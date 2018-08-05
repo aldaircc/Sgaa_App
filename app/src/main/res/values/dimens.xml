@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sizeShort">8sp</dimen>
+    <dimen name="sizeMedium">15sp</dimen>
+    <dimen name="sizeLarge">25sp</dimen>
+    <dimen name="sizeTitle">20sp</dimen>
+    <dimen name="sizeLabel">18sp</dimen>
+    <dimen name="sizeMenuButton">12sp</dimen>
+    <dimen name="spacingGeneralLinearLayout">3dp</dimen>
+    <dimen name="paddingHeaderInformation">5dp</dimen>
+    <dimen name="paddingLinearLayout">5dp</dimen>
+    <dimen name="paddingTopGeneral">5dp</dimen>
+    <dimen name="paddingBottomGeneral">5dp</dimen>
+    <dimen name="paddingLeftGeneral">5dp</dimen>
+    <dimen name="paddingRightGeneral">5dp</dimen>
+    <dimen name="paddingAllGeneral">5dp</dimen>
+</resources>
