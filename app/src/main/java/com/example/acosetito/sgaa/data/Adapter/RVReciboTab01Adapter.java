@@ -33,6 +33,7 @@ public class RVReciboTab01Adapter extends RecyclerView.Adapter<RVReciboTab01Adap
     public void clearAndAddAll(ArrayList<ListarRecepcionesXUsuario> list){
         this.list.clear();
         this.list.addAll(list);
+        this.listFilter.clear();
         this.listFilter.addAll(list);
         notifyDataSetChanged();
     }

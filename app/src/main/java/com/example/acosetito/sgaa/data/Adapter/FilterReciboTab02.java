@@ -49,7 +49,10 @@ public class FilterReciboTab02 extends Filter{
 
     @Override
     protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-        this.adapter.list = (List<ListarDetalleTx>) filterResults.values;
-        this.adapter.notifyDataSetChanged();
+        //this.adapter.list = (List<ListarDetalleTx>) filterResults.values;
+        //this.adapter.notifyDataSetChanged();
+        //this.adapter.updateList(this.adapter.list);
+        this.adapter.listUpdate = (List<ListarDetalleTx>) filterResults.values;
+        this.adapter.updateList(this.adapter.listUpdate);
     }
 }

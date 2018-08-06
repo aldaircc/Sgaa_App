@@ -1,4 +1,5 @@
 package com.example.acosetito.sgaa.data.Adapter;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +10,14 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab02Adapter;
+import com.example.acosetito.sgaa.data.Model.DiffUtil.ListarDetalleTx_DiffCallback;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adapter.RVReciboTab02AdapterViewHolder> implements Filterable{
 
-    List<ListarDetalleTx> list, listFilter;
+    public List<ListarDetalleTx> list, listFilter, listUpdate;
     private IRVReciboTab02Adapter irvReciboTab02Adapter;
     private int selectedPos = -1;
     FilterReciboTab02 filter;
@@ -23,6 +25,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
     public RVReciboTab02Adapter(IRVReciboTab02Adapter irvReciboTab02Adapter){
         this.list = new ArrayList<>();
         this.listFilter = new ArrayList<>();
+        this.listUpdate = new ArrayList<>();
         this.irvReciboTab02Adapter = irvReciboTab02Adapter;
     }
 
@@ -31,7 +34,18 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
         this.listFilter.clear();
         this.list.addAll(list);
         this.listFilter.addAll(list);
+        this.listUpdate.clear();
+        this.listUpdate.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void clearAndAddAllWithOutNotify(List<ListarDetalleTx> list){
+        this.list.clear();
+        this.listFilter.clear();
+        this.list.addAll(list);
+        this.listFilter.addAll(list);
+        this.listUpdate.clear();
+        this.listUpdate.addAll(list);
     }
 
     @Override
@@ -94,5 +108,13 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
             tvSaldo = (TextView)itemView.findViewById(R.id.tvSaldo);
             btnNext = (Button)itemView.findViewById(R.id.btnNext);
         }
+    }
+
+    public void updateList(List<ListarDetalleTx> newList){
+        final ListarDetalleTx_DiffCallback diffCallback = new ListarDetalleTx_DiffCallback(this.list, newList);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+        this.list.clear();
+        this.list.addAll(newList);
+        diffResult.dispatchUpdatesTo(this);
     }
 }
