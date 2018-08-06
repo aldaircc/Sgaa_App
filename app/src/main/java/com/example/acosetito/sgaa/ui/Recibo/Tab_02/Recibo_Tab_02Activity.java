@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Adapter.RVReciboTab02Adapter;
+import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 
 import java.util.ArrayList;
@@ -29,6 +31,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     ReciboTab02Presenter presenter;
     RVReciboTab02Adapter adapter;
     String strTxId, strNroOrden, strCuenta, strProveedor;
+    Boolean isFirst = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         btnNext = (Button)findViewById(R.id.btnNext);
         btnCausal = (Button)findViewById(R.id.btnCausal);
         btnCloseTx = (Button)findViewById(R.id.btnCloseTx);
+        btnCloseTx.setOnClickListener(btnCloseTxOnClickListener);
         svDetail = (SearchView)findViewById(R.id.svDetail);
         svDetail.setOnQueryTextListener(onQueryTextListener);
         chkAutomatic = (CheckBox)findViewById(R.id.chkAutomatic);
@@ -79,14 +83,42 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         @Override
         public boolean onQueryTextChange(String s) {
             adapter.getFilter().filter(s);
+            tvCountTx.setText(String.valueOf(adapter.getItemCount()));
             return false;
         }
     };
 
+    View.OnClickListener btnCloseTxOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.getCerrarRecepcion("123456789987",99, "ADMIN");
+        }
+    };
+
+    @Override
+    public void showResultCerrarRecepcion(Mensaje message) {
+        Toast.makeText(this, "Cerrar recepcion:"+ message.errNumber + " - " + message.message, Toast.LENGTH_SHORT).show();
+        presenter.getDataDetailTx(strTxId);
+
+    }
+
+    @Override
+    public void showFailureCerrarRecepcion(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void sourceDataDetailTx(List<ListarDetalleTx> list) {
+        lstDetail.clear();
         lstDetail = list;
-        adapter.clearAndAddAll(lstDetail);
+        if(isFirst){
+            adapter.clearAndAddAllWithOutNotify(lstDetail);
+            isFirst = false;
+        }else{
+            adapter.clearAndAddAllWithOutNotify(lstDetail);
+            adapter.updateList(lstDetail);
+        }
+        tvCountTx.setText(String.valueOf(list.size()));
     }
 
     @Override

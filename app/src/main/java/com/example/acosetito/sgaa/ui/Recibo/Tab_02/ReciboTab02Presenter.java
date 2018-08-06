@@ -7,4 +7,5 @@ import java.util.List;
 public interface ReciboTab02Presenter {
 
     void getDataDetailTx(String strIdTx);
+    void getCerrarRecepcion(String idTx, Integer idEstado, String usuario);
 }
