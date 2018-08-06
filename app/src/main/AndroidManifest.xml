@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Recibo.Tab_01.Recibo_Tab_01Activity">
+        <activity android:name=".ui.Recibo.Tab_01.Recibo_Tab_01Activity"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Login.LoginActivity" />
-        <activity android:name=".ui.Main.MainActivity" />
+        <activity android:name=".ui.Main.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ui.Recibo.Tab_02.Recibo_Tab_02Activity" />
         <activity android:name=".ui.Recibo.Tab_03.Recibo_Tab_03Activity" />
         <activity android:name=".ui.Recibo.Tab_04.Recibo_Tab_04Activity" />
