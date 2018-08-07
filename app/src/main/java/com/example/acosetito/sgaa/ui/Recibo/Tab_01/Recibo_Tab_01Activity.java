@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab01Adapter;
 import com.example.acosetito.sgaa.data.Adapter.RVReciboTab01Adapter;
@@ -52,6 +54,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     public void sourceDataRecepcionByUser(List<ListarRecepcionesXUsuario> list) {
+        listRecTx.clear();
         listRecTx = list;
         adapter.clearAndAddAll((ArrayList<ListarRecepcionesXUsuario>) listRecTx);
     }
@@ -83,6 +86,11 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     public void onItemClick(View v, int pos) {
+
+    }
+
+    @Override
+    public void onGetItemsCount(Integer count) {
 
     }
 }

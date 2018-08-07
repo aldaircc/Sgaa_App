@@ -8,8 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    //public static final String baseUrl = "http://172.16.32.15:8085/SGAA_WCF/"; Test de ejemplo
-    public static final String baseUrl = "http://10.0.2.2/SGAA_WCF/";
+    public static final String baseUrl = "http://172.16.32.15:8085/SGAA_WCF/";
+    //public static final String baseUrl = "http://10.0.2.2/SGAA_WCF/";
     public static Retrofit retrofit;
     public static Gson gson;
 

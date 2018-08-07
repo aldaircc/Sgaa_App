@@ -1,9 +1,15 @@
 package com.example.acosetito.sgaa.data.WebService;
+import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.google.gson.JsonObject;
+
 import java.util.List;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface ReciboClient {
@@ -20,4 +26,9 @@ public interface ReciboClient {
             @Query("strIdTx") String strIdTx
     );
 
+    @Headers({"Accept: application/json", "Content-Type:application/json"})
+    @POST("CerrarRecepcion/idTx/idEstado/usuario")
+    Call<Mensaje> getCerrarRecepcion(
+            @Body JsonObject objParams
+    );
 }

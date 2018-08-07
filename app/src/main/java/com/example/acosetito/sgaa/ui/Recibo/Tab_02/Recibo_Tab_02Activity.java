@@ -83,7 +83,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         @Override
         public boolean onQueryTextChange(String s) {
             adapter.getFilter().filter(s);
-            tvCountTx.setText(String.valueOf(adapter.getItemCount()));
+            tvCountTx.setText(String.valueOf(adapter.listUpdate.size()));
             return false;
         }
     };
@@ -111,14 +111,15 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     public void sourceDataDetailTx(List<ListarDetalleTx> list) {
         lstDetail.clear();
         lstDetail = list;
-        if(isFirst){
+
+        if (isFirst){
             adapter.clearAndAddAllWithOutNotify(lstDetail);
             isFirst = false;
         }else{
-            adapter.clearAndAddAllWithOutNotify(lstDetail);
             adapter.updateList(lstDetail);
         }
-        tvCountTx.setText(String.valueOf(list.size()));
+
+        tvCountTx.setText(String.valueOf(adapter.listUpdate.size()));
     }
 
     @Override
