@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.acosetito.sgaa"
-        minSdkVersion 18
+        minSdkVersion 18//24
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -17,6 +17,10 @@ android {
         }
     }
     sourceSets { main { res.srcDirs = ['src/main/res', 'src/main/res/menu'] } }
+    /**compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }**/
 }
 
 dependencies {
