@@ -2,6 +2,7 @@ package com.example.acosetito.sgaa.data.WebService;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -30,5 +31,26 @@ public interface ReciboClient {
     @POST("CerrarRecepcion/idTx/idEstado/usuario")
     Call<Mensaje> getCerrarRecepcion(
             @Body JsonObject objParams
+    );
+
+    @GET("ListarUAXProductoTx")
+    Call<List<UAXProductoTxA>> getUAXProductoTx(
+        @Query("strIdTx") String strIdTx,
+        @Query("intIdProducto") Integer intIdProducto,
+        @Query("intItem") Integer intItem
+    );
+
+    @GET("ValidarReciboTransferenciaSerie")
+    Call<Mensaje> validarReciboTransferenciaSerie(
+        @Query("strNumOrden") String strNumOrden,
+        @Query("strSerie") String strSerie,
+        @Query("intItem") Integer intItem
+    );
+
+    @GET("ValidarReciboSerie")
+    Call<Mensaje> validarReciboSerie(
+      @Query("strSerie") String strSerie,
+      @Query("strIdTx") String strIdTx,
+      @Query("intIdProducto") Integer intIdProducto
     );
 }
