@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="3">
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/textView11"
@@ -34,18 +34,18 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView15"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvCodProd"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:padding="@dimen/paddingHeaderInformation"
                 android:text="20180001"
                 android:textColor="@color/whiteColor"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvUM"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
@@ -62,8 +62,8 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvDescripcion"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="@dimen/paddingHeaderInformation"
@@ -102,7 +102,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/edtCantPedida"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -120,7 +120,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText5"
+                android:id="@+id/edtCantRecibida"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -150,7 +150,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/edtSaldo"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -168,7 +168,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText7"
+                android:id="@+id/edtBultos"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -217,7 +217,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText8"
+                android:id="@+id/edtFecEmi"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -235,7 +235,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/edtFecVenci"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -272,7 +272,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText10"
+                android:id="@+id/edtLote"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="3"
@@ -301,7 +301,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText11"
+                android:id="@+id/edtCodBar"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="3"
@@ -330,7 +330,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText14"
+                android:id="@+id/edtCantidad"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -347,7 +347,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText15"
+                android:id="@+id/edtAveriado"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -377,7 +377,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editText16"
+                android:id="@+id/edtObserv"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="3"
