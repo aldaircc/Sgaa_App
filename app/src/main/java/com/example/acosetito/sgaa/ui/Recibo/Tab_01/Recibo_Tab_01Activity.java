@@ -78,9 +78,10 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
     public void onSelectItem(ListarRecepcionesXUsuario ent) {
         Intent intent = new Intent(this, Recibo_Tab_02Activity.class);
         intent.putExtra("Id_Tx", ent.getId_Tx());
-        intent.putExtra("NroOrden", ent.getNumOrden());
+        intent.putExtra("NumOrden", ent.getNumOrden());
         intent.putExtra("Cuenta", ent.getCliente());
         intent.putExtra("Proveedor", ent.getProveedor());
+        intent.putExtra("Id_TipoMovimiento", ent.getId_TipoMovimiento());
         startActivity(intent);
     }
 
