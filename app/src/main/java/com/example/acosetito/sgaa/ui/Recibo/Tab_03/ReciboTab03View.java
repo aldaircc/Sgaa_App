@@ -16,4 +16,13 @@ public interface ReciboTab03View {
     void showFailureValidateReciboSerie(String result);
 
     void showMessageValidationBarCode(String result);
+
+    void showResultValidarUAReciboTransferencia(Mensaje message);
+    void showFailureValidateUAReciboTransferencia(String result);
+
+    void showResultValidateUARecibo(Mensaje message);
+    void showFailureValidateUARecibo(String result);
+
+    void showResultRegistrarUATransito(String result);
+    void showFailureRegistrarUATransito(String result);
 }

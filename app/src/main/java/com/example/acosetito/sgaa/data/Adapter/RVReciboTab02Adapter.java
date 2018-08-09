@@ -75,7 +75,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
             notifyItemChanged(selectedPos);
             selectedPos = pos;
             notifyItemChanged(selectedPos);
-            irvReciboTab02Adapter.onSelectItem(list.get(pos));
+            irvReciboTab02Adapter.onClickbtnNext(list.get(pos));
         }
     };
 

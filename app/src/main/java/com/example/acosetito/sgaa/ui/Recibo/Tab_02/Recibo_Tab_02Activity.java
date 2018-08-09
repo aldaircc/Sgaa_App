@@ -154,6 +154,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("Factor", ent.getFactor());
         intent.putExtra("FlagSeriePT", ent.getFlagSeriePT());
         intent.putExtra("Id_TipoMovimiento", intIdTipoMovimiento);
+        intent.putExtra("bolAutomatic", chkAutomatic.isChecked());
         startActivity(intent);
     }
 }

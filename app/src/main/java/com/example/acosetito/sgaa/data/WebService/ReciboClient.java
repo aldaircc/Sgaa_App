@@ -2,9 +2,12 @@ package com.example.acosetito.sgaa.data.WebService;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -52,5 +55,23 @@ public interface ReciboClient {
       @Query("strSerie") String strSerie,
       @Query("strIdTx") String strIdTx,
       @Query("intIdProducto") Integer intIdProducto
+    );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("ValidarUAReciboTransferencia/ua")
+    Call<Mensaje> validarUAReciboTransferencia(
+            @Body UA ua
+    );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("ValidarUARecibo/ua")
+    Call<Mensaje> validarUARecibo(
+            @Body HashMap<String, Object> ua
+    );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("RegistrarUATransito/TxUbi")
+    Call<String> registerUATransito(
+            @Body HashMap<String, TxUbicacion> txUbi
     );
 }

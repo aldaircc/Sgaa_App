@@ -120,7 +120,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edtCantRecibida"
+                android:id="@+id/edtCantTotalRecibida"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
@@ -330,7 +330,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edtCantidad"
+                android:id="@+id/edtCantRecibida"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"

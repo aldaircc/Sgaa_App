@@ -1,9 +1,15 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.WebService.ApiClient;
 import com.example.acosetito.sgaa.data.WebService.ReciboClient;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -97,5 +103,85 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
         }else{
             listener.OnFailureValidateEmptyBarCode(message);
         }
+    }
+
+    @Override
+    public void validateUAReciboTransferencia(UA ua, final OnListenerReciboTab03 listener) {
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        //JsonObject objParam = new JsonObject();
+        //objParam.add("ua", ua);
+        Call<Mensaje> call = reciboClient.validarUAReciboTransferencia(ua);
+        call.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                switch (response.code()){
+                    case 200:
+                        Mensaje message = response.body();
+                        listener.OnSuccessValidateUAReciboTransferencia(message);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                listener.OnFailureValidateUAReciboTransferencia(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void validateUARecibo(UA ua, final OnListenerReciboTab03 listener) {
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+
+        HashMap<String, Object> objParam = new HashMap<>();
+        objParam.put("ua", ua);
+
+        Call<Mensaje> call = reciboClient.validarUARecibo(objParam);
+        call.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                switch (response.code()){
+                    case 200:
+                        Mensaje message = response.body();
+                        listener.OnSuccessValidateUARecibo(message);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                listener.OnFailureValidateUARecibo(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void registerUATransito(TxUbicacion txUbi, final OnListenerReciboTab03 listener) {
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        HashMap<String, TxUbicacion> objParam = new HashMap<>();
+        objParam.put("TxUbi", txUbi);
+        Call<String> call = reciboClient.registerUATransito(objParam);
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                switch (response.code()){
+                    case 200:
+                        String result = response.body();
+                        listener.OnSuccessRegisterUATransito(result);
+                        break;
+                    default:
+                         break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                listener.OnFailureRegisterUATransito(t.getMessage());
+            }
+        });
     }
 }

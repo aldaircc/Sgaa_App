@@ -1,6 +1,8 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
 
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 
 import java.util.List;
@@ -73,5 +75,50 @@ public class ReciboTab03PresenterImpl implements ReciboTab03Presenter, ReciboTab
     @Override
     public void OnFailureValidateEmptyBarCode(String result) {
         reciboTab03View.showMessageValidationBarCode(result);
+    }
+
+    @Override
+    public void validateUAReciboTransferencia(UA ua) {
+        interactor.validateUAReciboTransferencia(ua, this);
+    }
+
+    @Override
+    public void OnSuccessValidateUAReciboTransferencia(Mensaje message) {
+        reciboTab03View.showResultValidateReciboTransferSerie(message);
+    }
+
+    @Override
+    public void OnFailureValidateUAReciboTransferencia(String result) {
+        reciboTab03View.showFailureValidateUAReciboTransferencia(result);
+    }
+
+    @Override
+    public void validateUARecibo(UA ua) {
+        interactor.validateUARecibo(ua, this);
+    }
+
+    @Override
+    public void OnSuccessValidateUARecibo(Mensaje message) {
+        reciboTab03View.showResultValidateUARecibo(message);
+    }
+
+    @Override
+    public void OnFailureValidateUARecibo(String result) {
+        reciboTab03View.showFailureValidateUARecibo(result);
+    }
+
+    @Override
+    public void registerUATransito(TxUbicacion txUbi) {
+        interactor.registerUATransito(txUbi, this);
+    }
+
+    @Override
+    public void OnSuccessRegisterUATransito(String result) {
+        reciboTab03View.showResultRegistrarUATransito(result);
+    }
+
+    @Override
+    public void OnFailureRegisterUATransito(String result) {
+        reciboTab03View.showFailureRegistrarUATransito(result);
     }
 }
