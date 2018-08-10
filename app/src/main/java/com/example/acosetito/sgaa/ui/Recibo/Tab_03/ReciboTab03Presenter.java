@@ -12,4 +12,6 @@ public interface ReciboTab03Presenter {
     void validateUAReciboTransferencia(UA ua);
     void validateUARecibo(UA ua);
     void registerUATransito(TxUbicacion txUbi);
+    void registerUA(UA ua);
+    void registerUATransferencia(UA ua);
 }

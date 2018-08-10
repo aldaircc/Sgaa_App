@@ -188,17 +188,58 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         return  total;
     }
 
+    void evaluateResultSave(Mensaje message){
+
+        if (message.errNumber == 0){
+            Double dSaldo, dValor1, dBultos;
+            dSaldo = Double.parseDouble(edtSaldo.getText().toString());
+            dValor1 = Double.parseDouble(message.valor1.toString());
+            dBultos = Double.parseDouble(edtBultos.getText().toString()) + 1;
+            edtSaldo.setText(String.format("%.3f", dSaldo - dValor1));
+            edtBultos.setText(dBultos.toString());
+            edtCantTotalRecibida.setText(String.format("%.3f", (dBultos * dValor1)));
+            //TabPage1.BackColor = Color.GreenYellow;
+
+            edtCodBar.requestFocus();
+            edtCodBar.selectAll();
+            edtAveriado.setText("0");
+            edtCantRecibida.setText("");
+            edtCodBar.setTag("");
+
+            if (dSaldo == 0){
+                Toast.makeText(this, "Item completo", Toast.LENGTH_SHORT).show();
+                //CargarListaDetalleTransaccion
+                //manejoPaneles(2); - In this case I will go to the next activity.
+            }
+        }else if (message.errNumber == 1){
+            //TabPage1.BackColor = Color.Red;
+            Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
+            edtCodBar.requestFocus();
+            edtCodBar.selectAll();
+        }else if (message.errNumber == -1){
+            //TabPage1.BackColor = Color.Red;
+            Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
+            edtCodBar.requestFocus();
+            edtCodBar.selectAll();
+        }else{
+            //TabPage1.BackColor = Color.Red;
+            Toast.makeText(this, "Operación fallida, intente otra vez...", Toast.LENGTH_SHORT).show();
+            edtCodBar.requestFocus();
+            edtCodBar.selectAll();
+        }
+    }
+
     @Override
     public void sourceDataUAsProducto(List<UAXProductoTxA> list) {
 
         if (list.size() > 0){
             Double totalCantidad = sumUaDetalle(list);
             Double cantidadPedida = Double.parseDouble(edtCantPedida.getText().toString());
-            edtCantRecibida.setText(String.format("%.3f", totalCantidad));
+            edtCantTotalRecibida.setText(String.format("%.3f", totalCantidad));
             edtSaldo.setText(String.format("%.3f", cantidadPedida - totalCantidad));
             edtBultos.setText(list.size());
         }else{
-            edtCantRecibida.setText("0");
+            edtCantTotalRecibida.setText("0");
             edtAveriado.setText("0");
             edtBultos.setText("0");
             edtCodBar.setText("");
@@ -410,20 +451,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
                 return;
             }
 
-
-            Double cantRetorno = Double.parseDouble(edtCantRecibida.getText().toString());
-            Double cantRecibidaUA = Double.parseDouble(edtCantTotalRecibida.getText().toString());
-            Double sumCantidad = cantRetorno + cantRecibidaUA;
-            Double cantPedida = Double.parseDouble(edtCantPedida.getText().toString());
-
-            Date fEmision, fVencimiento;
-            try {
-                fEmision = (edtFecEmi.getText().toString().trim()=="") ? null: formatter.parse(edtFecEmi.getText().toString());
-                fVencimiento = (edtFecVenci.getText().toString().trim()=="") ? null: formatter.parse(edtFecVenci.getText().toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
             TxUbicacion objTxUbi = new TxUbicacion();
             objTxUbi.setTipoUbicacion(1);
             objTxUbi.setId_Producto(objReceived.getId_Producto());
@@ -434,26 +461,18 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             objTxUbi.setObservacion(edtObserv.getText().toString());
             objTxUbi.setUsuarioModificacion("ADMIN"); //(Global.userName);
 
+            String result = "";
+            objReceived.setTipoAlmacenaje((objReceived.getTipoAlmacenaje() == null) ? "0" : objReceived.getTipoAlmacenaje() );
             if (Integer.parseInt(objReceived.getTipoAlmacenaje()) != 3){
                 presenter.registerUATransito(objTxUbi);
             }
-
-            /**
-             * string result = string.Empty;
-
-             if (tipoAlmacenaje != 3)
-             {
-             result = new GestionRecibosMovil().RegistrarUATransito(objTxUbi);
-             }
-             **/
-
         }
     };
 
     Boolean validateRegistro() {
         boolean result = true;
 
-        if (btnSave.isEnabled()){
+        if (!btnSave.isEnabled()){
             result = false;
             return result;
         }
@@ -475,7 +494,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         }
 
         if (!objReceived.getFlagSeriePT()){
-            if (edtCodBar.getText().toString().trim() != edtCodBar.getTag().toString().trim()){
+            if (!edtCodBar.getText().toString().trim().equals(edtCodBar.getTag().toString().trim())){
                 Toast.makeText(this, "La UA no es correcta.", Toast.LENGTH_SHORT).show();
                 edtCantRecibida.requestFocus();
                 edtCantRecibida.selectAll();
@@ -503,10 +522,81 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void showResultRegistrarUATransito(String result) {
 
+        Double cantRetorno = Double.parseDouble(edtCantRecibida.getText().toString());
+        Double cantRecibidaUA = Double.parseDouble(edtCantTotalRecibida.getText().toString());
+        Double sumCantidad = cantRetorno + cantRecibidaUA;
+        Double cantPedida = Double.parseDouble(edtCantPedida.getText().toString());
+
+        Date fEmision = null, fVencimiento = null;
+        try {
+            fEmision = (edtFecEmi.getText().toString().trim()=="") ? null: formatter.parse(edtFecEmi.getText().toString());
+            fVencimiento = (edtFecVenci.getText().toString().trim()=="") ? null: formatter.parse(edtFecVenci.getText().toString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if(_cantidad != 0){
+            if (!String.format("%.2f", _cantidad).equals(String.format("%.2f", cantRetorno))){
+                Toast.makeText(getApplicationContext(), "Esta cantidad no corresponde", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+
+        UA objUA = new UA();
+        objUA.setUA_CodBarra(edtCodBar.getText().toString());
+        objUA.setId_Tx(objReceived.getId_Tx());
+        objUA.setId_Producto(objReceived.getId_Producto());
+        objUA.setLoteLab(objReceived.getLote());
+        objUA.setSerie( (objReceived.getFlagSeriePT()) ? edtCodBar.getText().toString(): null);
+        objUA.setFechaEmision(fEmision);
+        objUA.setFechaVencimiento(fVencimiento);
+        objUA.setCantidad(Double.parseDouble(edtCantRecibida.getText().toString()));
+        objUA.setSaldo(Double.parseDouble(edtCantRecibida.getText().toString()));
+        objUA.setCantidadAveriada(Double.parseDouble(edtAveriado.getText().toString()));
+        objUA.setId_TerminalRF(1); //control.ParametrosLogeo.RF_ID
+        objUA.setItem(objReceived.getItem());
+        objUA.setId_Ubicacion(0);
+        objUA.setId_Tx_Ubi((result == "") ? null: result);
+        objUA.setObservacion(edtObserv.getText().toString());
+        objUA.setUsuarioRegistro("ADMIN"); //Global.userName
+        objUA.setId_Almacen(1); //Global.IdWarehouse
+        objUA.setId_UM(objReceived.getId_UMB());
+        objUA.setFlagAnulado(false);
+
+        if (intId_TipoMovimiento == 0){
+            Toast.makeText(getApplicationContext(), "Esta transacción no tiene tipo de movimiento", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (intId_TipoMovimiento == 11 || intId_TipoMovimiento == 13 || intId_TipoMovimiento == 14){
+            presenter.registerUATransferencia(objUA);
+        }else{
+            presenter.registerUA(objUA);
+        }
     }
 
     @Override
     public void showFailureRegistrarUATransito(String result) {
+
+    }
+
+    @Override
+    public void showResultRegisterUA(Mensaje message) {
+        evaluateResultSave(message);
+    }
+
+    @Override
+    public void showFailureRegisterUA(String result) {
+
+    }
+
+    @Override
+    public void showResultRegisterUATransferencia(Mensaje message) {
+        evaluateResultSave(message);
+    }
+
+    @Override
+    public void showFailureRegisterUATransferencia(String result) {
 
     }
 }

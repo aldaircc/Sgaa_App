@@ -24,6 +24,10 @@ public interface ReciboTab03Interactor {
         void OnFailureValidateUARecibo(String result);
         void OnSuccessRegisterUATransito(String result);
         void OnFailureRegisterUATransito(String result);
+        void OnSuccessRegisterUA(Mensaje message);
+        void OnFailureRegisterUA(String result);
+        void OnSuccessRegisterUATransferencia(Mensaje message);
+        void OnFailureRegisterUASTransferencia(String result);
     }
 
     void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem, OnListenerReciboTab03 listener);
@@ -33,4 +37,6 @@ public interface ReciboTab03Interactor {
     void validateUAReciboTransferencia(UA ua, OnListenerReciboTab03 listener);
     void validateUARecibo(UA ua, OnListenerReciboTab03 listener);
     void registerUATransito(TxUbicacion txUbi, OnListenerReciboTab03 listener);
+    void registerUA(UA ua, OnListenerReciboTab03 listener);
+    void registerUATransferencia(UA ua, OnListenerReciboTab03 listener);
 }

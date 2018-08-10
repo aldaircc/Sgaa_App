@@ -25,4 +25,10 @@ public interface ReciboTab03View {
 
     void showResultRegistrarUATransito(String result);
     void showFailureRegistrarUATransito(String result);
+
+    void showResultRegisterUA(Mensaje message);
+    void showFailureRegisterUA(String result);
+
+    void showResultRegisterUATransferencia(Mensaje message);
+    void showFailureRegisterUATransferencia(String result);
 }

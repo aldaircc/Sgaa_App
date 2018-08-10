@@ -121,4 +121,34 @@ public class ReciboTab03PresenterImpl implements ReciboTab03Presenter, ReciboTab
     public void OnFailureRegisterUATransito(String result) {
         reciboTab03View.showFailureRegistrarUATransito(result);
     }
+
+    @Override
+    public void registerUA(UA ua) {
+        interactor.registerUA(ua,this);
+    }
+
+    @Override
+    public void OnSuccessRegisterUA(Mensaje message) {
+        reciboTab03View.showResultRegisterUA(message);
+    }
+
+    @Override
+    public void OnFailureRegisterUA(String result) {
+        reciboTab03View.showFailureRegisterUA(result);
+    }
+
+    @Override
+    public void registerUATransferencia(UA ua) {
+        interactor.registerUATransferencia(ua, this);
+    }
+
+    @Override
+    public void OnSuccessRegisterUATransferencia(Mensaje message) {
+        reciboTab03View.showResultRegisterUATransferencia(message);
+    }
+
+    @Override
+    public void OnFailureRegisterUASTransferencia(String result) {
+        reciboTab03View.showFailureRegisterUATransferencia(result);
+    }
 }

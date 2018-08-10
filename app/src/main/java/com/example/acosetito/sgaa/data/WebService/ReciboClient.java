@@ -74,4 +74,16 @@ public interface ReciboClient {
     Call<String> registerUATransito(
             @Body HashMap<String, TxUbicacion> txUbi
     );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("RecepcionUA/ua")
+    Call<Mensaje> registerUA(
+            @Body HashMap<String, Object> ua
+    );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("RecepcionUATransferencia/ua")
+    Call<Mensaje> registerUATransferencia(
+      @Body HashMap<String, Object> ua
+    );
 }

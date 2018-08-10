@@ -1,4 +1,6 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
+import android.util.Log;
+
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
@@ -6,6 +8,8 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.WebService.ApiClient;
 import com.example.acosetito.sgaa.data.WebService.ReciboClient;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -181,6 +185,110 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 listener.OnFailureRegisterUATransito(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void registerUA(UA ua, final OnListenerReciboTab03 listener) {
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                .create();
+        String json = gson.toJson(ua);
+
+        JsonObject objJson = new JsonObject();
+        objJson.addProperty("FechaEmision", gson.toJson(ua.getFechaEmision()));
+        objJson.addProperty("FechaVencimiento", gson.toJson(ua.getFechaEmision()));
+
+        //objJson.addProperty("Accion" ,null);
+        //objJson.addProperty("BarraUbicacion",null);
+        objJson.addProperty("Cantidad", 100.0);
+        objJson.addProperty("CantidadAveriada", 0.0);
+        //objJson.addProperty("Codigo", null);
+        //objJson.addProperty("FecRegIdTerminalRF_Pallet":null);
+        //objJson.addProperty("FechaAnulacion":null);
+        objJson.addProperty("FechaEmision",gson.toJson(ua.getFechaEmision()));
+        //objJson.addProperty("FechaIngreso":null);
+        //objJson.addProperty("FechaModificacion":null);
+        //objJson.addProperty("FechaRegistro":null);
+        objJson.addProperty("FechaVencimiento",gson.toJson(ua.getFechaVencimiento()));
+        //objJson.addProperty("FlagActivo",null);
+        objJson.addProperty("FlagAnulado",false);
+        //objJson.addProperty("FlagAveriado":null);
+        //objJson.addProperty("FlagDisponible":null);
+        objJson.addProperty("Id_Almacen",1);
+        //objJson.addProperty("Id_Estado":null);
+        //objJson.addProperty("Id_Marca":null);
+        objJson.addProperty("Id_Producto",2577);
+        objJson.addProperty("Id_TerminalRF",1);
+        //objJson.addProperty("Id_TerminalRF_Pallet",null);
+        objJson.addProperty("Id_Tx","A20182040001");
+        //objJson.addProperty("Id_Tx_Anterior",null);
+        objJson.addProperty("Id_Tx_Ubi","201822100001");
+        //objJson.addProperty("Id_UM",null);
+        objJson.addProperty("Id_Ubicacion",0);
+        //objJson.addProperty("Id_UbicacionOld":null);
+        objJson.addProperty("Item",1);
+        objJson.addProperty("LoteLab",8787);
+       //objJson.addProperty("LotePT",null);
+        //objJson.addProperty("Nota",null);
+        objJson.addProperty("Observacion","");
+        //objJson.addProperty("PalletCodBarra",null);
+        //objJson.addProperty("Producto",null);
+        objJson.addProperty("Saldo",100.00);
+        //objJson.addProperty("Serie",null);
+        objJson.addProperty("UA_CodBarra","A20182200001");
+        //objJson.addProperty("UsuarioAnulacion",null);
+        //objJson.addProperty("UsuarioModificacion",null);
+        objJson.addProperty("UsuarioRegistro","ADMIN");
+
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        HashMap<String, Object> objParam = new HashMap<>();
+        //objParam.put("ua", ua);
+        objParam.put("ua", objJson);
+        Call<Mensaje> call = reciboClient.registerUA(objParam);
+        call.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                switch (response.code()){
+                    case 200:
+                        Mensaje message = response.body();
+                        listener.OnSuccessRegisterUA(message);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                listener.OnFailureRegisterUA(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void registerUATransferencia(UA ua, final OnListenerReciboTab03 listener) {
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        HashMap<String, Object> objParam = new HashMap<>();
+        objParam.put("ua", ua);
+        Call<Mensaje> call = reciboClient.registerUATransferencia(objParam);
+        call.enqueue(new Callback<Mensaje>() {
+            @Override
+            public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
+                switch (response.code()){
+                    case 200:
+                        Mensaje message = response.body();
+                        listener.OnSuccessRegisterUATransferencia(message);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Mensaje> call, Throwable t) {
+                listener.OnFailureRegisterUASTransferencia(t.getMessage());
             }
         });
     }

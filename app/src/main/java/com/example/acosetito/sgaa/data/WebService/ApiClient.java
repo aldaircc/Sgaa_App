@@ -18,9 +18,12 @@ public class ApiClient {
         if (retrofit == null)
         {
             gson = new GsonBuilder()
+                    .setLenient()
+                    .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                     .registerTypeAdapter(Date.class, new DateDeserializer()) // New line for parse datatype date returned from Web service
                     .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                     .create();
+
             retrofit = new Retrofit.Builder()
                     .baseUrl(baseUrl + service + "/rest/")
                     //.addConverterFactory(ScalarsConverterFactory.create())
