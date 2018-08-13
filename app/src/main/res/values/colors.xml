@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#ff4081</color>
     <color name="colorBackgroundActivity">#dddbdc</color>
+    <color name="redColor">#FF0000</color>
     <color name="whiteColor">#ffffff</color>
     <color name="blackColor">#000000</color>
     <color name="yellowColor">#ffff00</color>

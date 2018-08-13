@@ -12,7 +12,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
@@ -178,7 +181,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
                         listener.OnSuccessRegisterUATransito(result);
                         break;
                     default:
-                         break;
+                        break;
                 }
             }
 
@@ -194,53 +197,49 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
                 .create();
-        String json = gson.toJson(ua);
-
         JsonObject objJson = new JsonObject();
-        objJson.addProperty("FechaEmision", gson.toJson(ua.getFechaEmision()));
-        objJson.addProperty("FechaVencimiento", gson.toJson(ua.getFechaEmision()));
-
-        //objJson.addProperty("Accion" ,null);
-        //objJson.addProperty("BarraUbicacion",null);
-        objJson.addProperty("Cantidad", 100.0);
-        objJson.addProperty("CantidadAveriada", 0.0);
-        //objJson.addProperty("Codigo", null);
-        //objJson.addProperty("FecRegIdTerminalRF_Pallet":null);
-        //objJson.addProperty("FechaAnulacion":null);
-        objJson.addProperty("FechaEmision",gson.toJson(ua.getFechaEmision()));
-        //objJson.addProperty("FechaIngreso":null);
-        //objJson.addProperty("FechaModificacion":null);
-        //objJson.addProperty("FechaRegistro":null);
-        objJson.addProperty("FechaVencimiento",gson.toJson(ua.getFechaVencimiento()));
-        //objJson.addProperty("FlagActivo",null);
-        objJson.addProperty("FlagAnulado",false);
-        //objJson.addProperty("FlagAveriado":null);
-        //objJson.addProperty("FlagDisponible":null);
-        objJson.addProperty("Id_Almacen",1);
-        //objJson.addProperty("Id_Estado":null);
-        //objJson.addProperty("Id_Marca":null);
-        objJson.addProperty("Id_Producto",2577);
-        objJson.addProperty("Id_TerminalRF",1);
-        //objJson.addProperty("Id_TerminalRF_Pallet",null);
-        objJson.addProperty("Id_Tx","A20182040001");
-        //objJson.addProperty("Id_Tx_Anterior",null);
-        objJson.addProperty("Id_Tx_Ubi","201822100001");
-        //objJson.addProperty("Id_UM",null);
-        objJson.addProperty("Id_Ubicacion",0);
-        //objJson.addProperty("Id_UbicacionOld":null);
-        objJson.addProperty("Item",1);
-        objJson.addProperty("LoteLab",8787);
-       //objJson.addProperty("LotePT",null);
-        //objJson.addProperty("Nota",null);
-        objJson.addProperty("Observacion","");
-        //objJson.addProperty("PalletCodBarra",null);
-        //objJson.addProperty("Producto",null);
-        objJson.addProperty("Saldo",100.00);
-        //objJson.addProperty("Serie",null);
-        objJson.addProperty("UA_CodBarra","A20182200001");
-        //objJson.addProperty("UsuarioAnulacion",null);
-        //objJson.addProperty("UsuarioModificacion",null);
-        objJson.addProperty("UsuarioRegistro","ADMIN");
+        Object nullable = null;
+        objJson.addProperty("Accion" , ua.getAccion());
+        objJson.addProperty("BarraUbicacion", ua.getBarraUbicacion()); //optional
+        objJson.addProperty("Cantidad",  ua.getCantidad());
+        objJson.addProperty("CantidadAveriada", ua.getCantidadAveriada());
+        objJson.addProperty("Codigo", ua.getCodigo());
+        //objJson.addProperty("FecRegIdTerminalRF_Pallet", ua.getFecRegIdTerminalRF_Pallet()); //optional
+        //objJson.addProperty("FechaAnulacion", ua.getFechaAnulacion()); //optional
+        objJson.addProperty("FechaEmision","/Date("+ gson.toJson(ua.getFechaEmision().getTime()) + ")/");
+        //objJson.addProperty("FechaIngreso", ua.getFechaIngreso()); //optional
+        //objJson.addProperty("FechaModificacion", ua.getFechaModificacion()); //optional
+        //objJson.addProperty("FechaRegistro", ua.getFechaRegistro()); //optional
+        objJson.addProperty("FechaVencimiento", "/Date("+gson.toJson(ua.getFechaVencimiento().getTime())+ ")/");
+        objJson.addProperty("FlagActivo", ua.getFlagActivo()); //optional
+        objJson.addProperty("FlagAnulado",ua.getFlagAnulado());
+        objJson.addProperty("FlagAveriado", ua.getFlagAveriado()); //optional
+        objJson.addProperty("FlagDisponible", ua.getFlagDisponible()); //optional
+        objJson.addProperty("Id_Almacen",ua.getId_Almacen());
+        objJson.addProperty("Id_Estado", ua.getId_Estado()); //optional
+        objJson.addProperty("Id_Marca", ua.getId_Marca()); //optional
+        objJson.addProperty("Id_Producto",ua.getId_Producto());
+        objJson.addProperty("Id_TerminalRF",ua.getId_TerminalRF());
+        objJson.addProperty("Id_TerminalRF_Pallet", ua.getId_TerminalRF()); //optional
+        objJson.addProperty("Id_Tx",ua.getId_Tx());
+        objJson.addProperty("Id_Tx_Anterior", ua.getId_Tx_Anterior()); //optional
+        objJson.addProperty("Id_Tx_Ubi",ua.getId_Tx_Ubi());
+        objJson.addProperty("Id_UM", ua.getId_UM()); //optional
+        objJson.addProperty("Id_Ubicacion",ua.getId_Ubicacion());
+        objJson.addProperty("Id_UbicacionOld", ua.getId_UbicacionOld()); //optional
+        objJson.addProperty("Item",ua.getItem());
+        objJson.addProperty("LoteLab",ua.getLoteLab());
+        objJson.addProperty("LotePT", ua.getNota()); //optional
+        objJson.addProperty("Nota", ua.getNota()); //optional
+        objJson.addProperty("Observacion",ua.getObservacion());
+        objJson.addProperty("PalletCodBarra", ua.getPalletCodBarra()); //optional
+        objJson.addProperty("Producto", ua.getProducto()); //optional
+        objJson.addProperty("Saldo",ua.getSaldo());
+        objJson.addProperty("Serie", ua.getSerie()); //optional
+        objJson.addProperty("UA_CodBarra",ua.getUA_CodBarra());
+        objJson.addProperty("UsuarioAnulacion", ua.getUsuarioAnulacion());
+        objJson.addProperty("UsuarioModificacion", ua.getUsuarioModificacion() );
+        objJson.addProperty("UsuarioRegistro",ua.getUsuarioRegistro());
 
         ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();

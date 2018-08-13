@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     EditText edtCantPedida, edtCantRecibida, edtCantTotalRecibida, edtSaldo, edtBultos, edtFecEmi, edtFecVenci, edtLote, edtCodBar, edtAveriado, edtObserv;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     ReciboTab03Presenter presenter;
+    LinearLayout lySection03;
 
     /** Intent Values **/
     ListarDetalleTx objReceived;
@@ -64,7 +66,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             objReceived.setUM(extras.getString("UM"));
             objReceived.setId_UM(extras.getInt("Id_UM"));
             objReceived.setFechaEmision((Date) extras.get("Fecha_Emi"));
-            objReceived.setFechaVencimiento((Date) extras.get("Fecha_Emi"));
+            objReceived.setFechaVencimiento((Date) extras.get("Fecha_Venci"));
             objReceived.setLote(extras.getString("Lote"));
             objReceived.setCantidadPedida(extras.getDouble("CantPedida"));
             objReceived.setCantidadOperacion(extras.getDouble("CantRecib"));
@@ -79,8 +81,8 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             tvCodProd.setText(objReceived.getCodigo());
             tvUM.setText(objReceived.getUM());
             tvDescripcion.setText(objReceived.getDescripcion());
-            edtCantPedida.setText(String.valueOf(objReceived.getCantidadPedida()));
-            edtCantRecibida.setText(String.valueOf(objReceived.getCantidadOperacion()));
+            edtCantPedida.setText(String.format("%.3f", objReceived.getCantidadPedida()));
+            //edtCantRecibida.setText(String.valueOf(objReceived.getCantidadOperacion()));
             edtSaldo.setText(String.valueOf(objReceived.getSaldo()));
             //edtBultos.setText();
             edtFecEmi.setText(formatter.format(objReceived.getFechaEmision()));
@@ -119,6 +121,8 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         btnSave = (Button)findViewById(R.id.btnSave);
         btnSave.setOnClickListener(btnSaveOnClickListener);
 
+        lySection03 = (LinearLayout)findViewById(R.id.lySection03);
+
         ddMenu = new PopupMenu(getApplicationContext(), btnOption);
         ddMenu.getMenuInflater().inflate(R.menu.drop_down_menu, ddMenu.getMenu());
         ddMenu.setOnMenuItemClickListener(onMenuItemClickListener);
@@ -126,20 +130,20 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
 
 
     /**TextWatcher textWatcher_CodBar = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            Log.i("beforeTextChanged", charSequence.toString());
-        }
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    Log.i("beforeTextChanged", charSequence.toString());
+    }
 
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            Log.i("onTextChanged", charSequence.toString());
-        }
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    Log.i("onTextChanged", charSequence.toString());
+    }
 
-        @Override
-        public void afterTextChanged(Editable editable) {
-            Log.i("afterTextChanged", editable.toString());
-        }
+    @Override
+    public void afterTextChanged(Editable editable) {
+    Log.i("afterTextChanged", editable.toString());
+    }
     };**/
 
     View.OnClickListener btnBackOnClickListener = new View.OnClickListener() {
@@ -196,9 +200,11 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             dValor1 = Double.parseDouble(message.valor1.toString());
             dBultos = Double.parseDouble(edtBultos.getText().toString()) + 1;
             edtSaldo.setText(String.format("%.3f", dSaldo - dValor1));
+            dSaldo = (dSaldo - dValor1);
             edtBultos.setText(dBultos.toString());
             edtCantTotalRecibida.setText(String.format("%.3f", (dBultos * dValor1)));
             //TabPage1.BackColor = Color.GreenYellow;
+            lySection03.setBackgroundResource(R.color.greenBottomBar);
 
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
@@ -213,16 +219,19 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             }
         }else if (message.errNumber == 1){
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }else if (message.errNumber == -1){
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }else{
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             Toast.makeText(this, "Operación fallida, intente otra vez...", Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
@@ -237,7 +246,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             Double cantidadPedida = Double.parseDouble(edtCantPedida.getText().toString());
             edtCantTotalRecibida.setText(String.format("%.3f", totalCantidad));
             edtSaldo.setText(String.format("%.3f", cantidadPedida - totalCantidad));
-            edtBultos.setText(list.size());
+            edtBultos.setText(String.valueOf(list.size()));
         }else{
             edtCantTotalRecibida.setText("0");
             edtAveriado.setText("0");
@@ -307,6 +316,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
                 edtCodBar.setText(edtCodBar.getTag().toString());
                 btnOption.setEnabled(true);
                 //TabPage1.BackColor = Color.Yellow;
+                lySection03.setBackgroundResource(R.color.yellowColor);
 
                 _cantidad = 1.0;
                 edtCantRecibida.setText(String.format("%.2f", _cantidad));
@@ -314,6 +324,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
 
                 if (bolAutomatic){
                     //Execute event -> btnGuardar_Click(null, null);
+                    saveTransaction();
                 }
 
             }else{
@@ -363,22 +374,27 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             edtCantRecibida.requestFocus();
             edtCantRecibida.selectAll();
             //TabPage1.BackColor = Color.Yellow;
+            lySection03.setBackgroundResource(R.color.yellowColor);
             if (bolAutomatic){
                 //btnGuardar_Click(null, null); -- Trabajar esta parte, crear e implementar el metodo.
+                saveTransaction();
             }
         }else if(message.errNumber == 1){
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }else if (message.errNumber == -1){
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             edtCodBar.setTag("");
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }else{
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             edtCodBar.setTag("");
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
@@ -399,7 +415,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         if (message.errNumber == 0){
 
             if (_cantidad == 0){
-             _cantidad = Double.parseDouble(message.valor1.toString());
+                _cantidad = Double.parseDouble(message.valor1.toString());
             }
 
             //btnGuardar.Enabled = true;
@@ -408,13 +424,16 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             edtCantRecibida.requestFocus();
             edtCantRecibida.selectAll();
             //TabPage1.BackColor = Color.Yellow;
+            lySection03.setBackgroundResource(R.color.yellowColor);
 
             if (bolAutomatic){
                 //btnGuardar_Click(null, null); -- Trabajar esta parte, crear e implementar el metodo.
+                saveTransaction();
             }
 
         }else if (message.errNumber == 1){
             //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             //btnGuardar.Enabled = true;
             edtCodBar.setTag("");
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
@@ -422,14 +441,14 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             edtCodBar.selectAll();
 
         }else if (message.errNumber == -1){
-            //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             //btnGuardar.Enabled = true;
             edtCodBar.setTag("");
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }else{
-            //TabPage1.BackColor = Color.Red;
+            lySection03.setBackgroundResource(R.color.redColor);
             //btnGuardar.Enabled = true;
             edtCodBar.setTag("");
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
@@ -446,28 +465,31 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     View.OnClickListener btnSaveOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
-            if (!validateRegistro()){
-                return;
-            }
-
-            TxUbicacion objTxUbi = new TxUbicacion();
-            objTxUbi.setTipoUbicacion(1);
-            objTxUbi.setId_Producto(objReceived.getId_Producto());
-            objTxUbi.setId_Ubicacion_Origen(0);
-            objTxUbi.setId_Almacen(1); //(Global.IdWarehouse);
-            objTxUbi.setId_Tx(objReceived.getId_Tx());
-            objTxUbi.setPrioridad(10);
-            objTxUbi.setObservacion(edtObserv.getText().toString());
-            objTxUbi.setUsuarioModificacion("ADMIN"); //(Global.userName);
-
-            String result = "";
-            objReceived.setTipoAlmacenaje((objReceived.getTipoAlmacenaje() == null) ? "0" : objReceived.getTipoAlmacenaje() );
-            if (Integer.parseInt(objReceived.getTipoAlmacenaje()) != 3){
-                presenter.registerUATransito(objTxUbi);
-            }
+            saveTransaction();
         }
     };
+
+    void saveTransaction(){
+        if (!validateRegistro()){
+            return;
+        }
+
+        TxUbicacion objTxUbi = new TxUbicacion();
+        objTxUbi.setTipoUbicacion(1);
+        objTxUbi.setId_Producto(objReceived.getId_Producto());
+        objTxUbi.setId_Ubicacion_Origen(0);
+        objTxUbi.setId_Almacen(1); //(Global.IdWarehouse);
+        objTxUbi.setId_Tx(objReceived.getId_Tx());
+        objTxUbi.setPrioridad(10);
+        objTxUbi.setObservacion(edtObserv.getText().toString());
+        objTxUbi.setUsuarioModificacion("ADMIN"); //(Global.userName);
+
+        String result = "";
+        objReceived.setTipoAlmacenaje((objReceived.getTipoAlmacenaje() == null) ? "0" : objReceived.getTipoAlmacenaje() );
+        if (Integer.parseInt(objReceived.getTipoAlmacenaje()) != 3){
+            presenter.registerUATransito(objTxUbi);
+        }
+    }
 
     Boolean validateRegistro() {
         boolean result = true;
