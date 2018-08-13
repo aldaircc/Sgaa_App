@@ -11,5 +11,6 @@ public class Recibo_Tab_04Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_04);
+        //test
     }
 }
