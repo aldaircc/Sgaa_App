@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="5"
+    android:weightSum="2"
     tools:context=".ui.Recibo.Tab_03.Recibo_Tab_03Activity">
 
     <LinearLayout
         android:id="@+id/lySection01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:background="@color/lightBlueHeader"
         android:orientation="vertical"
         android:weightSum="2">
@@ -20,6 +21,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="4">
 
@@ -27,20 +29,22 @@
                 android:id="@+id/textView11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:padding="@dimen/paddingHeaderInformation"
                 android:text="PRODUCTO"
                 android:textColor="@color/yellowColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvCodProd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="1.8"
                 android:padding="@dimen/paddingHeaderInformation"
                 android:text="20180001"
                 android:textColor="@color/whiteColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <TextView
@@ -52,12 +56,14 @@
                 android:padding="@dimen/paddingHeaderInformation"
                 android:text="UM"
                 android:textColor="@color/yellowColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:orientation="horizontal"
             android:weightSum="1">
 
@@ -69,6 +75,7 @@
                 android:padding="@dimen/paddingHeaderInformation"
                 android:text="ACIDOS GRASOS X"
                 android:textColor="@color/whiteColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -76,20 +83,20 @@
     <LinearLayout
         android:id="@+id/lySection02"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:background="@color/skyBlueBackground"
         android:orientation="vertical"
         android:weightSum="4">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -99,15 +106,18 @@
                 android:layout_weight="1"
                 android:text="Pedida"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtCantPedida"
+            <TextView
+                android:id="@+id/tvCantPedida"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="2"
-                android:inputType="numberDecimal" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
 
             <TextView
                 android:id="@+id/textView5"
@@ -117,27 +127,29 @@
                 android:gravity="center"
                 android:text="Recibida"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtCantTotalRecibida"
+            <TextView
+                android:id="@+id/tvCantTotalRecibida"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="2"
-                android:inputType="numberDecimal" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -147,15 +159,18 @@
                 android:layout_weight="1"
                 android:text="Saldo"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtSaldo"
+            <TextView
+                android:id="@+id/tvSaldo"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="3"
-                android:inputType="numberDecimal" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -165,46 +180,49 @@
                 android:gravity="center"
                 android:text="Bultos   "
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtBultos"
+            <TextView
+                android:id="@+id/tvBultos"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="3"
-                android:inputType="numberDecimal" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="bottom"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="3dp"
             android:weightSum="1">
 
             <TextView
                 android:id="@+id/textView9"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Almacén productos para ventas"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -214,15 +232,18 @@
                 android:layout_weight="1"
                 android:text="F.E"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtFecEmi"
+            <TextView
+                android:id="@+id/tvFecEmi"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="3"
-                android:inputType="date" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -232,34 +253,37 @@
                 android:gravity="center"
                 android:text="F.V        "
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtFecVenci"
+            <TextView
+                android:id="@+id/tvFecVenci"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:ems="3"
-                android:inputType="date" />
+                android:paddingLeft="5dp"
+                android:textAlignment="textEnd"
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lySection03"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:weightSum="4">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -269,26 +293,26 @@
                 android:layout_weight="1"
                 android:text="Lote"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/edtLote"
+            <TextView
+                android:id="@+id/tvLote"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="3"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -298,26 +322,27 @@
                 android:layout_weight="1"
                 android:text="Cod. barra"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtCodBar"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:tag='""' />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -327,12 +352,13 @@
                 android:layout_weight="1"
                 android:text="Cantidad"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtCantRecibida"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="3"
                 android:inputType="number" />
@@ -342,14 +368,16 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center_horizontal"
                 android:text="Ave."
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtAveriado"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="3"
                 android:inputType="number" />
@@ -358,13 +386,12 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
@@ -372,14 +399,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Observacion:"
+                android:text="Observ.:"
                 android:textColor="@color/blackColor"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtObserv"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
+                android:layout_height="match_parent"
                 android:layout_weight="3"
                 android:ems="10"
                 android:inputType="textPersonName" />
@@ -403,11 +431,11 @@
             android:weightSum="5">
 
             <Button
-                android:id="@+id/btnBack"
+                android:id="@+id/btnDetail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/appbar_arrow_left" />
+                android:background="@drawable/appbar_column_two" />
 
             <Space
                 android:layout_width="0dp"
@@ -415,11 +443,12 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/btnDetail"
+                android:id="@+id/btnBack"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/appbar_column_two" />
+                android:background="@drawable/appbar_arrow_left"
+                android:visibility="invisible" />
 
             <Space
                 android:layout_width="0dp"
@@ -434,32 +463,6 @@
                 android:background="@drawable/appbar_checkmark" />
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lySection05"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/greenBottomBar"
-        android:orientation="vertical"
-        android:weightSum="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <Button
-                android:id="@+id/btnOption"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="#32cd32"
-                android:text="Opciones"
-                android:textColor="@color/whiteColor"
-                android:textStyle="bold" />
-        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

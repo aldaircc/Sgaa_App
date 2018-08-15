@@ -1,10 +1,12 @@
 package com.example.acosetito.sgaa.data.Model.Recepcion;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class UAXProductoTxA {
+public class UAXProductoTxA implements Comparable, Cloneable{
     @SerializedName("Id_Tx")
     private String Id_Tx;
     @SerializedName("Contenedor")
@@ -224,5 +226,26 @@ public class UAXProductoTxA {
 
     public void setApeNom(String apeNom) {
         ApeNom = apeNom;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        UAXProductoTxA compare = (UAXProductoTxA) o;
+        //if (compare.Id_Tx == this.Id_Tx && compare.SaldoTotal == (this.SaldoTotal)) {
+        if (compare.Id_Tx.equals(this.Id_Tx) && compare.SaldoTotal == (this.SaldoTotal)) {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public UAXProductoTxA clone() {
+        UAXProductoTxA clone;
+        try {
+            clone = (UAXProductoTxA) super.clone();
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
+        return clone;
     }
 }

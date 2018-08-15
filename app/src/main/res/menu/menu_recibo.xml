@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.Recibo.Tab_04.Recibo_Tab_04Activity">
     <item
-        android:id="@+id/add" android:icon="@android:drawable/ic_menu_add"
-        app:showAsAction="always" android:title="Add"/>
+        android:id="@+id/itemBulto"
+        android:icon="@drawable/appbar_column_two"
+        android:title="Bulto"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/add"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="itemAddNew"
+        app:showAsAction="always|withText" />
     <item
         android:id="@+id/reset" android:icon="@android:drawable/ic_menu_revert"
-        app:showAsAction="always" :showAsAction="always|withText" android:title="Reset"/>
+        app:showAsAction="always|withText" android:title="Reset"/>
     <item
-        android:id="@+id/about" android:icon="@android:drawable/ic_dialog_info"
-        app:showAsAction="never" android:title="Add">
+        android:id="@+id/itemEtiqImpr" android:icon="@android:drawable/ic_dialog_info"
+        app:showAsAction="never" android:title="Etiquetas Impresión">
     </item>
     <item
-        android:id="@+id/exit"
-        app:showAsAction="never" android:title="Exit">
+        android:id="@+id/itemSelectImpr"
+        app:showAsAction="never" android:title="Seleccionar impresora">
+    </item>
+    <item
+        android:id="@+id/itemRegInci"
+        app:showAsAction="never" android:title="Seleccionar impresora">
     </item>
 </menu>

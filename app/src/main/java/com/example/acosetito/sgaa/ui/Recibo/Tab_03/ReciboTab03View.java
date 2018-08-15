@@ -31,4 +31,6 @@ public interface ReciboTab03View {
 
     void showResultRegisterUATransferencia(Mensaje message);
     void showFailureRegisterUATransferencia(String result);
+
+    void navigatoToBulto();
 }

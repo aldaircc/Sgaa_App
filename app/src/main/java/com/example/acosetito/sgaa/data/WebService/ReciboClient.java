@@ -77,13 +77,13 @@ public interface ReciboClient {
 
     @Headers({"Accept: application/json", "Content-Type: application/json"})
     @POST("RecepcionUA/ua")
-    Call<Mensaje> registerUA(
+    Call<Mensaje> registrarUA(
             @Body HashMap<String, Object> ua
     );
 
     @Headers({"Accept: application/json", "Content-Type: application/json"})
     @POST("RecepcionUATransferencia/ua")
-    Call<Mensaje> registerUATransferencia(
+    Call<Mensaje> registrarUATransferencia(
       @Body HashMap<String, Object> ua
     );
 }

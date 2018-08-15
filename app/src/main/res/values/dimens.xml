@@ -14,4 +14,5 @@
     <dimen name="paddingLeftGeneral">5dp</dimen>
     <dimen name="paddingRightGeneral">5dp</dimen>
     <dimen name="paddingAllGeneral">5dp</dimen>
+    <dimen name="textSizeLabel">15.5sp</dimen>
 </resources>

@@ -245,7 +245,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
         HashMap<String, Object> objParam = new HashMap<>();
         //objParam.put("ua", ua);
         objParam.put("ua", objJson);
-        Call<Mensaje> call = reciboClient.registerUA(objParam);
+        Call<Mensaje> call = reciboClient.registrarUA(objParam);
         call.enqueue(new Callback<Mensaje>() {
             @Override
             public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {
@@ -271,7 +271,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
         ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();
         objParam.put("ua", ua);
-        Call<Mensaje> call = reciboClient.registerUATransferencia(objParam);
+        Call<Mensaje> call = reciboClient.registrarUATransferencia(objParam);
         call.enqueue(new Callback<Mensaje>() {
             @Override
             public void onResponse(Call<Mensaje> call, Response<Mensaje> response) {

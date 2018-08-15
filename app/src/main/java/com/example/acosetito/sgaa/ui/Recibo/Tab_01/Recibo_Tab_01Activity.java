@@ -35,7 +35,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
         adapter = new RVReciboTab01Adapter(this);
         rclReciboTx.setAdapter(adapter);
         presenter = new ReciboTab01PresenterImpl(this);
-        presenter.getListarRecepcionByUser("Admin", 1, 1);
+        presenter.getListarRecepcionByUser("ADMIN",2,1);//"Admin", 1, 1);
         svFilterTx.setOnQueryTextListener(onQueryTextListener);
     }
 

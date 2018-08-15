@@ -10,8 +10,11 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab02Adapter;
+import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab04Adapater;
 import com.example.acosetito.sgaa.data.Model.DiffUtil.ListarDetalleTx_DiffCallback;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,8 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
     private IRVReciboTab02Adapter irvReciboTab02Adapter;
     private int selectedPos = -1;
     FilterReciboTab02 filter;
+    IRVReciboTab04Adapater interfaceTab04;
+    private ArrayList<UAXProductoTxA> modelArrayList = new ArrayList<>();
 
     public RVReciboTab02Adapter(IRVReciboTab02Adapter irvReciboTab02Adapter){
         this.list = new ArrayList<>();

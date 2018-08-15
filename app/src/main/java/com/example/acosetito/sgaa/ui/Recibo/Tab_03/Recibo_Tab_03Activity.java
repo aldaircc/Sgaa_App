@@ -1,11 +1,14 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
 
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +25,7 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.ui.Recibo.Tab_04.Recibo_Tab_04Activity;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,10 +37,9 @@ import java.util.Optional;
 
 public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTab03View{
 
-    Button btnOption, btnBack, btnSave;
-    PopupMenu ddMenu;
-    TextView tvCodProd, tvUM, tvDescripcion;
-    EditText edtCantPedida, edtCantRecibida, edtCantTotalRecibida, edtSaldo, edtBultos, edtFecEmi, edtFecVenci, edtLote, edtCodBar, edtAveriado, edtObserv;
+    Button btnBack, btnSave, btnDetail;
+    TextView tvCodProd, tvUM, tvDescripcion, tvCantPedida, tvCantTotalRecibida, tvSaldo, tvBultos, tvFecEmi, tvFecVenci, tvLote;
+    EditText edtCantRecibida, edtCodBar, edtAveriado, edtObserv;
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     ReciboTab03Presenter presenter;
     LinearLayout lySection03;
@@ -45,7 +48,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     ListarDetalleTx objReceived;
     Integer intId_TipoMovimiento;
     String strNumOrden;
-    Boolean bolAutomatic;
+    Boolean bolAutomatic = false;
 
     /** Local variables **/
     Double _cantidad = 0.0;
@@ -81,13 +84,13 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             tvCodProd.setText(objReceived.getCodigo());
             tvUM.setText(objReceived.getUM());
             tvDescripcion.setText(objReceived.getDescripcion());
-            edtCantPedida.setText(String.format("%.3f", objReceived.getCantidadPedida()));
+            tvCantPedida.setText(String.format("%.3f", objReceived.getCantidadPedida()));
             //edtCantRecibida.setText(String.valueOf(objReceived.getCantidadOperacion()));
-            edtSaldo.setText(String.valueOf(objReceived.getSaldo()));
+            tvSaldo.setText(String.valueOf(objReceived.getSaldo()));
             //edtBultos.setText();
-            edtFecEmi.setText(formatter.format(objReceived.getFechaEmision()));
-            edtFecVenci.setText(formatter.format(objReceived.getFechaVencimiento()));
-            edtLote.setText(objReceived.getLote());
+            tvFecEmi.setText(formatter.format(objReceived.getFechaEmision()));
+            tvFecVenci.setText(formatter.format(objReceived.getFechaVencimiento()));
+            tvLote.setText(objReceived.getLote());
         }
 
         presenter = new ReciboTab03PresenterImpl(this);
@@ -99,35 +102,47 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         tvCodProd = (TextView)findViewById(R.id.tvCodProd);
         tvUM = (TextView)findViewById(R.id.tvUM);
         tvDescripcion = (TextView)findViewById(R.id.tvDescripcion);
-        edtCantPedida = (EditText)findViewById(R.id.edtCantPedida);
+        tvCantPedida = (TextView) findViewById(R.id.tvCantPedida);
         edtCantRecibida = (EditText)findViewById(R.id.edtCantRecibida);
-        edtSaldo = (EditText)findViewById(R.id.edtSaldo);
-        edtBultos = (EditText)findViewById(R.id.edtBultos);
-        edtFecEmi = (EditText)findViewById(R.id.edtFecEmi);
-        edtFecVenci = (EditText)findViewById(R.id.edtFecVenci);
-        edtLote = (EditText)findViewById(R.id.edtLote);
+        tvSaldo = (TextView)findViewById(R.id.tvSaldo);
+        tvBultos = (TextView)findViewById(R.id.tvBultos);
+        tvFecEmi = (TextView)findViewById(R.id.tvFecEmi);
+        tvFecVenci = (TextView)findViewById(R.id.tvFecVenci);
+        tvLote = (TextView)findViewById(R.id.tvLote);
         edtCodBar = (EditText)findViewById(R.id.edtCodBar);
         //edtCodBar.setOnKeyListener(onKeyListenerCodBar);
         //edtCodBar.addTextChangedListener(textWatcher_CodBar);
-        edtCantTotalRecibida = (EditText)findViewById(R.id.edtCantTotalRecibida);
+        tvCantTotalRecibida = (TextView)findViewById(R.id.tvCantTotalRecibida);
         edtAveriado = (EditText)findViewById(R.id.edtAveriado);
         edtObserv = (EditText)findViewById(R.id.edtObserv);
 
-
-        btnOption = (Button)findViewById(R.id.btnOption);
-        btnOption.setOnClickListener(optionsOnClickListener);
         btnBack = (Button)findViewById(R.id.btnBack);
         btnBack.setOnClickListener(btnBackOnClickListener);
         btnSave = (Button)findViewById(R.id.btnSave);
         btnSave.setOnClickListener(btnSaveOnClickListener);
+        btnDetail = (Button)findViewById(R.id.btnDetail);
+        btnDetail.setOnClickListener(btnDetailOnClickListener);
 
         lySection03 = (LinearLayout)findViewById(R.id.lySection03);
-
-        ddMenu = new PopupMenu(getApplicationContext(), btnOption);
-        ddMenu.getMenuInflater().inflate(R.menu.drop_down_menu, ddMenu.getMenu());
-        ddMenu.setOnMenuItemClickListener(onMenuItemClickListener);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recibo, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu){
+        if (Build.VERSION.SDK_INT > 11){
+            invalidateOptionsMenu();
+            menu.findItem(R.id.itemBulto).setVisible(true);
+            menu.findItem(R.id.itemEtiqImpr).setVisible(true);
+            menu.findItem(R.id.itemRegInci).setVisible(true);
+            menu.findItem(R.id.itemSelectImpr).setEnabled(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
 
     /**TextWatcher textWatcher_CodBar = new TextWatcher() {
     @Override
@@ -169,21 +184,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         }
     };
 
-    View.OnClickListener optionsOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            ddMenu.show();
-        }
-    };
-
-    PopupMenu.OnMenuItemClickListener onMenuItemClickListener = new PopupMenu.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            Toast.makeText(getApplicationContext(), "You have clicked "+ menuItem.getTitle(), Toast.LENGTH_SHORT).show();
-            return true;
-        }
-    };
-
     Double sumUaDetalle(List<UAXProductoTxA> list){
         Double total = 0.0;
         for (UAXProductoTxA obj: list) {
@@ -196,13 +196,13 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
 
         if (message.errNumber == 0){
             Double dSaldo, dValor1, dBultos;
-            dSaldo = Double.parseDouble(edtSaldo.getText().toString());
+            dSaldo = Double.parseDouble(tvSaldo.getText().toString());
             dValor1 = Double.parseDouble(message.valor1.toString());
-            dBultos = Double.parseDouble(edtBultos.getText().toString()) + 1;
-            edtSaldo.setText(String.format("%.3f", dSaldo - dValor1));
+            dBultos = Double.parseDouble(tvBultos.getText().toString()) + 1;
+            tvSaldo.setText(String.format("%.3f", dSaldo - dValor1));
             dSaldo = (dSaldo - dValor1);
-            edtBultos.setText(dBultos.toString());
-            edtCantTotalRecibida.setText(String.format("%.3f", (dBultos * dValor1)));
+            tvBultos.setText(dBultos.toString());
+            tvCantTotalRecibida.setText(String.format("%.3f", (dBultos * dValor1)));
             //TabPage1.BackColor = Color.GreenYellow;
             lySection03.setBackgroundResource(R.color.greenBottomBar);
 
@@ -243,14 +243,14 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
 
         if (list.size() > 0){
             Double totalCantidad = sumUaDetalle(list);
-            Double cantidadPedida = Double.parseDouble(edtCantPedida.getText().toString());
-            edtCantTotalRecibida.setText(String.format("%.3f", totalCantidad));
-            edtSaldo.setText(String.format("%.3f", cantidadPedida - totalCantidad));
-            edtBultos.setText(String.valueOf(list.size()));
+            Double cantidadPedida = Double.parseDouble(tvCantPedida.getText().toString());
+            tvCantTotalRecibida.setText(String.format("%.3f", totalCantidad));
+            tvSaldo.setText(String.format("%.3f", cantidadPedida - totalCantidad));
+            tvBultos.setText(String.valueOf(list.size()));
         }else{
-            edtCantTotalRecibida.setText("0");
+            tvCantTotalRecibida.setText("0");
             edtAveriado.setText("0");
-            edtBultos.setText("0");
+            tvBultos.setText("0");
             edtCodBar.setText("");
             edtCodBar.requestFocus();
         }
@@ -314,7 +314,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
 
                 edtCodBar.setTag(edtCodBar.getText());
                 edtCodBar.setText(edtCodBar.getTag().toString());
-                btnOption.setEnabled(true);
+                //btnOption.setEnabled(true);
                 //TabPage1.BackColor = Color.Yellow;
                 lySection03.setBackgroundResource(R.color.yellowColor);
 
@@ -545,14 +545,14 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     public void showResultRegistrarUATransito(String result) {
 
         Double cantRetorno = Double.parseDouble(edtCantRecibida.getText().toString());
-        Double cantRecibidaUA = Double.parseDouble(edtCantTotalRecibida.getText().toString());
+        Double cantRecibidaUA = Double.parseDouble(tvCantTotalRecibida.getText().toString());
         Double sumCantidad = cantRetorno + cantRecibidaUA;
-        Double cantPedida = Double.parseDouble(edtCantPedida.getText().toString());
+        Double cantPedida = Double.parseDouble(tvCantPedida.getText().toString());
 
         Date fEmision = null, fVencimiento = null;
         try {
-            fEmision = (edtFecEmi.getText().toString().trim()=="") ? null: formatter.parse(edtFecEmi.getText().toString());
-            fVencimiento = (edtFecVenci.getText().toString().trim()=="") ? null: formatter.parse(edtFecVenci.getText().toString());
+            fEmision = (tvFecEmi.getText().toString().trim()=="") ? null: formatter.parse(tvFecEmi.getText().toString());
+            fVencimiento = (tvFecVenci.getText().toString().trim()=="") ? null: formatter.parse(tvFecVenci.getText().toString());
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -620,5 +620,36 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void showFailureRegisterUATransferencia(String result) {
 
+    }
+
+    View.OnClickListener btnDetailOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            navigatoToBulto();
+        }
+    };
+
+    @Override
+    public void navigatoToBulto() {
+        Intent intent = new Intent(this, Recibo_Tab_04Activity.class);
+        intent.putExtra("Id_Tx", objReceived.getId_Tx());
+        intent.putExtra("NumOrden", strNumOrden);
+        intent.putExtra("Codigo",objReceived.getCodigo());
+        intent.putExtra("Articulo", objReceived.getDescripcion());
+        intent.putExtra("Id_Articulo", objReceived.getId_Producto());
+        intent.putExtra("UM", objReceived.getUM());
+        intent.putExtra("Id_UM", objReceived.getId_UM());
+        intent.putExtra("Fecha_Emi", objReceived.getFechaEmision());
+        intent.putExtra("Fecha_Venci",objReceived.getFechaVencimiento());
+        intent.putExtra("Lote", objReceived.getLote());
+        intent.putExtra("CantPedida", objReceived.getCantidadPedida());
+        intent.putExtra("CantRecib", objReceived.getCantidadOperacion());
+        intent.putExtra("Saldo", objReceived.getSaldo());
+        intent.putExtra("Item", objReceived.getItem());
+        intent.putExtra("Factor", objReceived.getFactor());
+        intent.putExtra("FlagSeriePT", objReceived.getFlagSeriePT());
+        intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
+        intent.putExtra("bolAutomatic", bolAutomatic);
+        startActivity(intent);
     }
 }
