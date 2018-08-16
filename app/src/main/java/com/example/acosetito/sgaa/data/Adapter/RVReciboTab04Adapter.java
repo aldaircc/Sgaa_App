@@ -84,7 +84,7 @@ public class RVReciboTab04Adapter extends RecyclerView.Adapter<RVReciboTab04Adap
             for (String key: o.keySet()){
                 if (key.equals("Saldo")){
                     holder.tvLote.setText(baseData.get(position).getLoteLab());
-                    holder.tvCantidad.setText(String.valueOf(baseData.get(position).getSaldoTotal()));
+                    holder.tvCantidad.setText(String.valueOf(baseData.get(position).getSaldoTotal()));//String.valueOf(baseData.get(position).getCantidad()));
                     holder.tvCantidad.setTextColor(Color.GREEN);
                 }
             }

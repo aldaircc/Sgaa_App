@@ -86,4 +86,10 @@ public interface ReciboClient {
     Call<Mensaje> registrarUATransferencia(
       @Body HashMap<String, Object> ua
     );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("ValidarPallet/strPallet/IdAlmacen")
+    Call<Mensaje> validarPallet(
+            @Body JsonObject obj
+    );
 }

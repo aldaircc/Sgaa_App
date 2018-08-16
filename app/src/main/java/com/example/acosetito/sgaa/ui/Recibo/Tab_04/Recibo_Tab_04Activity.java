@@ -2,6 +2,7 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_04;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.ui.Recibo.Tab_05.Recibo_Tab_05Activity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,6 +46,7 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     Integer intId_TipoMovimiento;
     String strNumOrden;
     Boolean bolAutomatic = false;
+    Double currentSaldo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,8 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
             intId_TipoMovimiento = extras.getInt("Id_TipoMovimiento");
             strNumOrden = extras.getString("NumOrden");
             bolAutomatic = extras.getBoolean("bolAutomatic");
+            currentSaldo = extras.getDouble("currentSaldo");
+            setDataToControls(objReceived);
         }
     }
 
@@ -93,6 +99,12 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
         rclBulto.setLayoutManager(new LinearLayoutManager(this));
         rclBulto.setItemAnimator(new DefaultItemAnimator());
         rclBulto.setAdapter(adapter);
+    }
+
+    void setDataToControls(ListarDetalleTx obj){
+        tvTx.setText(obj.getId_Tx());
+        tvCodArticulo.setText(obj.getCodigo());
+        tvDescripArt.setText(obj.getDescripcion());
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -113,6 +125,33 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recibo, menu);
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(Build.VERSION.SDK_INT > 11) {
+            invalidateOptionsMenu();
+            menu.findItem(R.id.itemPallet).setVisible(true);
+            menu.findItem(R.id.itemRegInci).setVisible(false);
+            menu.findItem(R.id.itemEtiqImpr).setVisible(false);
+            menu.findItem(R.id.itemSelectImpr).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.itemPallet:
+                evaluateSaldo();
+                return true;
+            case R.id.itemSelectImpr:
+                Toast.makeText(this, "Item SelectImpr was selected", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -151,6 +190,35 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void showFailureRegisterUA(String result) {
 
+    }
+
+    void evaluateSaldo(){
+        if (currentSaldo > 0){
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("¿Tiene un saldo pendiente, está seguro de cerrar el pallet?");
+            alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    navigateToPrintEtqPallet();
+                }
+            });
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }else{
+            navigateToPrintEtqPallet();
+        }
+    }
+
+    @Override
+    public void navigateToPrintEtqPallet() {
+        Intent intent = new Intent(this, Recibo_Tab_05Activity.class);
+        startActivity(intent);
     }
 
     private void changePricesInTheList() {

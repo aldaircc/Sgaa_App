@@ -12,4 +12,5 @@ public interface ReciboTab04View {
     void showFailureRegisterUATransferencia(String result);
     void getResultRegisterUA(Mensaje message);
     void showFailureRegisterUA(String result);
+    void navigateToPrintEtqPallet();
 }

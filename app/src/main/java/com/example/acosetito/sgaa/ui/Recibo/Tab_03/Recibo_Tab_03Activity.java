@@ -136,7 +136,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     public boolean onPrepareOptionsMenu(Menu menu){
         if (Build.VERSION.SDK_INT > 11){
             invalidateOptionsMenu();
-            menu.findItem(R.id.itemBulto).setVisible(true);
+            //menu.findItem(R.id.itemBulto).setVisible(true);
             menu.findItem(R.id.itemEtiqImpr).setVisible(true);
             menu.findItem(R.id.itemRegInci).setVisible(true);
             menu.findItem(R.id.itemSelectImpr).setEnabled(true);
@@ -650,6 +650,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("FlagSeriePT", objReceived.getFlagSeriePT());
         intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
         intent.putExtra("bolAutomatic", bolAutomatic);
+        intent.putExtra("currentSaldo", Double.parseDouble(tvSaldo.getText().toString()));
         startActivity(intent);
     }
 }
