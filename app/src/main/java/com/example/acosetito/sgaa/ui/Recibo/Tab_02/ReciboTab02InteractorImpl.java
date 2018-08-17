@@ -17,7 +17,7 @@ public class ReciboTab02InteractorImpl implements ReciboTab02Interactor{
 
     @Override
     public void getDataDetailTx(String strIdTx, final OnListenerReciboTab02 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<List<ListarDetalleTx>> call = reciboClient.getDetailTx(strIdTx);
         call.enqueue(new Callback<List<ListarDetalleTx>>() {
             @Override
@@ -44,7 +44,7 @@ public class ReciboTab02InteractorImpl implements ReciboTab02Interactor{
 
     @Override
     public void getCerrarRecepcion(String idTx, Integer idEstado, String usuario, final OnListenerReciboTab02 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         JsonObject objParams = new JsonObject();
         objParams.addProperty("idTx", idTx);
         objParams.addProperty("idEstado", idEstado);

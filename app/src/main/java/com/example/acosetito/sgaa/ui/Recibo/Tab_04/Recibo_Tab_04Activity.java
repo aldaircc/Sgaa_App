@@ -218,6 +218,25 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void navigateToPrintEtqPallet() {
         Intent intent = new Intent(this, Recibo_Tab_05Activity.class);
+        intent.putExtra("Id_Tx", objReceived.getId_Tx());
+        intent.putExtra("NumOrden", strNumOrden);
+        intent.putExtra("Codigo",objReceived.getCodigo());
+        intent.putExtra("Articulo", objReceived.getDescripcion());
+        intent.putExtra("Id_Articulo", objReceived.getId_Producto());
+        intent.putExtra("UM", objReceived.getUM());
+        intent.putExtra("Id_UM", objReceived.getId_UM());
+        intent.putExtra("Fecha_Emi", objReceived.getFechaEmision());
+        intent.putExtra("Fecha_Venci",objReceived.getFechaVencimiento());
+        intent.putExtra("Lote", objReceived.getLote());
+        intent.putExtra("CantPedida", objReceived.getCantidadPedida());
+        intent.putExtra("CantRecib", objReceived.getCantidadOperacion());
+        intent.putExtra("Saldo", objReceived.getSaldo());
+        intent.putExtra("Item", objReceived.getItem());
+        intent.putExtra("Factor", objReceived.getFactor());
+        intent.putExtra("FlagSeriePT", objReceived.getFlagSeriePT());
+        intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
+        intent.putExtra("bolAutomatic", bolAutomatic);
+        intent.putExtra("currentSaldo", currentSaldo);
         startActivity(intent);
     }
 

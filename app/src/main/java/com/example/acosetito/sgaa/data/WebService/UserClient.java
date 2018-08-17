@@ -2,8 +2,10 @@ package com.example.acosetito.sgaa.data.WebService;
 
 import com.example.acosetito.sgaa.data.Model.Almacen;
 import com.example.acosetito.sgaa.data.Model.CentroDistribucion;
+import com.example.acosetito.sgaa.data.Model.Impresora.AccesosImpresoraXUsuario;
 import com.example.acosetito.sgaa.data.Model.Usuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,5 +28,10 @@ public interface UserClient {
     Call<List<Almacen>> getWarehouseByUser(
             @Query("strUsuario") String strUsuario,
             @Query("intIdCentro") Integer intIdCentro
+    );
+
+    @GET("ListarAccesosImpresoraXUsuario")
+    Call<ArrayList<AccesosImpresoraXUsuario>> listarAccesosImpresoraXUsuario(
+            @Query("strUsuario") String strUsuario
     );
 }

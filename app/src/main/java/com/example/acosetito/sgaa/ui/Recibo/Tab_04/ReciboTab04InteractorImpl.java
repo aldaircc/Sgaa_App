@@ -22,7 +22,7 @@ public class ReciboTab04InteractorImpl implements ReciboTab04Interactor{
 
     @Override
     public void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem, final OnListenerReciboTab04 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<List<UAXProductoTxA>> call = reciboClient.getUAXProductoTx(strIdTx, intIdProducto, intItem);
         call.enqueue(new Callback<List<UAXProductoTxA>>() {
             @Override
@@ -86,7 +86,7 @@ public class ReciboTab04InteractorImpl implements ReciboTab04Interactor{
         objJson.addProperty("UsuarioModificacion", ua.getUsuarioModificacion() );
         objJson.addProperty("UsuarioRegistro",ua.getUsuarioRegistro());
 
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();
         objParam.put("ua", objJson);
         Call<Mensaje> call = reciboClient.registrarUA(objParam);
@@ -112,7 +112,7 @@ public class ReciboTab04InteractorImpl implements ReciboTab04Interactor{
 
     @Override
     public void registerUATransferencia(UA ua, final OnListenerReciboTab04 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();
         objParam.put("ua", ua);
         Call<Mensaje> call = reciboClient.registrarUATransferencia(objParam);

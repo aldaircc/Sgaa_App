@@ -13,7 +13,7 @@ public class ApiClient {
     public static Retrofit retrofit;
     public static Gson gson;
 
-    public static Retrofit getApiClient(String service)
+    public static Retrofit getApiClient(String url, String service)
     {
         if (retrofit == null)
         {
@@ -25,13 +25,13 @@ public class ApiClient {
                     .create();
 
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl + service + "/rest/")
+                    .baseUrl(url + service + "/rest/")
                     //.addConverterFactory(ScalarsConverterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(gson))// create(gson))
                     .build();
         }else{
             retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl + service + "/rest/")
+                    .baseUrl(url + service + "/rest/")
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }

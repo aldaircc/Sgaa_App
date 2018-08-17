@@ -14,7 +14,7 @@ public class AlmacenCDistInteractorImpl implements AlmacenCDistInteractor {
     @Override
     public void getCenterByUser(String user, final OnAlmacenCDistListener listener) {
 
-        UserClient userClient = (ApiClient.getApiClient(Global.usuarioService)).create(UserClient.class);
+        UserClient userClient = (ApiClient.getApiClient(Global.baseUrl, Global.usuarioService)).create(UserClient.class);
         Call<List<CentroDistribucion>> call = userClient.getCenterByUser(user);
         call.enqueue(new Callback<List<CentroDistribucion>>() {
             @Override
@@ -39,7 +39,7 @@ public class AlmacenCDistInteractorImpl implements AlmacenCDistInteractor {
     @Override
     public void getWarehouseByUser(String user, Integer intIdCentro, final OnAlmacenCDistListener listener) {
         try {
-            UserClient userClient = (ApiClient.getApiClient(Global.usuarioService)).create(UserClient.class);
+            UserClient userClient = (ApiClient.getApiClient(Global.baseUrl, Global.usuarioService)).create(UserClient.class);
             Call<List<Almacen>> call = userClient.getWarehouseByUser(user, intIdCentro);
             call.enqueue(new Callback<List<Almacen>>() {
                 @Override

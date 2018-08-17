@@ -6,6 +6,10 @@ public interface ReciboTab05View {
 
     void showResultValidatePallet(Mensaje message);
     void showFailureValidatePallet(String result);
+    void showResultInsertPallet(String result);
+    void showFailureInsertPallet(String result);
+    void showResultPrintEtq(Mensaje message);
+    void showFailurePrintEtq(String result);
     void showProgressDialog();
     void hideProgressDialog();
 }

@@ -92,4 +92,10 @@ public interface ReciboClient {
     Call<Mensaje> validarPallet(
             @Body JsonObject obj
     );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("InsertarPallet/idAlmacen/user/idCentro")
+    Call<String> insertarPallet(
+            @Body JsonObject obj
+    );
 }

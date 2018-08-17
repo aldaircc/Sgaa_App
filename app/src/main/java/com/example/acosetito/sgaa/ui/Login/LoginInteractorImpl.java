@@ -11,7 +11,7 @@ import retrofit2.Response;
 public class LoginInteractorImpl implements LoginInteractor {
     @Override
     public void validateUser(String user, String password, Integer idTerminal, final OnValidateUserListener listener) {
-        UserClient userClient = (ApiClient.getApiClient(Global.usuarioService)).create(UserClient.class);
+        UserClient userClient = (ApiClient.getApiClient(Global.baseUrl, Global.usuarioService)).create(UserClient.class);
         Call<List<Usuario>> call = userClient.validateUserAndroid(user, password, idTerminal);
         call.enqueue(new Callback<List<Usuario>>() {
             @Override

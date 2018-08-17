@@ -26,7 +26,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
     @Override
     public void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem, final OnListenerReciboTab03 listener) {
 
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<List<UAXProductoTxA>> call = reciboClient.getUAXProductoTx(strIdTx, intIdProducto, intItem);
         call.enqueue(new Callback<List<UAXProductoTxA>>() {
             @Override
@@ -51,7 +51,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void validateReciboTransferSerie(String strNumOrden, String strSerie, Integer intItem, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<Mensaje> call = reciboClient.validarReciboTransferenciaSerie(strNumOrden, strSerie, intItem);
         call.enqueue(new Callback<Mensaje>() {
             @Override
@@ -75,7 +75,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void validateReciboSerie(String strSerie, String strIdTx, Integer intIdProducto, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<Mensaje> call = reciboClient.validarReciboSerie(strSerie, strIdTx, intIdProducto);
         call.enqueue(new Callback<Mensaje>() {
             @Override
@@ -114,7 +114,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void validateUAReciboTransferencia(UA ua, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         //JsonObject objParam = new JsonObject();
         //objParam.add("ua", ua);
         Call<Mensaje> call = reciboClient.validarUAReciboTransferencia(ua);
@@ -140,7 +140,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void validateUARecibo(UA ua, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
 
         HashMap<String, Object> objParam = new HashMap<>();
         objParam.put("ua", ua);
@@ -168,7 +168,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void registerUATransito(TxUbicacion txUbi, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, TxUbicacion> objParam = new HashMap<>();
         objParam.put("TxUbi", txUbi);
         Call<String> call = reciboClient.registerUATransito(objParam);
@@ -241,7 +241,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
         objJson.addProperty("UsuarioModificacion", ua.getUsuarioModificacion() );
         objJson.addProperty("UsuarioRegistro",ua.getUsuarioRegistro());
 
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();
         //objParam.put("ua", ua);
         objParam.put("ua", objJson);
@@ -268,7 +268,7 @@ public class ReciboTab03InteractorImpl implements ReciboTab03Interactor {
 
     @Override
     public void registerUATransferencia(UA ua, final OnListenerReciboTab03 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         HashMap<String, Object> objParam = new HashMap<>();
         objParam.put("ua", ua);
         Call<Mensaje> call = reciboClient.registrarUATransferencia(objParam);

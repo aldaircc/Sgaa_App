@@ -2,8 +2,11 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_05;
 
 import android.os.Handler;
 
+import com.example.acosetito.sgaa.data.Model.Impresora.ListaEtiqueta;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
+
+import java.util.ArrayList;
 
 public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab05Interactor.OnListenerReciboTab05{
 
@@ -36,6 +39,42 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
     @Override
     public void OnFailureValidatePallet(String result) {
         view.showFailureValidatePallet(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void insertPallet(Integer intId_Almacen, String strUsuario, Integer intId_Centro) {
+        view.showProgressDialog();
+        interactor.insertPallet(intId_Almacen, strUsuario, intId_Centro, this);
+    }
+
+    @Override
+    public void OnSuccessInsertPallet(String result) {
+        view.showResultInsertPallet(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailureInsertPallet(String result) {
+        view.showFailureInsertPallet(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void printListaEtq(ArrayList<ListaEtiqueta> lista, String strFormato, String strNombreImpresora, Boolean bolEsScript) {
+        view.showProgressDialog();
+        interactor.printListaEtq(lista, strFormato, strNombreImpresora, bolEsScript,this);
+    }
+
+    @Override
+    public void OnSuccessPrintListaEtq(Mensaje message) {
+        view.showResultPrintEtq(message);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailurePrintListaEtq(String result) {
+        view.showFailurePrintEtq(result);
         view.hideProgressDialog();
     }
 }

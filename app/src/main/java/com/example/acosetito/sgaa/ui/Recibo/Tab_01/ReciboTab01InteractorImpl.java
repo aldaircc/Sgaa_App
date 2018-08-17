@@ -14,7 +14,7 @@ public class ReciboTab01InteractorImpl implements ReciboTab01Interactor {
 
     @Override
     public void getListarRecepcionByUser(String strUsuario, Integer intIdAlmacen, Integer intIdMuelle, final OnListenerReciboTab01 listener) {
-        ReciboClient reciboClient = (ApiClient.getApiClient(Global.recepcionService)).create(ReciboClient.class);
+        ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
         Call<List<ListarRecepcionesXUsuario>> call = reciboClient.getRecepcionesXUsuario(strUsuario, intIdAlmacen, intIdMuelle);
         call.enqueue(new Callback<List<ListarRecepcionesXUsuario>>() {
             @Override
