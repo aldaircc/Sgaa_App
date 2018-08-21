@@ -12,4 +12,9 @@
     <color name="lightBlueHeader">#3878be</color>
     <color name="skyBlueBackground">#d8e2f4</color>
     <color name="greenBottomBar">#32cd32</color>
+
+    <color name="dark_blue">#180065</color>
+    <color name="light_blue">#334ee9ff</color>
+    <color name="medium_green">#3d853e</color>
+    <color name="light_green">#3c2ae668</color>
 </resources>

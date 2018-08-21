@@ -13,10 +13,13 @@ import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Model.Impresora.Etiqueta;
 import com.example.acosetito.sgaa.data.Model.Impresora.ListaEtiqueta;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.ImpUA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
-import com.example.acosetito.sgaa.ui.Fragments.ImpresoraFragment;
+import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +30,7 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
     EditText edtEtqPallet;
     Button btnEtqPallet, btnRegister;
     ReciboTab05Presenter presenter;
+    List<UAXProductoTxA> lstBulto;
 
     /** Intent Values **/
     ListarDetalleTx objReceived;
@@ -87,29 +91,6 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
                 showDialogImpresora();
             }else{
                 presenter.insertPallet(2,"ADMIN",1);//Global.IdWarehouse, Global.userName, Global.idCentro);
-                /**
-                 codBarPallet = new GestionRecibosMovil().CrearEtqContenedor(Convert.ToInt32(lblAlmacen.Tag), lblUser.Tag.ToString(), control.Global.IdCentro);
-                 txtEtqPallet3.Text = codBarPallet;
-
-                 //---- imprimir------
-                 GestionImpresionesMovil print = new GestionImpresionesMovil();
-                 List<ProxySGAAMovil.SOAPImpresiones.ListaEtiquetas> lstLisEtq = new List<ProxySGAAMovil.SOAPImpresiones.ListaEtiquetas>();
-
-                 ProxySGAAMovil.SOAPImpresiones.ListaEtiquetas LE = new ProxySGAAMovil.SOAPImpresiones.ListaEtiquetas();
-                 LE.etiqueta = new ProxySGAAMovil.SOAPImpresiones.Etiqueta[]{
-                 new ProxySGAAMovil.SOAPImpresiones.Etiqueta() { campo = "|ALMACEN|", valor = control.Global.Almacen },
-                 new ProxySGAAMovil.SOAPImpresiones.Etiqueta() { campo = "|CODIGO|", valor = lblCodArticulo2.Text  },
-                 new ProxySGAAMovil.SOAPImpresiones.Etiqueta() { campo = "|PRODUCTO|", valor = lblDesArticulo.Text.Trim()   },
-                 new ProxySGAAMovil.SOAPImpresiones.Etiqueta() { campo = "|CUENTA|", valor = lblCliente.Tag.ToString() },
-                 new ProxySGAAMovil.SOAPImpresiones.Etiqueta() { campo = "|CODBARRA|", valor = codBarPallet }
-                 };
-                 lstLisEtq.Add(LE);
-                 var objMsj = print.imprimirListaEtiquetas(lstLisEtq, "ETQ_PALLETS_UA.txt", nomImp, true);
-                 if (objMsj.errNumber == -1)
-                 {
-                 MessageBox.Show(objMsj.message.ToString(), "Error");
-                 }
-                 **/
             }
         }
     };
@@ -118,6 +99,9 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         @Override
         public void onClick(View view) {
             presenter.validatePallet(edtEtqPallet.getText().toString(), 2); //Global.IdWarehouse);
+            /**if(edtEtqPallet.getText().length() != 0){
+                presenter.validatePallet(edtEtqPallet.getText().toString(), 2); //Global.IdWarehouse);
+            }**/
         }
     };
 
@@ -136,38 +120,23 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
              }
              txtEtqPallet3.Focus();
              **/
+
+            presenter.getUAsProductoTx(objReceived.getId_Tx(), objReceived.getId_Producto(), objReceived.getItem());
+
         }else{
             Toast.makeText(this, "El pallet escaneado no existe", Toast.LENGTH_SHORT).show();
             edtEtqPallet.requestFocus();
             edtEtqPallet.selectAll();
         }
-        /**
-         if (msjValida.valor1 >= -1)
-         {
-         if (palletcausal)
-         {
-         CerrarPalletCausal();
-         }
-         else
-         {
-         CerrarPallet();
-         }
-
-         txtEtqPallet3.Focus();
-         }
-         else
-         {
-         MessageBox.Show("El pallet escaneado no existe",
-         "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand, MessageBoxDefaultButton.Button1);
-         txtEtqPallet3.Focus();
-         txtEtqPallet3.SelectAll();
-         }
-         **/
     }
 
     @Override
     public void showResultPrintEtq(Mensaje message) {
-        Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
+        if (message.errNumber == -1)
+        {
+            Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
@@ -203,6 +172,69 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void showFailureInsertPallet(String result) {
         Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showResultRegisterPallet(Mensaje message) {
+        if (message.errNumber == 0){
+            Toast.makeText(this,"UA's registradas: "+ counterImpUA + " de " + lstBulto.size(), Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this,"Error al momento de registrar las UA's", Toast.LENGTH_SHORT).show();
+        }
+        edtEtqPallet.setText("");
+        edtEtqPallet.requestFocus();
+    }
+
+    @Override
+    public void showFailureRegisterPallet(String result) {
+
+    }
+
+    @Override
+    public void getBultos(List<UAXProductoTxA> list) {
+        lstBulto = list;
+        TxUbicacion objTxUbi = new TxUbicacion();
+        objTxUbi.setTipoUbicacion(1);
+        objTxUbi.setId_Producto(objReceived.getId_Producto());
+        objTxUbi.setId_Ubicacion_Origen(0);
+        objTxUbi.setId_Almacen(2);//Global.IdWarehouse);
+        objTxUbi.setId_Tx(objReceived.getId_Tx());
+        objTxUbi.setPrioridad(10);
+        objTxUbi.setObservacion("");
+        objTxUbi.setUsuarioModificacion("ADMIN");//Global.userName);
+        presenter.registerUATransito(objTxUbi);
+    }
+
+    @Override
+    public void showFailureGetBultos(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
+
+    Integer counterImpUA = 0;
+
+    @Override
+    public void showResultRegisterUATransito(String result) {
+
+        ArrayList<ImpUA> lstUbi = new ArrayList<>();
+        for(UAXProductoTxA o: lstBulto){
+            if (o.getContenedor() != null) continue;
+
+            ImpUA objUA = new ImpUA();
+            objUA.setUA_CodBarra(o.getUA_CodBarra());
+            objUA.setPalletCodBarra(edtEtqPallet.getText().toString());
+            objUA.setUsuarioRegistro("ADMIN");//Global.userName);
+            objUA.setId_Tx_Ubi(result);
+            objUA.setId_Almacen(2);//Global.IdWarehouse);
+            lstUbi.add(objUA);
+            counterImpUA++;
+        }
+
+        presenter.registerPallet(lstUbi);
+    }
+
+    @Override
+    public void showFailureRequest(String result) {
+
     }
 
     @Override

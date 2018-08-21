@@ -1,5 +1,6 @@
 package com.example.acosetito.sgaa.data.WebService;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.ImpUA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
 import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
@@ -7,6 +8,7 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import retrofit2.Call;
@@ -97,5 +99,11 @@ public interface ReciboClient {
     @POST("InsertarPallet/idAlmacen/user/idCentro")
     Call<String> insertarPallet(
             @Body JsonObject obj
+    );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("RegistrarPallet/ua")
+    Call<Mensaje> registrarPallet(
+            @Body HashMap<String, ArrayList<ImpUA>> ua
     );
 }

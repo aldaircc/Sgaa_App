@@ -15,7 +15,16 @@ public class ProgressDialogRequest {
     private static ProgressDialog progressDialog;
 
     public static void show(Context context){//, int messageResourceId) {
-        if (progressDialog != null) {
+
+        progressDialog = new ProgressDialog(context);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setMessage("Please wait.");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+
+        /**
+         //Old Version
+         if (progressDialog != null) {
             progressDialog.dismiss();
         }
 
@@ -30,10 +39,10 @@ public class ProgressDialogRequest {
         progressDialog = new ProgressDialog(context);//, style);
         //progressDialog.setMessage(context.getResources().getString(messageResourceId));
         //progressDialog.setMessage("XXX");
-        //progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.setCancelable(false);
         progressDialog.show();
-        progressDialog.setContentView(R.layout.custom_progressdialog);
+        progressDialog.setContentView(R.layout.custom_progressdialog);**/
     }
 
     public static void dismiss() {

@@ -3,6 +3,8 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_04;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_05.Recibo_Tab_05Activity;
 
 import java.util.ArrayList;

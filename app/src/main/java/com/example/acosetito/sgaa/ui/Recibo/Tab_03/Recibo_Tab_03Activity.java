@@ -2,6 +2,8 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
 
 import android.content.Intent;
 import android.os.Build;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -25,6 +27,8 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
+import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_04.Recibo_Tab_04Activity;
 
 import java.text.DateFormat;
@@ -142,6 +146,24 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             menu.findItem(R.id.itemSelectImpr).setEnabled(true);
         }
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.itemPallet:
+                //evaluateSaldo();
+                return true;
+            case R.id.itemRegInci:
+                showDialogIncidencia();
+                return true;
+            case R.id.itemSelectImpr:
+                showDialogImpresora();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     /**TextWatcher textWatcher_CodBar = new TextWatcher() {
@@ -652,5 +674,22 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("bolAutomatic", bolAutomatic);
         intent.putExtra("currentSaldo", Double.parseDouble(tvSaldo.getText().toString()));
         startActivity(intent);
+    }
+
+    private void showDialogImpresora() {
+        FragmentManager fm = getSupportFragmentManager();
+        ImpresoraFragment frm = new ImpresoraFragment();
+        frm.show(fm, "fragment_Impresora");
+    }
+
+    private void showDialogIncidencia(){
+        FragmentManager fm = getSupportFragmentManager();
+        IncidenciaFragment frm = new IncidenciaFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("Id_Tx",objReceived.getId_Tx());
+        bundle.putString("Nro_Orden", strNumOrden);
+        bundle.putBoolean("Pausa", true);
+        frm.setArguments(bundle);
+        frm.show(fm, "fragment_Incidencia");
     }
 }

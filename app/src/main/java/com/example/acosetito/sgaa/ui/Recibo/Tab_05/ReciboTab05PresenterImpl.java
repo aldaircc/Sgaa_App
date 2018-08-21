@@ -4,9 +4,13 @@ import android.os.Handler;
 
 import com.example.acosetito.sgaa.data.Model.Impresora.ListaEtiqueta;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.ImpUA;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab05Interactor.OnListenerReciboTab05{
 
@@ -61,6 +65,23 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
     }
 
     @Override
+    public void registerPallet(ArrayList<ImpUA> ua) {
+        interactor.registerPallet(ua, this);
+    }
+
+    @Override
+    public void OnSuccessRegisterPallet(Mensaje message) {
+        view.showResultRegisterPallet(message);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailureRegisterPallet(String result) {
+        view.showFailureRegisterPallet(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
     public void printListaEtq(ArrayList<ListaEtiqueta> lista, String strFormato, String strNombreImpresora, Boolean bolEsScript) {
         view.showProgressDialog();
         interactor.printListaEtq(lista, strFormato, strNombreImpresora, bolEsScript,this);
@@ -75,6 +96,40 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
     @Override
     public void OnFailurePrintListaEtq(String result) {
         view.showFailurePrintEtq(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem) {
+        interactor.getUAsProductoTx(strIdTx, intIdProducto, intItem, this);
+    }
+
+    @Override
+    public void registerUATransito(TxUbicacion txUbi) {
+        interactor.registerUATransito(txUbi, this);
+    }
+
+    @Override
+    public void OnSuccessGetUAsProductoTx(List<UAXProductoTxA> list) {
+        view.getBultos(list);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailureGetUAsProductoTx(String result) {
+        view.showFailureGetBultos(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnSuccessRegisterUATransito(String result) {
+        view.showResultRegisterUATransito(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailureRegisterUATransito(String result) {
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 }
