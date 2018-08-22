@@ -8,4 +8,7 @@ public interface ReciboTab02Presenter {
 
     void getDataDetailTx(String strIdTx);
     void getCerrarRecepcion(String idTx, Integer idEstado, String usuario);
+    void showDialogImpresora();
+    void showDialogIncidencia(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento);
+    void navigateToReciboTab01();
 }

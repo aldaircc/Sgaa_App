@@ -1,5 +1,6 @@
 package com.example.acosetito.sgaa.data.WebService;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
+import com.example.acosetito.sgaa.data.Model.Recepcion.Causal;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ImpUA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
@@ -21,7 +22,7 @@ import retrofit2.http.Query;
 public interface ReciboClient {
 
     @GET("ListarRecepcionesXUsuario_V2")
-    Call<List<ListarRecepcionesXUsuario>> getRecepcionesXUsuario(
+    Call<ArrayList<ListarRecepcionesXUsuario>> getRecepcionesXUsuario(
             @Query("strUsuario") String strUsuario,
             @Query("intIdAlmacen") Integer intIdAlmacen,
             @Query("intIdMuelle") Integer intIdMuelle
@@ -105,5 +106,11 @@ public interface ReciboClient {
     @POST("RegistrarPallet/ua")
     Call<Mensaje> registrarPallet(
             @Body HashMap<String, ArrayList<ImpUA>> ua
+    );
+
+    @GET("ListarCausalesXModulo")
+    Call<ArrayList<Causal>> listarCausalesXModulo(
+            @Query("intIdCliente") Integer intIdCliente,
+            @Query("intIdModulo") Integer intIdModulo
     );
 }

@@ -20,4 +20,6 @@ public class Global {
     public static final String pickingService = "PickingService.svc";
     public static final String recepcionService = "RecepcionService.svc";
     public static final String impresoraService = "Impresiones.svc";
+    public static final String produccionService = "ProduccionService.svc";
+    public static final String tablasEstaticasService = "TablasEstaticasService.svc";
 }

@@ -21,13 +21,28 @@ public class ReciboTab02PresenterImpl implements ReciboTab02Presenter, ReciboTab
     }
 
     @Override
+    public void showDialogImpresora() {
+        view.showDialogImpresora();
+    }
+
+    @Override
+    public void showDialogIncidencia(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+        view.showDialogIncidencia(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
+    }
+
+    @Override
+    public void navigateToReciboTab01() {
+        view.navigateToReciboTab01();
+    }
+
+    @Override
     public void OnSuccessGetCerrarRecepcion(Mensaje message) {
         view.showResultCerrarRecepcion(message);
     }
 
     @Override
     public void OnFailureGetCerrarRecepcion(String result) {
-        view.showFailureCerrarRecepcion(result);
+        view.showFailureRequest(result);
     }
 
     @Override
@@ -37,7 +52,7 @@ public class ReciboTab02PresenterImpl implements ReciboTab02Presenter, ReciboTab
 
     @Override
     public void OnFailureGetDetailTx(String result) {
-        view.showFailureDetailTx(result);
+        view.showFailureRequest(result);
     }
 
     @Override

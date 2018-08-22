@@ -15,13 +15,13 @@ public class ReciboTab01InteractorImpl implements ReciboTab01Interactor {
     @Override
     public void getListarRecepcionByUser(String strUsuario, Integer intIdAlmacen, Integer intIdMuelle, final OnListenerReciboTab01 listener) {
         ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
-        Call<List<ListarRecepcionesXUsuario>> call = reciboClient.getRecepcionesXUsuario(strUsuario, intIdAlmacen, intIdMuelle);
-        call.enqueue(new Callback<List<ListarRecepcionesXUsuario>>() {
+        Call<ArrayList<ListarRecepcionesXUsuario>> call = reciboClient.getRecepcionesXUsuario(strUsuario, intIdAlmacen, intIdMuelle);
+        call.enqueue(new Callback<ArrayList<ListarRecepcionesXUsuario>>() {
             @Override
-            public void onResponse(Call<List<ListarRecepcionesXUsuario>> call, Response<List<ListarRecepcionesXUsuario>> response) {
+            public void onResponse(Call<ArrayList<ListarRecepcionesXUsuario>> call, Response<ArrayList<ListarRecepcionesXUsuario>> response) {
                 switch (response.code()) {
                     case 200:
-                        List<ListarRecepcionesXUsuario> list = new ArrayList<>();
+                        ArrayList<ListarRecepcionesXUsuario> list = new ArrayList<>();
                         if (response.body().size() != 0) {
                             list = response.body();
                         }
@@ -33,7 +33,7 @@ public class ReciboTab01InteractorImpl implements ReciboTab01Interactor {
             }
 
             @Override
-            public void onFailure(Call<List<ListarRecepcionesXUsuario>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ListarRecepcionesXUsuario>> call, Throwable t) {
                 listener.OnFailureGetListarRecepcionByUser(t.getMessage());
             }
         });

@@ -23,12 +23,14 @@ import android.widget.Toast;
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
+import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
 import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
+import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_04.Recibo_Tab_04Activity;
 
 import java.text.DateFormat;
@@ -39,7 +41,7 @@ import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Optional;
 
-public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTab03View{
+public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTab03View, IncidenciaFragment.IncidenciaDialogListener{
 
     Button btnBack, btnSave, btnDetail;
     TextView tvCodProd, tvUM, tvDescripcion, tvCantPedida, tvCantTotalRecibida, tvSaldo, tvBultos, tvFecEmi, tvFecVenci, tvLote;
@@ -52,7 +54,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     ListarDetalleTx objReceived;
     Integer intId_TipoMovimiento;
     String strNumOrden;
-    Boolean bolAutomatic = false;
+    Boolean bolAutomatic = false, bolFlagPausa = false;
 
     /** Local variables **/
     Double _cantidad = 0.0;
@@ -84,6 +86,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             intId_TipoMovimiento = extras.getInt("Id_TipoMovimiento");
             strNumOrden = extras.getString("NumOrden");
             bolAutomatic = extras.getBoolean("bolAutomatic");
+            bolFlagPausa = extras.getBoolean("FlagPausa");
 
             tvCodProd.setText(objReceived.getCodigo());
             tvUM.setText(objReceived.getUM());
@@ -140,7 +143,9 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     public boolean onPrepareOptionsMenu(Menu menu){
         if (Build.VERSION.SDK_INT > 11){
             invalidateOptionsMenu();
-            //menu.findItem(R.id.itemBulto).setVisible(true);
+            menu.findItem(R.id.itemBack).setVisible(true);
+            menu.findItem(R.id.itemRefresh).setVisible(true);
+            menu.findItem(R.id.itemPallet).setVisible(false);
             menu.findItem(R.id.itemEtiqImpr).setVisible(true);
             menu.findItem(R.id.itemRegInci).setVisible(true);
             menu.findItem(R.id.itemSelectImpr).setEnabled(true);
@@ -688,8 +693,15 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         Bundle bundle = new Bundle();
         bundle.putString("Id_Tx",objReceived.getId_Tx());
         bundle.putString("Nro_Orden", strNumOrden);
-        bundle.putBoolean("Pausa", true);
+        bundle.putBoolean("FlagPausa", bolFlagPausa);
         frm.setArguments(bundle);
         frm.show(fm, "fragment_Incidencia");
+    }
+
+    @Override
+    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+        Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 }

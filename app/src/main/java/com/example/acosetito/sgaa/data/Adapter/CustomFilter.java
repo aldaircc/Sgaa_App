@@ -1,6 +1,7 @@
 package com.example.acosetito.sgaa.data.Adapter;
 
 import android.util.Log;
+import android.widget.Adapter;
 import android.widget.Filter;
 
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
@@ -45,7 +46,7 @@ public class CustomFilter extends Filter {
 
     @Override
     protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-        this.adapter.list = (ArrayList<ListarRecepcionesXUsuario>) filterResults.values;
+        this.adapter.baseData = (ArrayList<ListarRecepcionesXUsuario>) filterResults.values;
         adapter.notifyDataSetChanged();
     }
 }

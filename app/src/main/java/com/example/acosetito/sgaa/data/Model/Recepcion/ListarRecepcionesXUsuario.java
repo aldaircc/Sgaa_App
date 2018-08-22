@@ -1,10 +1,9 @@
 package com.example.acosetito.sgaa.data.Model.Recepcion;
-
+import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
-public class ListarRecepcionesXUsuario {
+public class ListarRecepcionesXUsuario implements Comparable, Cloneable{
     @SerializedName("Id_Tx")
     private String Id_Tx ;
     @SerializedName("NumOrden")
@@ -204,5 +203,27 @@ public class ListarRecepcionesXUsuario {
 
     public void setFlagDetalle(Boolean flagDetalle) {
         FlagDetalle = flagDetalle;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        ListarRecepcionesXUsuario compare = (ListarRecepcionesXUsuario) o;
+        if (compare.Id_Tx.equals(this.Id_Tx) && compare.NumOrden.equals(this.NumOrden) &&
+                compare.Cliente.equals(this.Cliente) && compare.Proveedor.equals(this.Proveedor) &&
+                compare.FlagPausa.equals(this.FlagPausa)) {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public ListarRecepcionesXUsuario clone() {
+        ListarRecepcionesXUsuario clone;
+        try {
+            clone = (ListarRecepcionesXUsuario) super.clone();
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
+        return clone;
     }
 }

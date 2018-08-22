@@ -2,6 +2,7 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_01;
 
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReciboTab01PresenterImpl implements ReciboTab01Presenter, ReciboTab01Interactor.OnListenerReciboTab01 {
@@ -20,12 +21,17 @@ public class ReciboTab01PresenterImpl implements ReciboTab01Presenter, ReciboTab
     }
 
     @Override
-    public void OnSuccessGetListarRecepcionByUser(List<ListarRecepcionesXUsuario> list) {
+    public void goBackToMenu() {
+        view.goBackToMenu();
+    }
+
+    @Override
+    public void OnSuccessGetListarRecepcionByUser(ArrayList<ListarRecepcionesXUsuario> list) {
             view.sourceDataRecepcionByUser(list);
     }
 
     @Override
     public void OnFailureGetListarRecepcionByUser(String result) {
-            view.showFailureRecepcionByUser(result);
+            view.showFailureRequest(result);
     }
 }

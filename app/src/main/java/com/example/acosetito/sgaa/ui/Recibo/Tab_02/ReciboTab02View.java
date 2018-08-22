@@ -7,7 +7,11 @@ import java.util.List;
 
 public interface ReciboTab02View {
     void showResultCerrarRecepcion(Mensaje message);
-    void showFailureCerrarRecepcion(String result);
     void sourceDataDetailTx(List<ListarDetalleTx> list);
-    void showFailureDetailTx(String result);
+    void showFailureRequest(String result);
+    void showDialogImpresora();
+    void showDialogIncidencia(String strId_Tx, String strNumOrden,
+                              Boolean bolFlagPausa, String strCuenta,
+                              String strProveedor, Integer intId_TipoMovimiento);
+    void navigateToReciboTab01();
 }

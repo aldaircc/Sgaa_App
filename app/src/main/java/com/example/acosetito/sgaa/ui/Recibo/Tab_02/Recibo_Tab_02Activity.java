@@ -1,11 +1,16 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_02;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,13 +22,17 @@ import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Adapter.RVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
+import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
+import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
+import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_03.Recibo_Tab_03Activity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTab02View, IRVReciboTab02Adapter{
+public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTab02View, IRVReciboTab02Adapter, IncidenciaFragment.IncidenciaDialogListener{
     RecyclerView rclDetailTx;
     Button btnBack, btnNext, btnCausal, btnCloseTx;
     SearchView svDetail;
@@ -36,8 +45,9 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     Boolean isFirst = true;
 
     /** Intent values **/
-    String strTxId, strNumOrden, strCuenta, strProveedor;
-    Integer intIdTipoMovimiento;
+    String strR_TxId, strR_NumOrden, strR_Cuenta, strR_Proveedor;
+    Integer intR_IdTipoMovimiento;
+    Boolean bolR_FlagPausa = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +57,19 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            strTxId = extras.getString("Id_Tx");
-            strNumOrden = extras.getString("NumOrden");
-            strCuenta = extras.getString("Cuenta");
-            strProveedor = extras.getString("Proveedor");
-            intIdTipoMovimiento = extras.getInt("Id_TipoMovimiento");
-            tvNroOrden.setText(strNumOrden);
-            tvProveedor.setText(strProveedor);
-            tvCuenta.setText(strCuenta);
+            strR_TxId = extras.getString("Id_Tx");
+            strR_NumOrden = extras.getString("NumOrden");
+            strR_Cuenta = extras.getString("Cuenta");
+            strR_Proveedor = extras.getString("Proveedor");
+            intR_IdTipoMovimiento = extras.getInt("Id_TipoMovimiento");
+            bolR_FlagPausa = extras.getBoolean("FlagPausa");
+            tvNroOrden.setText(strR_NumOrden);
+            tvProveedor.setText(strR_Proveedor);
+            tvCuenta.setText(strR_Cuenta);
         }
 
         presenter = new ReciboTab02PresenterImpl(this);
-        presenter.getDataDetailTx(strTxId);
+        presenter.getDataDetailTx(strR_TxId);
     }
 
     void initializeControls(){
@@ -102,16 +113,58 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         }
     };
 
-    @Override
-    public void showResultCerrarRecepcion(Mensaje message) {
-        Toast.makeText(this, "Cerrar recepcion:"+ message.errNumber + " - " + message.message, Toast.LENGTH_SHORT).show();
-        presenter.getDataDetailTx(strTxId);
 
+    //region Show menu and options
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_recibo, menu);
+        return true;
     }
 
     @Override
-    public void showFailureCerrarRecepcion(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if(Build.VERSION.SDK_INT > 11) {
+            invalidateOptionsMenu();
+            menu.findItem(R.id.itemBack).setVisible(true);
+            menu.findItem(R.id.itemRefresh).setVisible(true);
+            menu.findItem(R.id.itemPallet).setVisible(false);
+            menu.findItem(R.id.itemRegInci).setVisible(true);
+            menu.findItem(R.id.itemEtiqImpr).setVisible(false);
+            menu.findItem(R.id.itemSelectImpr).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.itemBack:
+                //presenter.goBackToMenu();
+                Intent intent = new Intent();
+                intent.putExtra("key", 369);
+                setResult(RESULT_OK, intent);
+                finish();
+                return true;
+            case R.id.itemRefresh:
+                //presenter.getListarRecepcionByUser("ADMIN",2,1);//"Admin", 1, 1);
+                return true;
+            case R.id.itemSelectImpr:
+                return true;
+            case R.id.itemRegInci:
+                presenter.showDialogIncidencia(strR_TxId, strR_NumOrden, bolR_FlagPausa, strR_Cuenta, strR_Proveedor, intR_IdTipoMovimiento);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //endregion
+
+    @Override
+    public void showResultCerrarRecepcion(Mensaje message) {
+        Toast.makeText(this, "Cerrar recepcion:"+ message.errNumber + " - " + message.message, Toast.LENGTH_SHORT).show();
+        presenter.getDataDetailTx(strR_TxId);
+
     }
 
     @Override
@@ -130,15 +183,45 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureDetailTx(String result) {
+    public void showFailureRequest(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showDialogImpresora() {
+        FragmentManager fm = getSupportFragmentManager();
+        ImpresoraFragment frm = new ImpresoraFragment();
+        frm.show(fm, "fragment_Impresora");
+    }
+
+    @Override
+    public void showDialogIncidencia(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+        FragmentManager fm = getSupportFragmentManager();
+        IncidenciaFragment frm = new IncidenciaFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("Id_Tx", strId_Tx);
+        bundle.putString("Nro_Orden", strNumOrden);
+        bundle.putBoolean("FlagPausa", bolFlagPausa);
+        bundle.putString("Cuenta", strCuenta);
+        bundle.putString("Proveedor", strProveedor);
+        bundle.putInt("Id_TipoMovimiento", intId_TipoMovimiento);
+        bundle.putInt("moduloTab", 12);
+        frm.setArguments(bundle);
+        frm.show(fm, "fragment_Incidencia");
+    }
+
+    @Override
+    public void navigateToReciboTab01() {
+        Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     @Override
     public void onClickbtnNext(ListarDetalleTx ent) {
         Intent intent = new Intent(this, Recibo_Tab_03Activity.class);
         intent.putExtra("Id_Tx", ent.getId_Tx());
-        intent.putExtra("NumOrden", strNumOrden);
+        intent.putExtra("NumOrden", strR_NumOrden);
         intent.putExtra("Codigo",ent.getCodigo());
         intent.putExtra("Articulo", ent.getDescripcion());
         intent.putExtra("Id_Articulo", ent.getId_Producto());
@@ -153,8 +236,20 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("Item", ent.getItem());
         intent.putExtra("Factor", ent.getFactor());
         intent.putExtra("FlagSeriePT", ent.getFlagSeriePT());
-        intent.putExtra("Id_TipoMovimiento", intIdTipoMovimiento);
+        intent.putExtra("Id_TipoMovimiento", intR_IdTipoMovimiento);
         intent.putExtra("bolAutomatic", chkAutomatic.isChecked());
+        intent.putExtra("FlagPausa", bolR_FlagPausa);
         startActivity(intent);
+    }
+
+    @Override
+    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+        presenter.navigateToReciboTab01();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Write your code here
+        super.onBackPressed();
     }
 }

@@ -146,6 +146,11 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
+            case R.id.itemBack:
+                return true;
+            case R.id.itemRefresh:
+                presenter.getBultosTx(objReceived.getId_Tx(), objReceived.getId_Producto(), objReceived.getItem());
+                return true;
             case R.id.itemPallet:
                 evaluateSaldo();
                 return true;

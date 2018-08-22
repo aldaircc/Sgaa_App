@@ -4,6 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.Recibo.Tab_04.Recibo_Tab_04Activity">
     <item
+        android:id="@+id/itemBack"
+        android:icon="@drawable/appbar_arrow_left"
+        android:title="Regresar"
+        app:showAsAction="always|withText"
+        />
+    <item
+        android:id="@+id/itemRefresh"
+        android:icon="@drawable/appbar_refresh"
+        android:title="Refrescar"
+        app:showAsAction="always|withText"/>
+    <item
         android:id="@+id/itemPallet"
         android:icon="@drawable/appbar_column_two"
         android:title="Pallet"
