@@ -29,7 +29,7 @@ public interface ReciboClient {
     );
 
     @GET("TxDetalleXTx_v2")
-    Call<List<ListarDetalleTx>> getDetailTx(
+    Call<ArrayList<ListarDetalleTx>> getDetailTx(
             @Query("strIdTx") String strIdTx
     );
 

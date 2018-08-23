@@ -19,6 +19,7 @@ import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVReciboTab01Adapter;
 import com.example.acosetito.sgaa.data.Adapter.RVReciboTab01Adapter;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
 import com.example.acosetito.sgaa.ui.Main.MainActivity;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_02.Recibo_Tab_02Activity;
@@ -130,6 +131,16 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogRequest.show(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        ProgressDialogRequest.dismiss();
     }
 
     void initializeControls(){

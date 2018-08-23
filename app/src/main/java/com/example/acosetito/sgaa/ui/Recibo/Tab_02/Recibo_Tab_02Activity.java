@@ -23,6 +23,7 @@ import com.example.acosetito.sgaa.data.Adapter.RVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
@@ -39,7 +40,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     CheckBox chkAutomatic;
     TextView tvNroOrden, tvCuenta, tvProveedor, tvCountTx;
 
-    List<ListarDetalleTx> lstDetail = new ArrayList<>();
+    ArrayList<ListarDetalleTx> lstDetail = new ArrayList<>();
     ReciboTab02Presenter presenter;
     RVReciboTab02Adapter adapter;
     Boolean isFirst = true;
@@ -88,7 +89,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         tvCountTx = (TextView)findViewById(R.id.tvCountTx);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rclDetailTx.setLayoutManager(llm);
-        adapter = new RVReciboTab02Adapter(this);
+        adapter = new RVReciboTab02Adapter(this, lstDetail);
         rclDetailTx.setAdapter(adapter);
     }
 
@@ -101,7 +102,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         @Override
         public boolean onQueryTextChange(String s) {
             adapter.getFilter().filter(s);
-            tvCountTx.setText(String.valueOf(adapter.listUpdate.size()));
+            tvCountTx.setText(String.valueOf(adapter.baseData.size()));
             return false;
         }
     };
@@ -147,7 +148,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
                 finish();
                 return true;
             case R.id.itemRefresh:
-                //presenter.getListarRecepcionByUser("ADMIN",2,1);//"Admin", 1, 1);
+                presenter.getDataDetailTx(strR_TxId);
                 return true;
             case R.id.itemSelectImpr:
                 return true;
@@ -164,22 +165,14 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     public void showResultCerrarRecepcion(Mensaje message) {
         Toast.makeText(this, "Cerrar recepcion:"+ message.errNumber + " - " + message.message, Toast.LENGTH_SHORT).show();
         presenter.getDataDetailTx(strR_TxId);
-
     }
 
     @Override
-    public void sourceDataDetailTx(List<ListarDetalleTx> list) {
+    public void sourceDataDetailTx(ArrayList<ListarDetalleTx> list) {
         lstDetail.clear();
         lstDetail = list;
-
-        if (isFirst){
-            adapter.clearAndAddAllWithOutNotify(lstDetail);
-            isFirst = false;
-        }else{
-            adapter.updateList(lstDetail);
-        }
-
-        tvCountTx.setText(String.valueOf(adapter.listUpdate.size()));
+        adapter.setBaseData(lstDetail);
+        tvCountTx.setText(String.valueOf(adapter.baseData.size()));
     }
 
     @Override
@@ -215,6 +208,16 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogRequest.show(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        ProgressDialogRequest.dismiss();
     }
 
     @Override

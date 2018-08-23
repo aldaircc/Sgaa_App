@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lySection01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@color/lightBlueHeader"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingAllGeneral"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tvUser"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ADMINISTRADOR"
+                android:textColor="@color/yellowColor"
+                android:textSize="@dimen/sizeMedium"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/paddingAllGeneral"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tvWarehouse"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="ALMACEN FRUTALES 419"
+                android:textColor="@color/whiteColor"
+                android:textSize="@dimen/sizeMedium"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lySection02"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.2"
+        android:background="@color/skyBlueBackground"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/svFilterTx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/whiteColor"
+            android:paddingBottom="2dp"
+            android:paddingLeft="@dimen/paddingLeftGeneral"
+            android:paddingRight="@dimen/paddingRightGeneral"
+            android:paddingTop="2dp"
+            iconifiedByDefault="false"
+            queryHint="Buscar ..." />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lySection03"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
+        android:background="@color/skyBlueBackground"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rclReciboTx"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/whiteColor"
+            android:paddingBottom="2dp"
+            android:paddingLeft="@dimen/paddingLeftGeneral"
+            android:paddingRight="@dimen/paddingRightGeneral"
+            android:paddingTop="2dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lySection04"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/skyBlueBackground"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:weightSum="5">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:background="@drawable/appbar_arrow_left"
+                android:minHeight="0dp"
+                android:minWidth="0dp" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnRefresh"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:background="@drawable/appbar_refresh" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnNext"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_weight="1"
+                android:background="@drawable/appbar_arrow_right" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

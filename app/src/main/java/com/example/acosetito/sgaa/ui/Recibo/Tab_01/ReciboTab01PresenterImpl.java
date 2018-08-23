@@ -17,6 +17,7 @@ public class ReciboTab01PresenterImpl implements ReciboTab01Presenter, ReciboTab
 
     @Override
     public void getListarRecepcionByUser(String strUsuario, Integer intIdAlmacen, Integer intIdMuelle) {
+        view.showProgressDialog();
         interactor.getListarRecepcionByUser(strUsuario, intIdAlmacen, intIdMuelle, this);
     }
 
@@ -28,10 +29,12 @@ public class ReciboTab01PresenterImpl implements ReciboTab01Presenter, ReciboTab
     @Override
     public void OnSuccessGetListarRecepcionByUser(ArrayList<ListarRecepcionesXUsuario> list) {
             view.sourceDataRecepcionByUser(list);
+            view.hideProgressDialog();
     }
 
     @Override
     public void OnFailureGetListarRecepcionByUser(String result) {
             view.showFailureRequest(result);
+            view.hideProgressDialog();
     }
 }

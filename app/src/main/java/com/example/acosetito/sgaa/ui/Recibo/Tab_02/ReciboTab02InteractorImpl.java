@@ -18,13 +18,13 @@ public class ReciboTab02InteractorImpl implements ReciboTab02Interactor{
     @Override
     public void getDataDetailTx(String strIdTx, final OnListenerReciboTab02 listener) {
         ReciboClient reciboClient = (ApiClient.getApiClient(Global.baseUrl, Global.recepcionService)).create(ReciboClient.class);
-        Call<List<ListarDetalleTx>> call = reciboClient.getDetailTx(strIdTx);
-        call.enqueue(new Callback<List<ListarDetalleTx>>() {
+        Call<ArrayList<ListarDetalleTx>> call = reciboClient.getDetailTx(strIdTx);
+        call.enqueue(new Callback<ArrayList<ListarDetalleTx>>() {
             @Override
-            public void onResponse(Call<List<ListarDetalleTx>> call, Response<List<ListarDetalleTx>> response) {
+            public void onResponse(Call<ArrayList<ListarDetalleTx>> call, Response<ArrayList<ListarDetalleTx>> response) {
                 switch (response.code()){
                     case 200:
-                        List<ListarDetalleTx> list = new ArrayList<>();
+                        ArrayList<ListarDetalleTx> list = new ArrayList<>();
                         if (response.body().size() != 0){
                             list = response.body();
                         }
@@ -36,7 +36,7 @@ public class ReciboTab02InteractorImpl implements ReciboTab02Interactor{
             }
 
             @Override
-            public void onFailure(Call<List<ListarDetalleTx>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<ListarDetalleTx>> call, Throwable t) {
                 listener.OnFailureGetDetailTx(t.getMessage());
             }
         });

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="6"
+    android:weightSum="2"
     tools:context=".ui.Recibo.Tab_02.Recibo_Tab_02Activity">
 
     <LinearLayout
@@ -20,21 +20,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
+            android:paddingBottom="3dp"
             android:paddingLeft="@dimen/paddingLeftGeneral"
             android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="2dp"
+            android:paddingTop="3dp"
             android:weightSum="3">
 
             <TextView
                 android:id="@+id/textView14"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:text="Nro. Orden:"
                 android:textColor="@color/yellowColor"
                 android:textSize="@dimen/sizeMedium"
@@ -44,9 +43,7 @@
                 android:id="@+id/tvNroOrden"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
                 android:layout_weight="2"
-                android:paddingLeft="5dp"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
                 android:textSize="@dimen/sizeMedium"
@@ -56,22 +53,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="1dp"
+            android:paddingBottom="3dp"
             android:paddingLeft="@dimen/paddingLeftGeneral"
             android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="1dp"
+            android:paddingTop="3dp"
             android:weightSum="3">
 
             <TextView
                 android:id="@+id/textView13"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:text="Cuenta:"
                 android:textColor="@color/yellowColor"
                 android:textSize="@dimen/sizeMedium"
@@ -81,10 +76,7 @@
                 android:id="@+id/tvCuenta"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
                 android:layout_weight="2"
-                android:paddingLeft="5dp"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
                 android:textSize="@dimen/sizeMedium"
@@ -94,21 +86,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
+            android:paddingBottom="3dp"
             android:paddingLeft="@dimen/paddingLeftGeneral"
             android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="2dp"
+            android:paddingTop="3dp"
             android:weightSum="3">
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
                 android:text="Proveedor:"
                 android:textColor="@color/yellowColor"
                 android:textSize="@dimen/sizeMedium"
@@ -118,10 +109,7 @@
                 android:id="@+id/tvProveedor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_marginTop="2dp"
                 android:layout_weight="2"
-                android:paddingLeft="5dp"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
                 android:textSize="@dimen/sizeMedium"
@@ -134,34 +122,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/skyBlueBackground"
+        android:gravity="center_vertical"
         android:orientation="vertical"
         android:weightSum="1">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="2dp"
-            android:paddingTop="2dp"
-            android:weightSum="1">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
             <android.support.v7.widget.SearchView
                 android:id="@+id/svDetail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:iconifiedByDefault="false"
                 app:queryHint="Buscar ..." />
-
         </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lySection03"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="6"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
         android:orientation="vertical"
         android:weightSum="1">
 
@@ -183,24 +169,19 @@
         android:layout_height="wrap_content"
         android:background="@color/skyBlueBackground"
         android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:paddingBottom="2dp"
-            android:paddingLeft="@dimen/paddingLeftGeneral"
-            android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="2dp"
             android:weightSum="4">
 
             <TextView
                 android:id="@+id/textView18"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.7"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:text="Total:"
@@ -219,8 +200,9 @@
                 android:id="@+id/chkAutomatic"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="2.3"
                 android:gravity="right|center_vertical"
+                android:paddingRight="5dp"
                 android:text="Verificación automatica"
                 android:textColor="@color/blackColor" />
         </LinearLayout>
@@ -230,9 +212,9 @@
         android:id="@+id/lySection05"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:background="@color/skyBlueBackground"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -245,43 +227,28 @@
             <Button
                 android:id="@+id/btnBack"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/appbar_arrow_left" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/btnCausal"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Causal" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/btnCloseTx"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Cerrar Rx" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
             <Button
                 android:id="@+id/btnNext"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/appbar_arrow_right" />
 

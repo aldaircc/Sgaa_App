@@ -6,7 +6,22 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class ListarDetalleTx {
+public class ListarDetalleTx implements Comparable, Cloneable{
+
+    @SerializedName("Id_Condicion")
+    private Integer Id_Condicion;
+    @SerializedName("Condicion")
+    private String Condicion;
+    @SerializedName("PosicionReferencia")
+    private String PosicionReferencia;
+    @SerializedName("FlagLotePT")
+    private Boolean FlagLotePT;
+    @SerializedName("FlagSeriePT")
+    private Boolean FlagSeriePT;
+    @SerializedName("Id_SubAlmacen")
+    private Integer Id_SubAlmacen;
+    @SerializedName("NombreSubAlmacen")
+    private String NombreSubAlmacen;
 
     @SerializedName("Id_Tx")
     private String Id_Tx;
@@ -449,18 +464,29 @@ public class ListarDetalleTx {
         NombreSubAlmacen = nombreSubAlmacen;
     }
 
-    @SerializedName("Id_Condicion")
-    private Integer Id_Condicion;
-    @SerializedName("Condicion")
-    private String Condicion;
-    @SerializedName("PosicionReferencia")
-    private String PosicionReferencia;
-    @SerializedName("FlagLotePT")
-    private Boolean FlagLotePT;
-    @SerializedName("FlagSeriePT")
-    private Boolean FlagSeriePT;
-    @SerializedName("Id_SubAlmacen")
-    private Integer Id_SubAlmacen;
-    @SerializedName("NombreSubAlmacen")
-    private String NombreSubAlmacen;
+    @Override
+    public int compareTo(@NonNull Object o) {
+        ListarDetalleTx compare = (ListarDetalleTx) o;
+        if (compare.Id_Tx.equals(this.Id_Tx) && compare.Descripcion.equals(this.Descripcion)
+                && compare.Codigo.equals(this.Codigo)
+                && compare.Id_SubAlmacen.equals(this.Id_SubAlmacen)
+                && compare.NombreSubAlmacen.equals(this.NombreSubAlmacen)
+                && compare.CantidadPedida.equals(this.CantidadPedida)
+                && compare.CantidadOperacion.equals(this.CantidadOperacion)
+                && compare.Saldo.equals(this.Saldo)) {
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public ListarDetalleTx clone() {
+        ListarDetalleTx clone;
+        try {
+            clone = (ListarDetalleTx) super.clone();
+        }catch (CloneNotSupportedException e){
+            throw new RuntimeException(e);
+        }
+        return clone;
+    }
 }

@@ -19,7 +19,7 @@ public class ProgressDialogRequest {
         progressDialog = new ProgressDialog(context);
         progressDialog.setTitle("Loading...");
         progressDialog.setMessage("Please wait.");
-        progressDialog.setCancelable(true);
+        progressDialog.setCancelable(false);
         progressDialog.show();
 
         /**

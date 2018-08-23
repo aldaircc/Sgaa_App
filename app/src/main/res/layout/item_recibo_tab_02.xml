@@ -24,7 +24,7 @@
                 android:weightSum="1">
 
                 <View
-                    android:id="@+id/view"
+                    android:id="@+id/viewEstado"
                     android:layout_width="5dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -41,15 +41,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical"
-                    android:weightSum="8">
+                    android:weightSum="9">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
                         android:weightSum="4">
 
                         <TextView
@@ -64,8 +67,19 @@
                             android:id="@+id/tvCodeProd"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:text="xxxxxxxxx" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="3dp"
+                        android:weightSum="4">
 
                         <TextView
                             android:id="@+id/textView31"
@@ -79,9 +93,8 @@
                             android:id="@+id/tvLote"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+                            android:layout_weight="3"
                             android:text="xxxxxxxxx" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -89,6 +102,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
                         android:weightSum="1">
 
                         <TextView
@@ -105,6 +120,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="3dp"
                         android:weightSum="1">
 
                         <TextView
@@ -120,6 +137,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
                         android:weightSum="1">
 
                         <TextView
@@ -136,6 +155,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="3dp"
                         android:weightSum="1">
 
                         <TextView
@@ -150,7 +171,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp">
 
                         <TextView
                             android:id="@+id/textView41"
@@ -165,7 +189,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="9999999" />
+                            android:text="9999999"
+                            android:textAlignment="textEnd" />
 
                     </LinearLayout>
 
@@ -173,7 +198,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp">
 
                         <TextView
                             android:id="@+id/textView43"
@@ -188,7 +216,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="9999999" />
+                            android:text="9999999"
+                            android:textAlignment="textEnd" />
 
                     </LinearLayout>
 
@@ -196,7 +225,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="3dp"
+                        android:paddingRight="3dp">
 
                         <TextView
                             android:id="@+id/textView"
@@ -211,7 +243,8 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="9999999" />
+                            android:text="9999999"
+                            android:textAlignment="textEnd" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -220,7 +253,7 @@
             <LinearLayout
                 android:id="@+id/lyCol03"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1.22"
                 android:gravity="center_vertical|center_horizontal"
                 android:orientation="vertical"
@@ -229,7 +262,7 @@
                 <Button
                     android:id="@+id/button"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_weight="0.4"
                     android:background="@drawable/appbar_ticket" />
@@ -237,7 +270,7 @@
                 <Button
                     android:id="@+id/btnNext"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:layout_weight="0.4"
                     android:background="@drawable/appbar_arrow_right" />

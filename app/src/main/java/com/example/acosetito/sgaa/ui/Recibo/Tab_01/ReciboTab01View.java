@@ -9,4 +9,6 @@ public interface ReciboTab01View {
     void sourceDataRecepcionByUser(ArrayList<ListarRecepcionesXUsuario> list);
     void showFailureRequest(String result);
     void goBackToMenu();
+    void showProgressDialog();
+    void hideProgressDialog();
 }
