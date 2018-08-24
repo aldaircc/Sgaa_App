@@ -24,12 +24,6 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void validatePallet(String strPallet, int intIdAlmacen) {
-        /**new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.showProgressDialog();
-            }
-        }, 500);**/
         view.showProgressDialog();
         interactor.validatePallet(strPallet, intIdAlmacen, this);
     }
@@ -42,7 +36,7 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void OnFailureValidatePallet(String result) {
-        view.showFailureValidatePallet(result);
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 
@@ -60,12 +54,13 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void OnFailureInsertPallet(String result) {
-        view.showFailureInsertPallet(result);
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 
     @Override
     public void registerPallet(ArrayList<ImpUA> ua) {
+        view.showProgressDialog();
         interactor.registerPallet(ua, this);
     }
 
@@ -77,7 +72,7 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void OnFailureRegisterPallet(String result) {
-        view.showFailureRegisterPallet(result);
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 
@@ -95,18 +90,25 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void OnFailurePrintListaEtq(String result) {
-        view.showFailurePrintEtq(result);
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 
     @Override
     public void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem) {
+        view.showProgressDialog();
         interactor.getUAsProductoTx(strIdTx, intIdProducto, intItem, this);
     }
 
     @Override
     public void registerUATransito(TxUbicacion txUbi) {
+        view.showProgressDialog();
         interactor.registerUATransito(txUbi, this);
+    }
+
+    @Override
+    public void navigateToReciboTab04() {
+        view.navigateToReciboTab04();
     }
 
     @Override
@@ -117,7 +119,7 @@ public class ReciboTab05PresenterImpl implements ReciboTab05Presenter, ReciboTab
 
     @Override
     public void OnFailureGetUAsProductoTx(String result) {
-        view.showFailureGetBultos(result);
+        view.showFailureRequest(result);
         view.hideProgressDialog();
     }
 

@@ -16,12 +16,13 @@ public class ProgressDialogRequest {
 
     public static void show(Context context){//, int messageResourceId) {
 
-        progressDialog = new ProgressDialog(context);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setMessage("Please wait.");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-
+        if (progressDialog == null) {
+            progressDialog = new ProgressDialog(context);
+            progressDialog.setTitle("Loading...");
+            progressDialog.setMessage("Please wait.");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+        }
         /**
          //Old Version
          if (progressDialog != null) {

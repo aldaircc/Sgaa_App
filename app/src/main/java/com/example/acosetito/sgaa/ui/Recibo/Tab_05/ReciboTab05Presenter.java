@@ -14,4 +14,5 @@ public interface ReciboTab05Presenter {
     void registerPallet(ArrayList<ImpUA> ua);
     void getUAsProductoTx(String strIdTx, Integer intIdProducto, Integer intItem);
     void registerUATransito(TxUbicacion txUbi);
+    void navigateToReciboTab04();
 }

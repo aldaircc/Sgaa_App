@@ -49,6 +49,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     String strR_TxId, strR_NumOrden, strR_Cuenta, strR_Proveedor;
     Integer intR_IdTipoMovimiento;
     Boolean bolR_FlagPausa = false;
+    private final int CODE_TAB_02 = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,10 +143,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         {
             case R.id.itemBack:
                 //presenter.goBackToMenu();
-                Intent intent = new Intent();
-                intent.putExtra("key", 369);
-                setResult(RESULT_OK, intent);
-                finish();
+                presenter.navigateToReciboTab01();
                 return true;
             case R.id.itemRefresh:
                 presenter.getDataDetailTx(strR_TxId);
@@ -205,26 +203,18 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     public void navigateToReciboTab01() {
-        Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+         Intent intent = new Intent();
+         intent.putExtra("key", 369);
+         setResult(RESULT_OK, intent);
+         finish();
     }
 
-    @Override
-    public void showProgressDialog() {
-        ProgressDialogRequest.show(this);
-    }
 
     @Override
-    public void hideProgressDialog() {
-        ProgressDialogRequest.dismiss();
-    }
-
-    @Override
-    public void onClickbtnNext(ListarDetalleTx ent) {
+    public void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa) {
         Intent intent = new Intent(this, Recibo_Tab_03Activity.class);
         intent.putExtra("Id_Tx", ent.getId_Tx());
-        intent.putExtra("NumOrden", strR_NumOrden);
+        intent.putExtra("NumOrden", strNumOrden);
         intent.putExtra("Codigo",ent.getCodigo());
         intent.putExtra("Articulo", ent.getDescripcion());
         intent.putExtra("Id_Articulo", ent.getId_Producto());
@@ -239,10 +229,26 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("Item", ent.getItem());
         intent.putExtra("Factor", ent.getFactor());
         intent.putExtra("FlagSeriePT", ent.getFlagSeriePT());
-        intent.putExtra("Id_TipoMovimiento", intR_IdTipoMovimiento);
-        intent.putExtra("bolAutomatic", chkAutomatic.isChecked());
-        intent.putExtra("FlagPausa", bolR_FlagPausa);
-        startActivity(intent);
+        intent.putExtra("Id_TipoMovimiento", intIdTipoMovimiento);
+        intent.putExtra("bolAutomatic", bolAutomatic);
+        intent.putExtra("FlagPausa", bolFlagPausa);
+        //startActivity(intent);
+        startActivityForResult(intent, CODE_TAB_02);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogRequest.show(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        ProgressDialogRequest.dismiss();
+    }
+
+    @Override
+    public void onClickbtnNext(ListarDetalleTx ent) {
+        presenter.navigateToReciboTab03(ent, strR_NumOrden, intR_IdTipoMovimiento, chkAutomatic.isChecked(), bolR_FlagPausa);
     }
 
     @Override
@@ -253,6 +259,16 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void onBackPressed() {
         // Write your code here
-        super.onBackPressed();
+        //super.onBackPressed();
+        presenter.navigateToReciboTab01();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == CODE_TAB_02){
+            Integer x = data.getExtras().getInt("key");
+            presenter.getDataDetailTx(strR_TxId);
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

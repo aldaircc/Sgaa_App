@@ -143,6 +143,19 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
         ProgressDialogRequest.dismiss();
     }
 
+    @Override
+    public void navigateToReciboTab02(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+        Intent intent = new Intent(this, Recibo_Tab_02Activity.class);
+        intent.putExtra("Id_Tx", strId_Tx);
+        intent.putExtra("NumOrden", strNumOrden);
+        intent.putExtra("Cuenta", strCuenta);
+        intent.putExtra("Proveedor", strProveedor);
+        intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
+        intent.putExtra("FlagPausa", bolFlagPausa);
+        //startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
     void initializeControls(){
         svFilterTx = (SearchView)findViewById(R.id.svFilterTx);
         rclReciboTx = (RecyclerView)findViewById(R.id.rclReciboTx);
@@ -162,7 +175,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
                     ent.getFlagPausa(), ent.getCliente(),
                     ent.getProveedor(), ent.getId_TipoMovimiento());
         }else {
-            navigateToTab02(ent.getId_Tx(), ent.getNumOrden(), ent.getFlagPausa(),
+            presenter.navigateToReciboTab02(ent.getId_Tx(), ent.getNumOrden(), ent.getFlagPausa(),
                     ent.getCliente(), ent.getProveedor(), ent.getId_TipoMovimiento());
         }
     }
@@ -194,26 +207,13 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
         frm.show(fm, "fragment_Incidencia");
     }
 
-    private void navigateToTab02(String strId_Tx, String strNumOrden,
-                                 Boolean bolFlagPausa, String strCuenta,
-                                 String strProveedor, Integer intId_TipoMovimiento){
-        Intent intent = new Intent(this, Recibo_Tab_02Activity.class);
-        intent.putExtra("Id_Tx", strId_Tx);
-        intent.putExtra("NumOrden", strNumOrden);
-        intent.putExtra("Cuenta", strCuenta);
-        intent.putExtra("Proveedor", strProveedor);
-        intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
-        intent.putExtra("FlagPausa", bolFlagPausa);
-        //startActivity(intent);
-        startActivityForResult(intent, REQUEST_CODE);
-    }
-
     @Override
     public void onCompleteEditDialog(String strId_Tx, String strNumOrden,
                                      Boolean bolFlagPausa, String strCuenta,
                                      String strProveedor, Integer intId_TipoMovimiento)
     {
-        navigateToTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
+        //navigateToTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
+        presenter.navigateToReciboTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
     }
 
     @Override
@@ -227,6 +227,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE){
             Integer x = data.getExtras().getInt("key");
+            presenter.getListarRecepcionByUser("ADMIN",2,1);//"Admin", 1, 1);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -34,4 +34,10 @@ public interface UserClient {
     Call<ArrayList<AccesosImpresoraXUsuario>> listarAccesosImpresoraXUsuario(
             @Query("strUsuario") String strUsuario
     );
+
+    @GET("ValidarUsuario")
+    Call<ArrayList<Usuario>> validarUsuario(
+            @Query("usuario") String strUsuario,
+            @Query("clave") String strClave
+    );
 }

@@ -1,6 +1,7 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_05;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -135,18 +136,7 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         if (message.errNumber == -1)
         {
             Toast.makeText(this, message.message, Toast.LENGTH_SHORT).show();
-
         }
-    }
-
-    @Override
-    public void showFailurePrintEtq(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void showFailureValidatePallet(String result) {
-
     }
 
     @Override
@@ -170,11 +160,6 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureInsertPallet(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showResultRegisterPallet(Mensaje message) {
         if (message.errNumber == 0){
             Toast.makeText(this,"UA's registradas: "+ counterImpUA + " de " + lstBulto.size(), Toast.LENGTH_SHORT).show();
@@ -183,11 +168,6 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         }
         edtEtqPallet.setText("");
         edtEtqPallet.requestFocus();
-    }
-
-    @Override
-    public void showFailureRegisterPallet(String result) {
-
     }
 
     @Override
@@ -203,11 +183,6 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         objTxUbi.setObservacion("");
         objTxUbi.setUsuarioModificacion("ADMIN");//Global.userName);
         presenter.registerUATransito(objTxUbi);
-    }
-
-    @Override
-    public void showFailureGetBultos(String result) {
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
     Integer counterImpUA = 0;
@@ -234,7 +209,15 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     public void showFailureRequest(String result) {
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void navigateToReciboTab04() {
+        Intent intent = new Intent();
+        intent.putExtra("key", 369);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     @Override
@@ -251,5 +234,10 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         FragmentManager fm = getSupportFragmentManager();
         ImpresoraFragment alertDialog = ImpresoraFragment.newInstance();
         alertDialog.show(fm, "Fragment_alert");
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.navigateToReciboTab04();
     }
 }

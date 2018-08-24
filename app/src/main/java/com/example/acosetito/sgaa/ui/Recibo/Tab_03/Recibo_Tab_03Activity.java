@@ -28,6 +28,7 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UAXProductoTxA;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
@@ -55,6 +56,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     Integer intId_TipoMovimiento;
     String strNumOrden;
     Boolean bolAutomatic = false, bolFlagPausa = false;
+    private final int CODE_TAB_03 = 13;
 
     /** Local variables **/
     Double _cantidad = 0.0;
@@ -133,6 +135,8 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         lySection03 = (LinearLayout)findViewById(R.id.lySection03);
     }
 
+    //region Show menu and options
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_recibo, menu);
@@ -157,6 +161,9 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
+            case R.id.itemBack:
+                presenter.navigateToReciboTab02();
+                return true;
             case R.id.itemPallet:
                 //evaluateSaldo();
                 return true;
@@ -170,6 +177,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
                 return super.onOptionsItemSelected(item);
         }
     }
+    //endregion
 
     /**TextWatcher textWatcher_CodBar = new TextWatcher() {
     @Override
@@ -284,11 +292,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureUAXProduco(String result) {
-
-    }
-
-    @Override
     public void showResultValidateReciboTransferSerie(Mensaje message) {
 
         if (message.errNumber != 0){
@@ -302,11 +305,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureValidateReciboTransferSerie(String result) {
-
-    }
-
-    @Override
     public void showResultValidateReciboSerie(Mensaje message) {
         if (message.errNumber != 0){
             //BackGroundColor red
@@ -316,11 +314,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             edtCodBar.requestFocus();
             Toast.makeText(getApplicationContext(), message.message, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void showFailureValidateReciboSerie(String result) {
-
     }
 
     @Override
@@ -430,11 +423,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureValidateUAReciboTransferencia(String result) {
-
-    }
-
-    @Override
     public void showResultValidateUARecibo(Mensaje message) {
 
         _cantidad = 0.0;
@@ -482,11 +470,6 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
             edtCodBar.requestFocus();
             edtCodBar.selectAll();
         }
-    }
-
-    @Override
-    public void showFailureValidateUARecibo(String result) {
-
     }
 
     View.OnClickListener btnSaveOnClickListener = new View.OnClickListener() {
@@ -625,18 +608,8 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureRegistrarUATransito(String result) {
-
-    }
-
-    @Override
     public void showResultRegisterUA(Mensaje message) {
         evaluateResultSave(message);
-    }
-
-    @Override
-    public void showFailureRegisterUA(String result) {
-
     }
 
     @Override
@@ -645,40 +618,59 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void showFailureRegisterUATransferencia(String result) {
-
+    public void showFailureRequest(String result) {
+        Toast.makeText(this,result, Toast.LENGTH_SHORT).show();
     }
 
     View.OnClickListener btnDetailOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            navigatoToBulto();
+            presenter.navigateToReciboTab04(objReceived, strNumOrden, intId_TipoMovimiento, bolAutomatic, Double.parseDouble(tvSaldo.getText().toString()));
         }
     };
 
     @Override
-    public void navigatoToBulto() {
+    public void navigateToReciboTab04(ListarDetalleTx ent, String strNroOrden, Integer intTipoMovimiento, Boolean bolAuto, Double currentSaldo) {
         Intent intent = new Intent(this, Recibo_Tab_04Activity.class);
-        intent.putExtra("Id_Tx", objReceived.getId_Tx());
-        intent.putExtra("NumOrden", strNumOrden);
-        intent.putExtra("Codigo",objReceived.getCodigo());
-        intent.putExtra("Articulo", objReceived.getDescripcion());
-        intent.putExtra("Id_Articulo", objReceived.getId_Producto());
-        intent.putExtra("UM", objReceived.getUM());
-        intent.putExtra("Id_UM", objReceived.getId_UM());
-        intent.putExtra("Fecha_Emi", objReceived.getFechaEmision());
-        intent.putExtra("Fecha_Venci",objReceived.getFechaVencimiento());
-        intent.putExtra("Lote", objReceived.getLote());
-        intent.putExtra("CantPedida", objReceived.getCantidadPedida());
-        intent.putExtra("CantRecib", objReceived.getCantidadOperacion());
-        intent.putExtra("Saldo", objReceived.getSaldo());
-        intent.putExtra("Item", objReceived.getItem());
-        intent.putExtra("Factor", objReceived.getFactor());
-        intent.putExtra("FlagSeriePT", objReceived.getFlagSeriePT());
-        intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
-        intent.putExtra("bolAutomatic", bolAutomatic);
-        intent.putExtra("currentSaldo", Double.parseDouble(tvSaldo.getText().toString()));
-        startActivity(intent);
+        intent.putExtra("Id_Tx", ent.getId_Tx());
+        intent.putExtra("NumOrden", strNroOrden);
+        intent.putExtra("Codigo",ent.getCodigo());
+        intent.putExtra("Articulo", ent.getDescripcion());
+        intent.putExtra("Id_Articulo", ent.getId_Producto());
+        intent.putExtra("UM", ent.getUM());
+        intent.putExtra("Id_UM", ent.getId_UM());
+        intent.putExtra("Fecha_Emi", ent.getFechaEmision());
+        intent.putExtra("Fecha_Venci",ent.getFechaVencimiento());
+        intent.putExtra("Lote", ent.getLote());
+        intent.putExtra("CantPedida", ent.getCantidadPedida());
+        intent.putExtra("CantRecib", ent.getCantidadOperacion());
+        intent.putExtra("Saldo", ent.getSaldo());
+        intent.putExtra("Item", ent.getItem());
+        intent.putExtra("Factor", ent.getFactor());
+        intent.putExtra("FlagSeriePT", ent.getFlagSeriePT());
+        intent.putExtra("Id_TipoMovimiento", intTipoMovimiento);
+        intent.putExtra("bolAutomatic", bolAuto);
+        intent.putExtra("currentSaldo", currentSaldo);
+        //startActivity(intent);
+        startActivityForResult(intent, CODE_TAB_03);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogRequest.show(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        ProgressDialogRequest.dismiss();
+    }
+
+    @Override
+    public void navigateToReciboTab02() {
+        Intent intent = new Intent();
+        intent.putExtra("key", 369);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
     private void showDialogImpresora() {
@@ -703,5 +695,18 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.navigateToReciboTab02();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == CODE_TAB_03){
+            Integer x = data.getExtras().getInt("key");
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

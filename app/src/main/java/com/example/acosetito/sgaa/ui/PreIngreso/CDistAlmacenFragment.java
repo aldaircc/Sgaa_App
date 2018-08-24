@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -45,14 +46,9 @@ public class CDistAlmacenFragment extends DialogFragment implements AlmacenCDist
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_cdist_almacen, container, false);
-        Log.i("CDListAlmacenFragment - onCreateView", "inicio");
         View rootView = inflater.inflate(R.layout.fragment_cdist_almacen, container, false);
         //if (getArguments() != null)
-        Log.i("Bundle origin", "value: "+ getArguments().getString("origin"));
         intOrigin = Integer.parseInt(getArguments().getString("origin").toString());
-        this.getDialog().setCanceledOnTouchOutside(false);
-        Log.i("CDListAlmacenFragment - onCreateView", "Fin");
         return rootView;
     }
 
@@ -72,19 +68,15 @@ public class CDistAlmacenFragment extends DialogFragment implements AlmacenCDist
         spnWarehouse.setOnItemSelectedListener(spnWareHouseOnItemSelectedListener);
         presenter = new AlmacenCDistPresenterImpl(this);
         presenter.getCenterByUser(Global.userName);
-
-        Log.i("primero : ", "onViewCreated");
-        //getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.FLAG_SPLIT_TOUCH);
-        Log.i("CDListAlmacenFragment - onViewCreated", "final");
     }
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Log.i("primero : ", "onCreateDialog");
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.FLAG_SPLIT_TOUCH);
+        dialog.setCanceledOnTouchOutside(false);
         return dialog;
     }
 
@@ -95,9 +87,7 @@ public class CDistAlmacenFragment extends DialogFragment implements AlmacenCDist
     View.OnClickListener btnAceptarOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.i("btnAceptarOnClickListener", "inicio");
             presenter.validateInputFields(intIdCenter, intIdWarehouse);
-            Log.i("btnAceptarOnClickListener", "value warehouse: "+ strWarehouse + " - final");
         }
     };
 
@@ -119,7 +109,7 @@ public class CDistAlmacenFragment extends DialogFragment implements AlmacenCDist
                 Global.centerName = strCenter;
                 presenter.getWarehouseByUser(Global.userName, intIdCenter);
             }catch (Exception ex){
-                Log.e("onItemSelected", ex.getMessage());
+
             }
         }
 
@@ -139,7 +129,7 @@ public class CDistAlmacenFragment extends DialogFragment implements AlmacenCDist
                 Global.IdWarehouse = intIdWarehouse;
                 Global.wareHouse = strWarehouse;
             }catch (Exception ex){
-                Log.e("spnWareHouseOnItemSelectedListener", ex.getMessage());
+
             }
         }
 

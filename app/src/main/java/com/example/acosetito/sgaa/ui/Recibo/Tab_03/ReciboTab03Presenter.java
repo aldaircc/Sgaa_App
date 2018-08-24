@@ -1,5 +1,6 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_03;
 
+import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 
@@ -14,4 +15,6 @@ public interface ReciboTab03Presenter {
     void registerUATransito(TxUbicacion txUbi);
     void registerUA(UA ua);
     void registerUATransferencia(UA ua);
+    void navigateToReciboTab04(ListarDetalleTx ent, String strNroOrden, Integer intTipoMovimiento, Boolean bolAuto, Double currentSaldo);
+    void navigateToReciboTab02();
 }

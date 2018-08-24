@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView, CDist
         if (result.trim().length() != 0){
             Toast.makeText(LoginActivity.this, "Validation:"+result, Toast.LENGTH_SHORT).show();
         }else{
-            presenter.validateUser(edtUser.getText().toString(), edtPassword.getText().toString(), 1);
+            presenter.validateUser(edtUser.getText().toString(), edtPassword.getText().toString(), 2);//1);
         }
     }
 
