@@ -24,6 +24,7 @@ import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
+import com.example.acosetito.sgaa.ui.Etiqueta.EtqCajaLpnActivity;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 import com.example.acosetito.sgaa.ui.Fragments.Incidencia.IncidenciaFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
@@ -49,7 +50,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     String strR_TxId, strR_NumOrden, strR_Cuenta, strR_Proveedor;
     Integer intR_IdTipoMovimiento;
     Boolean bolR_FlagPausa = false;
-    private final int CODE_TAB_02 = 12;
+    private final int CODE_TAB_02 = 12, CODE_ETQ = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +150,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
                 presenter.getDataDetailTx(strR_TxId);
                 return true;
             case R.id.itemSelectImpr:
+                presenter.navigateToEtqCajaLpn();
                 return true;
             case R.id.itemRegInci:
                 presenter.showDialogIncidencia(strR_TxId, strR_NumOrden, bolR_FlagPausa, strR_Cuenta, strR_Proveedor, intR_IdTipoMovimiento);
@@ -234,6 +236,12 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("FlagPausa", bolFlagPausa);
         //startActivity(intent);
         startActivityForResult(intent, CODE_TAB_02);
+    }
+
+    @Override
+    public void navigateToEtqCajaLpn() {
+        Intent intent = new Intent(this, EtqCajaLpnActivity.class);
+        startActivityForResult(intent, CODE_ETQ);
     }
 
     @Override

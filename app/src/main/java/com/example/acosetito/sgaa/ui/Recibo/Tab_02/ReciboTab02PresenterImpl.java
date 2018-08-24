@@ -43,6 +43,11 @@ public class ReciboTab02PresenterImpl implements ReciboTab02Presenter, ReciboTab
     }
 
     @Override
+    public void navigateToEtqCajaLpn() {
+        view.navigateToEtqCajaLpn();
+    }
+
+    @Override
     public void OnSuccessGetCerrarRecepcion(Mensaje message) {
         view.showResultCerrarRecepcion(message);
         view.hideProgressDialog();

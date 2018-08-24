@@ -14,6 +14,7 @@ public interface ReciboTab02View {
                               String strProveedor, Integer intId_TipoMovimiento);
     void navigateToReciboTab01();
     void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa);
+    void navigateToEtqCajaLpn();
     void showProgressDialog();
     void hideProgressDialog();
 }

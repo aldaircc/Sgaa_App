@@ -12,4 +12,5 @@ public interface ReciboTab02Presenter {
     void showDialogIncidencia(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento);
     void navigateToReciboTab01();
     void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa);
+    void navigateToEtqCajaLpn();
 }
