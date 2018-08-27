@@ -65,7 +65,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_03);
-        initializeControls();
+        initializeComponent();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null){
@@ -106,7 +106,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
         presenter.getUAsProductoTx(objReceived.getId_Tx(), objReceived.getId_Producto(), objReceived.getItem());
     }
 
-    void initializeControls(){
+    void initializeComponent(){
 
         tvCodProd = (TextView)findViewById(R.id.tvCodProd);
         tvUM = (TextView)findViewById(R.id.tvUM);
@@ -691,7 +691,7 @@ public class Recibo_Tab_03Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento, Integer Id_Cliente) {
         Intent intent = new Intent(this, Recibo_Tab_01Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);

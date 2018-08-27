@@ -47,6 +47,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
 
         holder.itemView.setTag(position);
         holder.btnNext.setTag(position);
+        holder.btnEtq.setTag(position);
         holder.tvCodeProd.setText(ent.getCodigo());
         holder.tvLote.setText(ent.getLote());
         holder.tvDescription.setText(ent.getDescripcion());
@@ -55,7 +56,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
         holder.tvCantOper.setText(String.format("%.3f", ent.getCantidadOperacion()));
         holder.tvSaldo.setText(String.format("%.3f", ent.getSaldo()));
         holder.btnNext.setOnClickListener(btnNextOnClickListener);
-
+        holder.btnEtq.setOnClickListener(btnEtqOnClickListener);
     }
 
     @Override
@@ -107,6 +108,14 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
         }
     };
 
+    View.OnClickListener btnEtqOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            int pos = (int)view.getTag();
+            irvReciboTab02Adapter.onClickbtnEtq(baseData.get(pos));
+        }
+    };
+
     @Override
     public int getItemCount() {
         return this.baseData.size();
@@ -123,7 +132,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
     public class RVReciboTab02AdapterViewHolder extends RecyclerView.ViewHolder{
 
         TextView tvCodeProd, tvLote, tvDescription, tvSubAlmacen, tvCantPedida, tvCantOper, tvSaldo;
-        Button btnNext;
+        Button btnNext, btnEtq;
         View viewEstado;
 
         public RVReciboTab02AdapterViewHolder(View itemView) {
@@ -137,6 +146,7 @@ public class RVReciboTab02Adapter extends RecyclerView.Adapter<RVReciboTab02Adap
             tvCantOper = (TextView)itemView.findViewById(R.id.tvCantOper);
             tvSaldo = (TextView)itemView.findViewById(R.id.tvSaldo);
             btnNext = (Button)itemView.findViewById(R.id.btnNext);
+            btnEtq = (Button)itemView.findViewById(R.id.btnEtq);
         }
     }
 

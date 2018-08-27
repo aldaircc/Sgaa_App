@@ -2,6 +2,8 @@ package com.example.acosetito.sgaa.ui.Recibo.Tab_02;
 
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
+import com.example.acosetito.sgaa.data.Model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,8 @@ public class ReciboTab02PresenterImpl implements ReciboTab02Presenter, ReciboTab
     }
 
     @Override
-    public void navigateToEtqCajaLpn() {
-        view.navigateToEtqCajaLpn();
+    public void navigateToEtqCajaLpn(ListarDetalleTx detail, String strCuenta, String strNroOrden, Integer intId_Cliente, Integer intId_TipoMovimiento, Integer intId_CuentaLPN) {
+        view.navigateToEtqCajaLpn(detail, strCuenta, strNroOrden, intId_Cliente, intId_TipoMovimiento, intId_CuentaLPN);
     }
 
     @Override

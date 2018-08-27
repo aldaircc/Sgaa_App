@@ -4,4 +4,5 @@ import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 
 public interface IRVReciboTab02Adapter {
     void onClickbtnNext(ListarDetalleTx ent);
+    void onClickbtnEtq(ListarDetalleTx ent);
 }

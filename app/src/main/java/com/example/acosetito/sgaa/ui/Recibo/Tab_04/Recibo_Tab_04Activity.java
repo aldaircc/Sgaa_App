@@ -57,7 +57,7 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_04);
-        initializedControls();
+        initializeComponent();
         getValueExtras();
         presenter = new ReciboTab04PresenterImpl(this);
         presenter.getBultosTx(objReceived.getId_Tx(), objReceived.getId_Producto(), objReceived.getItem());//"A20182040001", 2577, 1);
@@ -91,7 +91,7 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
         }
     }
 
-    void initializedControls(){
+    void initializeComponent(){
         btnChange = (Button)findViewById(R.id.btnChangeSaldo);
         btnChange.setOnClickListener(onClickListener);
         btnRefresh = (Button)findViewById(R.id.btnRefresh);

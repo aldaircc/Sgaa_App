@@ -11,5 +11,5 @@ public interface ReciboTab01View {
     void goBackToMenu();
     void showProgressDialog();
     void hideProgressDialog();
-    void navigateToReciboTab02(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento);
+    void navigateToReciboTab02(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento, Integer intId_Cliente);
 }

@@ -44,7 +44,7 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_05);
-        initializedControls();
+        initializeComponent();
         getValueExtras();
         presenter = new ReciboTab05PresenterImpl(this);
     }
@@ -77,7 +77,7 @@ public class Recibo_Tab_05Activity extends AppCompatActivity implements ReciboTa
         }
     }
 
-    void initializedControls(){
+    void initializeComponent(){
         edtEtqPallet = (EditText)findViewById(R.id.edtEtqPallet);
         btnEtqPallet = (Button)findViewById(R.id.btnEtqPallet);
         btnRegister = (Button)findViewById(R.id.btnRegister);

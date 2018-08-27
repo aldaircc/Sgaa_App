@@ -1,6 +1,7 @@
 package com.example.acosetito.sgaa.data.WebService;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ControlPendiente;
+import com.example.acosetito.sgaa.data.Model.Recepcion.SubAlmacenXCuenta;
 
 import java.util.ArrayList;
 
@@ -28,5 +29,11 @@ public interface TablasEstaticasClient {
     Call<ArrayList<ControlPendiente>> buscarControlPendiente(
             @Query("StrIdTx") String strId_Tx,
             @Query("strUsuario") String strUsuario
+    );
+
+    @GET("ListarSubAlmacenesXCuentaAlmacen")
+    Call<ArrayList<SubAlmacenXCuenta>> listarSubAlmacenesXCuenta(
+            @Query("intIdCuenta") Integer intIdCuenta,
+            @Query("intIdAlmacen") Integer intIdAlmacen
     );
 }

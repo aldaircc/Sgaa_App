@@ -23,6 +23,8 @@ import com.example.acosetito.sgaa.data.Adapter.RVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
+import com.example.acosetito.sgaa.data.Model.Usuario;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Etiqueta.EtqCajaLpnActivity;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
@@ -32,6 +34,7 @@ import com.example.acosetito.sgaa.ui.Recibo.Tab_03.Recibo_Tab_03Activity;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTab02View, IRVReciboTab02Adapter, IncidenciaFragment.IncidenciaDialogListener{
@@ -48,7 +51,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
     /** Intent values **/
     String strR_TxId, strR_NumOrden, strR_Cuenta, strR_Proveedor;
-    Integer intR_IdTipoMovimiento;
+    Integer intR_IdTipoMovimiento, intR_Id_Cliente;
     Boolean bolR_FlagPausa = false;
     private final int CODE_TAB_02 = 12, CODE_ETQ = 12;
 
@@ -56,7 +59,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_02);
-        initializeControls();
+        initializeComponent();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -66,6 +69,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
             strR_Proveedor = extras.getString("Proveedor");
             intR_IdTipoMovimiento = extras.getInt("Id_TipoMovimiento");
             bolR_FlagPausa = extras.getBoolean("FlagPausa");
+            intR_Id_Cliente = extras.getInt("Id_Cliente");
             tvNroOrden.setText(strR_NumOrden);
             tvProveedor.setText(strR_Proveedor);
             tvCuenta.setText(strR_Cuenta);
@@ -75,7 +79,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         presenter.getDataDetailTx(strR_TxId);
     }
 
-    void initializeControls(){
+    void initializeComponent(){
         rclDetailTx = (RecyclerView)findViewById(R.id.rclDetailTx);
         btnBack = (Button)findViewById(R.id.btnBack);
         btnNext = (Button)findViewById(R.id.btnNext);
@@ -148,9 +152,6 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
                 return true;
             case R.id.itemRefresh:
                 presenter.getDataDetailTx(strR_TxId);
-                return true;
-            case R.id.itemSelectImpr:
-                presenter.navigateToEtqCajaLpn();
                 return true;
             case R.id.itemRegInci:
                 presenter.showDialogIncidencia(strR_TxId, strR_NumOrden, bolR_FlagPausa, strR_Cuenta, strR_Proveedor, intR_IdTipoMovimiento);
@@ -239,8 +240,32 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void navigateToEtqCajaLpn() {
+    public void navigateToEtqCajaLpn(ListarDetalleTx detail, String strCuenta, String strNroOrden, Integer intId_Cliente, Integer intId_TipoMovimiento, Integer intId_CuentaLPN) {
         Intent intent = new Intent(this, EtqCajaLpnActivity.class);
+        intent.putExtra("LoteLab", detail.getLote());
+        intent.putExtra("Id_Producto", detail.getId_Producto());
+        intent.putExtra("Id_UM", detail.getId_UM());
+        intent.putExtra("CantidadPedida", detail.getCantidadPedida());
+        intent.putExtra("Codigo", detail.getCodigo());
+        intent.putExtra("Articulo", detail.getDescripcion());
+        intent.putExtra("UM", detail.getUM());
+        intent.putExtra("Cliente", strCuenta);
+        intent.putExtra("UM_Base", detail.getUMBase());
+        intent.putExtra("TipoAlmacenaje", detail.getTipoAlmacenaje());
+        intent.putExtra("Item", detail.getItem());
+        intent.putExtra("Acceso", 0);
+        intent.putExtra("NroDoc", strNroOrden);
+        intent.putExtra("FecEmi", (detail.getFechaEmision() != null) ? detail.getFechaEmision(): new Date());
+        intent.putExtra("FecVen", (detail.getFechaVencimiento() != null) ? detail.getFechaVencimiento(): new Date());
+        intent.putExtra("FlagSerie", detail.getFlagSeriePT());
+        intent.putExtra("FlagLote", detail.getFlagLotePT());
+        intent.putExtra("CondicionAlmac", detail.getCondicionAlmacenamiento());
+        intent.putExtra("Condicion", (detail.getCondicion() == null) ? "DISPONIBLE" : detail.getCondicion());
+        intent.putExtra("Id_Condicion", detail.getId_Condicion());
+        intent.putExtra("Id_Cliente", intId_Cliente);
+        intent.putExtra("idTipoMovimiento", intId_TipoMovimiento);
+        intent.putExtra("IdCuentaLPN", intId_CuentaLPN);
+        intent.putExtra("Id_SubAlmacen", detail.getId_SubAlmacen());
         startActivityForResult(intent, CODE_ETQ);
     }
 
@@ -260,7 +285,12 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+    public void onClickbtnEtq(ListarDetalleTx ent) {
+        presenter.navigateToEtqCajaLpn(ent, strR_Cuenta, strR_NumOrden, intR_Id_Cliente, intR_IdTipoMovimiento, intR_Id_Cliente);
+    }
+
+    @Override
+    public void onCompleteEditDialog(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento, Integer intId_Cliente) {
         presenter.navigateToReciboTab01();
     }
 

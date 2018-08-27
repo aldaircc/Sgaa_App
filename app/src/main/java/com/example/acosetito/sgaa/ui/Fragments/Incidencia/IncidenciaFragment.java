@@ -55,7 +55,7 @@ public class IncidenciaFragment extends DialogFragment implements IncidenciaView
     /** Variables received **/
      String strR_Id_Tx, strR_NumOrden, strR_Cuenta, strR_Proveedor;
      Boolean bolR_FlagPausa;
-     Integer intR_Id_TipoMovimiento;
+     Integer intR_Id_TipoMovimiento, intR_Id_Cliente;
 
     Date dtFechaIni = null;
 
@@ -122,6 +122,7 @@ public class IncidenciaFragment extends DialogFragment implements IncidenciaView
             intR_Id_TipoMovimiento = bundle.getInt("Id_TipoMovimiento", 0);
             bolR_FlagPausa= bundle.getBoolean("FlagPausa", false);
             moduloTab = bundle.getInt("moduloTab", 0);
+            intR_Id_Cliente = bundle.getInt("Id_Cliente", 0);
         }
 
         tvNroOrden.setText(strR_Id_Tx); //strId_Tx);
@@ -228,7 +229,7 @@ public class IncidenciaFragment extends DialogFragment implements IncidenciaView
 
             IncidenciaDialogListener listener = (IncidenciaDialogListener) getActivity();
             //Debes enviar el valor del flagPausa actualizado
-            listener.onCompleteEditDialog(strR_Id_Tx, strR_NumOrden, !bolR_FlagPausa, strR_Cuenta, strR_Proveedor, intR_Id_TipoMovimiento);
+            listener.onCompleteEditDialog(strR_Id_Tx, strR_NumOrden, !bolR_FlagPausa, strR_Cuenta, strR_Proveedor, intR_Id_TipoMovimiento, intR_Id_Cliente);
 
             this.dismiss();
         }else{
@@ -283,6 +284,6 @@ public class IncidenciaFragment extends DialogFragment implements IncidenciaView
     public interface IncidenciaDialogListener{
         void onCompleteEditDialog(String strId_Tx, String strNumOrden,
                                   Boolean bolFlagPausa, String strCuenta,
-                                  String strProveedor, Integer intId_TipoMovimiento);
+                                  String strProveedor, Integer intId_TipoMovimiento, Integer intId_Cliente);
     }
 }

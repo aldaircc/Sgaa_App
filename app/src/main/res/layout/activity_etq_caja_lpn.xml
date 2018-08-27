@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="12"
+    android:weightSum="9"
     tools:context=".ui.Etiqueta.EtqCajaLpnActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@color/lightBlueHeader"
         android:orientation="horizontal"
-        android:weightSum="2">
+        android:paddingBottom="3dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="5dp"
+        android:weightSum="4">
 
         <TextView
             android:id="@+id/textView54"
@@ -23,32 +26,38 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Código"
-            android:textColor="@color/yellowColor" />
+            android:textColor="@color/yellowColor"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView47"
+            android:id="@+id/tvCodigo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:text="Código del producto"
-            android:textColor="@color/whiteColor" />
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:background="@color/lightBlueHeader"
         android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="3dp"
         android:weightSum="1">
 
         <TextView
-            android:id="@+id/textView58"
+            android:id="@+id/tvArticulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Descripción producto"
-            android:textColor="@color/whiteColor" />
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -57,48 +66,140 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
         android:weightSum="4">
 
         <TextView
             android:id="@+id/textView60"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Lote" />
+            android:text="Lote"
+            android:textColor="@color/blackColor" />
 
         <EditText
-            android:id="@+id/editText"
-            android:layout_width="wrap_content"
+            android:id="@+id/edtLote"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:ems="10"
             android:inputType="textPersonName" />
 
         <TextView
-            android:id="@+id/textView61"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvUM"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="TextView" />
+            android:text="UM"
+            android:textColor="@color/blackColor" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="6">
+
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="FE"
+            android:textColor="@color/blackColor" />
+
+        <TextView
+            android:id="@+id/tvFE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="27/08/2018"
+            android:textColor="@color/blackColor" />
+
+        <CheckBox
+            android:id="@+id/chkFE"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+
+        <TextView
+            android:id="@+id/textView62"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="FV "
+            android:textAlignment="viewEnd"
+            android:textColor="@color/blackColor" />
+
+        <TextView
+            android:id="@+id/tvFV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="27/08/2018"
+            android:textColor="@color/blackColor" />
+
+        <CheckBox
+            android:id="@+id/chkFV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView63"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="UA Alternativa"
+            android:textColor="@color/blackColor" />
+
+        <Spinner
+            android:id="@+id/spnUAlter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView64"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cant."
+            android:textColor="@color/blackColor" />
+
+        <EditText
+            android:id="@+id/edtCantxEtq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="numberDecimal" />
 
     </LinearLayout>
 
@@ -106,35 +207,151 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView66"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="#Etq"
+            android:textColor="@color/blackColor" />
+
+        <EditText
+            android:id="@+id/edtNumEtq"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Etq saldo"
+            android:textColor="@color/blackColor" />
+
+        <EditText
+            android:id="@+id/edtCantEtqSaldo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Formato"
+            android:textColor="@color/blackColor" />
+
+        <Spinner
+            android:id="@+id/spnFormato"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView69"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="SubAlmacen"
+            android:textColor="@color/blackColor" />
+
+        <Spinner
+            android:id="@+id/spnSubAlmacen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView70"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Copias"
+            android:textColor="@color/blackColor" />
+
+        <EditText
+            android:id="@+id/edtNumCopias"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+
+        <TextView
+            android:id="@+id/tvTotalSuma"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@color/greenBottomBar"
+            android:text="75000"
+            android:textColor="@color/blackColor" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:weightSum="2">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal"></LinearLayout>
+        <Button
+            android:id="@+id/btnImprimir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/appbar_barcode" />
+
+        <Button
+            android:id="@+id/btnInventariar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Registrar ubicación" />
+    </LinearLayout>
+
 </LinearLayout>

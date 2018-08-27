@@ -144,7 +144,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
     }
 
     @Override
-    public void navigateToReciboTab02(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento) {
+    public void navigateToReciboTab02(String strId_Tx, String strNumOrden, Boolean bolFlagPausa, String strCuenta, String strProveedor, Integer intId_TipoMovimiento, Integer intId_Cliente) {
         Intent intent = new Intent(this, Recibo_Tab_02Activity.class);
         intent.putExtra("Id_Tx", strId_Tx);
         intent.putExtra("NumOrden", strNumOrden);
@@ -152,6 +152,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("Proveedor", strProveedor);
         intent.putExtra("Id_TipoMovimiento", intId_TipoMovimiento);
         intent.putExtra("FlagPausa", bolFlagPausa);
+        intent.putExtra("Id_Cliente", intId_Cliente);
         //startActivity(intent);
         startActivityForResult(intent, REQUEST_CODE);
     }
@@ -176,7 +177,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
                     ent.getProveedor(), ent.getId_TipoMovimiento());
         }else {
             presenter.navigateToReciboTab02(ent.getId_Tx(), ent.getNumOrden(), ent.getFlagPausa(),
-                    ent.getCliente(), ent.getProveedor(), ent.getId_TipoMovimiento());
+                    ent.getCliente(), ent.getProveedor(), ent.getId_TipoMovimiento(), ent.getId_Cliente());
         }
     }
 
@@ -210,10 +211,10 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
     @Override
     public void onCompleteEditDialog(String strId_Tx, String strNumOrden,
                                      Boolean bolFlagPausa, String strCuenta,
-                                     String strProveedor, Integer intId_TipoMovimiento)
+                                     String strProveedor, Integer intId_TipoMovimiento, Integer intId_Cliente)
     {
         //navigateToTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
-        presenter.navigateToReciboTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento);
+        presenter.navigateToReciboTab02(strId_Tx, strNumOrden, bolFlagPausa, strCuenta, strProveedor, intId_TipoMovimiento, intId_Cliente);
     }
 
     @Override
