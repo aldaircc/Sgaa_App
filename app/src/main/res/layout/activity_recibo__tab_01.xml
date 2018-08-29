@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/paddingAllGeneral"
+            android:padding="@dimen/paddingHeaderInformation"
             android:weightSum="1">
 
             <TextView
@@ -31,7 +31,7 @@
                 android:layout_weight="1"
                 android:text="ADMINISTRADOR"
                 android:textColor="@color/yellowColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/paddingAllGeneral"
+            android:padding="@dimen/paddingHeaderInformation"
             android:weightSum="1">
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:text="ALMACEN FRUTALES 419"
                 android:textColor="@color/whiteColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

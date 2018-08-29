@@ -14,10 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@color/lightBlueHeader"
         android:orientation="horizontal"
-        android:paddingBottom="3dp"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:paddingTop="5dp"
+        android:padding="5dp"
         android:weightSum="4">
 
         <TextView
@@ -27,6 +24,7 @@
             android:layout_weight="1"
             android:text="Código"
             android:textColor="@color/yellowColor"
+            android:textSize="@dimen/textSizeLabel"
             android:textStyle="bold" />
 
         <TextView
@@ -36,6 +34,7 @@
             android:layout_weight="3"
             android:text="Código del producto"
             android:textColor="@color/whiteColor"
+            android:textSize="@dimen/textSizeLabel"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -44,10 +43,7 @@
         android:layout_height="wrap_content"
         android:background="@color/lightBlueHeader"
         android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:paddingTop="3dp"
+        android:padding="5dp"
         android:weightSum="1">
 
         <TextView
@@ -57,6 +53,7 @@
             android:layout_weight="1"
             android:text="Descripción producto"
             android:textColor="@color/whiteColor"
+            android:textSize="@dimen/textSizeLabel"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -76,7 +73,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Lote"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtLote"
@@ -92,13 +91,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="UM"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
@@ -110,7 +112,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:text="FE"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvFE"
@@ -118,7 +122,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="27/08/2018"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textStyle="bold" />
 
         <CheckBox
             android:id="@+id/chkFE"
@@ -133,7 +138,9 @@
             android:layout_weight="0.5"
             android:text="FV "
             android:textAlignment="viewEnd"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvFV"
@@ -141,7 +148,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="27/08/2018"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textStyle="bold" />
 
         <CheckBox
             android:id="@+id/chkFV"
@@ -164,15 +172,17 @@
             android:id="@+id/textView63"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:text="UA Alternativa"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spnUAlter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="2.5"
             android:spinnerMode="dialog" />
     </LinearLayout>
 
@@ -180,6 +190,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
@@ -191,7 +202,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cant."
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtCantxEtq"
@@ -207,6 +220,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
@@ -218,7 +232,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="#Etq"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtNumEtq"
@@ -234,7 +250,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Etq saldo"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtCantEtqSaldo"
@@ -259,15 +277,18 @@
             android:id="@+id/textView68"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:text="Formato"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spnFormato"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3" />
+            android:layout_weight="2.5"
+            android:spinnerMode="dialog" />
     </LinearLayout>
 
     <LinearLayout
@@ -284,21 +305,24 @@
             android:id="@+id/textView69"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:text="SubAlmacen"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spnSubAlmacen"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="3" />
+            android:layout_weight="2.5" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="3dp"
         android:paddingRight="3dp"
@@ -310,7 +334,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Copias"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edtNumCopias"
@@ -318,7 +344,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:text="0" />
 
         <TextView
             android:id="@+id/tvTotalSuma"
@@ -326,8 +353,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:background="@color/greenBottomBar"
+            android:paddingRight="10dp"
             android:text="75000"
-            android:textColor="@color/blackColor" />
+            android:textAlignment="textEnd"
+            android:textColor="@color/whiteColor"
+            android:textSize="@dimen/textSizeLabel"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout

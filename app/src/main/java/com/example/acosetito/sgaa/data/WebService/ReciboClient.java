@@ -113,4 +113,10 @@ public interface ReciboClient {
             @Query("intIdCliente") Integer intIdCliente,
             @Query("intIdModulo") Integer intIdModulo
     );
+
+    @Headers({"Accept: application/json", "Content-Type: application/json"})
+    @POST("registrarUAMasivo/imp/idCentro")
+    Call<ArrayList<ImpUA>> registrarUAMasivo(
+            @Body HashMap<String, Object> obj
+    );
 }

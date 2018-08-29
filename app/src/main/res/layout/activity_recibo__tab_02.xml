@@ -23,10 +23,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="3dp"
-            android:paddingLeft="@dimen/paddingLeftGeneral"
-            android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="3dp"
+            android:padding="@dimen/paddingHeaderInformation"
             android:weightSum="3">
 
             <TextView
@@ -36,7 +33,7 @@
                 android:layout_weight="1"
                 android:text="Nro. Orden:"
                 android:textColor="@color/yellowColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <TextView
@@ -46,7 +43,7 @@
                 android:layout_weight="2"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -56,10 +53,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="3dp"
-            android:paddingLeft="@dimen/paddingLeftGeneral"
-            android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="3dp"
+            android:padding="@dimen/paddingHeaderInformation"
             android:weightSum="3">
 
             <TextView
@@ -69,7 +63,7 @@
                 android:layout_weight="1"
                 android:text="Cuenta:"
                 android:textColor="@color/yellowColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <TextView
@@ -79,7 +73,7 @@
                 android:layout_weight="2"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -89,10 +83,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="3dp"
-            android:paddingLeft="@dimen/paddingLeftGeneral"
-            android:paddingRight="@dimen/paddingRightGeneral"
-            android:paddingTop="3dp"
+            android:padding="@dimen/paddingHeaderInformation"
             android:weightSum="3">
 
             <TextView
@@ -102,7 +93,7 @@
                 android:layout_weight="1"
                 android:text="Proveedor:"
                 android:textColor="@color/yellowColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
 
             <TextView
@@ -112,7 +103,7 @@
                 android:layout_weight="2"
                 android:text="xxxxxxxxxxxx"
                 android:textColor="@color/whiteColor"
-                android:textSize="@dimen/sizeMedium"
+                android:textSize="@dimen/textSizeLabel"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>

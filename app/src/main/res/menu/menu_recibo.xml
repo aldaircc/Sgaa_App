@@ -20,15 +20,17 @@
         android:title="Pallet"
         app:showAsAction="always|withText" />
     <item
-        android:id="@+id/itemEtiqImpr" android:icon="@android:drawable/ic_dialog_info"
-        app:showAsAction="never" android:title="Etiquetas Impresión">
-    </item>
+        android:id="@+id/itemEtiqImpr"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="Etiquetas Impresión"></item>
     <item
         android:id="@+id/itemSelectImpr"
+        android:icon="@drawable/appbar_printer_text"
         app:showAsAction="never" android:title="Seleccionar impresora">
     </item>
     <item
         android:id="@+id/itemRegInci"
+        android:icon="@drawable/appbar_book_open_information"
         app:showAsAction="never" android:title="Registrar incidencia">
     </item>
 </menu>

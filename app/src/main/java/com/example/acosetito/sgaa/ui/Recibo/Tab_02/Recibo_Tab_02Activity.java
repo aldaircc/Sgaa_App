@@ -1,6 +1,8 @@
 package com.example.acosetito.sgaa.ui.Recibo.Tab_02;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
@@ -23,6 +25,7 @@ import com.example.acosetito.sgaa.data.Adapter.RVReciboTab02Adapter;
 import com.example.acosetito.sgaa.data.Model.Mensaje;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarDetalleTx;
 import com.example.acosetito.sgaa.data.Model.Recepcion.ListarRecepcionesXUsuario;
+import com.example.acosetito.sgaa.data.Model.Recepcion.TxUbicacion;
 import com.example.acosetito.sgaa.data.Model.Recepcion.UA;
 import com.example.acosetito.sgaa.data.Model.Usuario;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
@@ -113,10 +116,54 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         }
     };
 
+    Integer getSaldoRecibo(ArrayList<ListarDetalleTx> list){
+        Integer total = 0;
+
+        for (int i = 0; i < list.size(); i++){
+            if (list.get(i).getSaldo().isNaN()){
+                if (list.get(i).getSaldo() > 0.0){
+                    total++;
+                }
+            }
+        }
+        return total;
+    }
+
     View.OnClickListener btnCloseTxOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            presenter.getCerrarRecepcion("123456789987",99, "ADMIN");
+            if (intR_IdTipoMovimiento.equals(0)){
+                Toast.makeText(Recibo_Tab_02Activity.this, "Esta transacción no tiene tipo de movimiento", Toast.LENGTH_SHORT).show();
+                return;
+            }else{
+                final Integer int_SaldoCierre = getSaldoRecibo(lstDetail);
+                String message = "";
+
+                if (int_SaldoCierre > 0){
+                    message = "Existen " + int_SaldoCierre + " productos con saldo pendiente ¿Está seguro de cerrar la transacción?";
+                }else {
+                    message = "¿Está seguro de cerrar la transacción?";
+                }
+
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(Recibo_Tab_02Activity.this);
+                alertDialogBuilder.setMessage(message);
+                alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //presenter.getCerrarRecepcion(strR_TxId,(int_SaldoCierre > 0 ? 6 : 5), "ADMIN");
+                        presenter.getCerrarRecepcion("123456789987",99, "ADMIN");
+                    }
+                });
+
+                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+            }
         }
     };
 
