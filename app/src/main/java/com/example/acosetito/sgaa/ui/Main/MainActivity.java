@@ -13,8 +13,10 @@ import android.widget.Toast;
 
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
+import com.example.acosetito.sgaa.ui.Almacenaje.OptionsAlmacenajeActivity;
 import com.example.acosetito.sgaa.ui.PreIngreso.CDistAlmacenFragment;
 import com.example.acosetito.sgaa.ui.Recibo.Tab_01.Recibo_Tab_01Activity;
+import com.example.acosetito.sgaa.ui.Recibo.Tab_02.Recibo_Tab_02Activity;
 
 public class MainActivity extends AppCompatActivity implements MainView, CDistAlmacenFragment.EditNameDialogListener{
 
@@ -95,11 +97,12 @@ public class MainActivity extends AppCompatActivity implements MainView, CDistAl
 
         switch (view.getId()){
             case R.id.btnRecibo:
-                intent = new Intent(this, Recibo_Tab_01Activity.class);
-                //intent = new Intent(this, Main3Activity.class);
+                intent = new Intent(MainActivity.this, Recibo_Tab_01Activity.class);
                 startActivity(intent);
                 break;
             case R.id.btnAlmacenaje:
+                intent = new Intent(MainActivity.this, OptionsAlmacenajeActivity.class);
+                startActivity(intent);
                 break;
             case R.id.btnPicking:
                 break;
@@ -110,8 +113,6 @@ public class MainActivity extends AppCompatActivity implements MainView, CDistAl
                 break;
             case R.id.btnTransferencia:
                 message = "Go to Transferencia module";
-                //intent = new Intent(this, TransferenciaActivity.class);
-                //startActivity(intent);
                 break;
             case R.id.btnEtiquetado:
                 break;
@@ -122,8 +123,6 @@ public class MainActivity extends AppCompatActivity implements MainView, CDistAl
             default:
                 break;
         }
-
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     @Override
