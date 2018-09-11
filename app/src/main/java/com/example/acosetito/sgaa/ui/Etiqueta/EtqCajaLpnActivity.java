@@ -35,6 +35,7 @@ import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -311,7 +312,7 @@ public class EtqCajaLpnActivity extends AppCompatActivity implements EtqView{
                         Double saldoEtq = dblR_CantPedida - (numEtqPrint * fac);
                         edtCantxEtq.setText(fac.toString());
                         edtNumEtq.setText(numEtqPrint.toString());
-                        edtCantEtqSaldo.setText(String.format("%.2f",saldoEtq));
+                        edtCantEtqSaldo.setText(saldoEtq.toString());
                     }else{
                         dbl_CantXBulto = obj.getCantXBulto();
                         edtCantxEtq.setText(dbl_CantXBulto.toString());

@@ -96,10 +96,10 @@ public class EtqInteractorImpl implements EtqInteractor{
         json.addProperty("SaldoEtiqueta",  imp.getSaldoEtiqueta());
         json.addProperty("UA_CodBarra",  imp.getUA_CodBarra());
         json.addProperty("UsuarioRegistro",  imp.getUsuarioRegistro());
-
         obj.put("imp", json);
         obj.put("idCentro", intId_Centro);
         Call<ArrayList<ImpUA>> call = reciboClient.registrarUAMasivo(obj);
+
         call.enqueue(new Callback<ArrayList<ImpUA>>() {
             @Override
             public void onResponse(Call<ArrayList<ImpUA>> call, Response<ArrayList<ImpUA>> response) {
