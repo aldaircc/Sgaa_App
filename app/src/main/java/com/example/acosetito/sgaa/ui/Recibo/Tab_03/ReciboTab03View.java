@@ -17,8 +17,10 @@ public interface ReciboTab03View {
     void showResultRegisterUA(Mensaje message);
     void showResultRegisterUATransferencia(Mensaje message);
     void showFailureRequest(String result);
+    void showDialogImpresora();
     void navigateToReciboTab04(ListarDetalleTx ent, String strNroOrden, Integer intTipoMovimiento, Boolean bolAuto, Double currentSaldo);
     void navigateToReciboTab02();
+    void navigateToEtqCajaLpn(ListarDetalleTx detail, String strCuenta, String strNroOrden, Integer intId_Cliente, Integer intId_TipoMovimiento, Integer intId_CuentaLPN);
     void showProgressDialog();
     void hideProgressDialog();
 }

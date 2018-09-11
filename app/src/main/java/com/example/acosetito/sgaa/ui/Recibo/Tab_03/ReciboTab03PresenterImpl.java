@@ -168,6 +168,16 @@ public class ReciboTab03PresenterImpl implements ReciboTab03Presenter, ReciboTab
     }
 
     @Override
+    public void showDialogImpresora() {
+        reciboTab03View.showDialogImpresora();
+    }
+
+    @Override
+    public void navigateToEtqCajaLpn(ListarDetalleTx detail, String strCuenta, String strNroOrden, Integer intId_Cliente, Integer intId_TipoMovimiento, Integer intId_CuentaLPN) {
+        reciboTab03View.navigateToEtqCajaLpn(detail, strCuenta, strNroOrden, intId_Cliente, intId_TipoMovimiento, intId_CuentaLPN);
+    }
+
+    @Override
     public void navigateToReciboTab04(ListarDetalleTx ent, String strNroOrden, Integer intTipoMovimiento, Boolean bolAuto, Double currentSaldo) {
         reciboTab03View.navigateToReciboTab04(ent, strNroOrden, intTipoMovimiento, bolAuto, currentSaldo);
     }

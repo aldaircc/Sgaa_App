@@ -15,6 +15,8 @@ public interface ReciboTab03Presenter {
     void registerUATransito(TxUbicacion txUbi);
     void registerUA(UA ua);
     void registerUATransferencia(UA ua);
+    void showDialogImpresora();
+    void navigateToEtqCajaLpn(ListarDetalleTx detail, String strCuenta, String strNroOrden, Integer intId_Cliente, Integer intId_TipoMovimiento, Integer intId_CuentaLPN);
     void navigateToReciboTab04(ListarDetalleTx ent, String strNroOrden, Integer intTipoMovimiento, Boolean bolAuto, Double currentSaldo);
     void navigateToReciboTab02();
 }
