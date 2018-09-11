@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="6"
+    tools:context=".ui.Almacenaje.OptionsAlmacenajeActivity">
+
+    <Button
+        android:id="@+id/btnAlm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_column_two"
+        android:gravity="center_vertical"
+        android:text="Almacenaje" />
+
+    <Button
+        android:id="@+id/btnReab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_column_three"
+        android:gravity="center_vertical"
+        android:text="Reabastecimiento" />
+
+    <Button
+        android:id="@+id/btnReub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_forklift_load"
+        android:gravity="center_vertical"
+        android:text="Reubicación" />
+
+    <Button
+        android:id="@+id/btnConsUb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_list_merge"
+        android:gravity="center_vertical"
+        android:text="Consultar ubicación" />
+
+    <Button
+        android:id="@+id/btnConsUA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_social_dropbox"
+        android:gravity="center_vertical"
+        android:text="Consultar UA/EAN" />
+
+    <Button
+        android:id="@+id/btnLibBloq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/appbar_lock"
+        android:gravity="center_vertical"
+        android:text="Liberar/Bloquear" />
+
+</LinearLayout>
