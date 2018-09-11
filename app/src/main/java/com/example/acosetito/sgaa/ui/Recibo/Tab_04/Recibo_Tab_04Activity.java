@@ -39,7 +39,6 @@ import java.util.Random;
 public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTab04View, IRVReciboTab04Adapater{
 
     TextView tvTx, tvCodArticulo, tvDescripArt;
-    Button btnChange, btnRefresh;
     RecyclerView rclBulto;
     List<UAXProductoTxA> listBulto = new ArrayList<>();
     ReciboTab04Presenter presenter;
@@ -92,10 +91,6 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
     }
 
     void initializeComponent(){
-        btnChange = (Button)findViewById(R.id.btnChangeSaldo);
-        btnChange.setOnClickListener(onClickListener);
-        btnRefresh = (Button)findViewById(R.id.btnRefresh);
-        btnRefresh.setOnClickListener(refreshOnClickListener);
         tvTx = (TextView)findViewById(R.id.tvTx);
         tvCodArticulo = (TextView)findViewById(R.id.tvCodArticulo);
         tvDescripArt = (TextView)findViewById(R.id.tvDescripArt);
@@ -111,20 +106,6 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
         tvCodArticulo.setText(obj.getCodigo());
         tvDescripArt.setText(obj.getDescripcion());
     }
-
-    View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            changePricesInTheList();
-        }
-    };
-
-    View.OnClickListener refreshOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            presenter.getBultosTx(objReceived.getId_Tx(), objReceived.getId_Producto(), objReceived.getItem());//"A20182040001", 2577, 1);
-        }
-    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,7 +139,7 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
                 evaluateSaldo();
                 return true;
             case R.id.itemSelectImpr:
-                Toast.makeText(this, "Item SelectImpr was selected", Toast.LENGTH_SHORT).show();
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -259,25 +240,6 @@ public class Recibo_Tab_04Activity extends AppCompatActivity implements ReciboTa
             //navigateToPrintEtqPallet();
             presenter.navigateToReciboTab05(objReceived, strNumOrden, intId_TipoMovimiento, bolAutomatic, currentSaldo);
         }
-    }
-
-    private void changePricesInTheList() {
-
-        ArrayList<UAXProductoTxA> models = new ArrayList<>();
-
-        for (UAXProductoTxA model : listBulto) {
-            models.add(model.clone());
-        }
-
-        for (UAXProductoTxA model : models) {
-            if (model.getSaldoTotal() == 0)//< 900)
-                model.setSaldoTotal( new Random().nextInt(2000 - 0) + 0);// = 900;
-        }
-
-        if (adapter.getData().get(0).getSaldoTotal() != 0)
-            models = adapter.getData();
-
-        adapter.setBaseData(models);//setData(models);
     }
 
     @Override
