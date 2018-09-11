@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +43,7 @@ import java.util.List;
 
 public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTab02View, IRVReciboTab02Adapter, IncidenciaFragment.IncidenciaDialogListener{
     RecyclerView rclDetailTx;
-    Button btnBack, btnNext, btnCausal, btnCloseTx;
+    Button btnBack, btnCloseTx;
     SearchView svDetail;
     CheckBox chkAutomatic;
     TextView tvNroOrden, tvCuenta, tvProveedor, tvCountTx;
@@ -60,6 +61,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("onCreate", "Start");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recibo__tab_02);
         initializeComponent();
@@ -80,13 +82,12 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
         presenter = new ReciboTab02PresenterImpl(this);
         presenter.getDataDetailTx(strR_TxId);
+        Log.d("onCreate", "Finish");
     }
 
     void initializeComponent(){
         rclDetailTx = (RecyclerView)findViewById(R.id.rclDetailTx);
         btnBack = (Button)findViewById(R.id.btnBack);
-        btnNext = (Button)findViewById(R.id.btnNext);
-        btnCausal = (Button)findViewById(R.id.btnCausal);
         btnCloseTx = (Button)findViewById(R.id.btnCloseTx);
         btnCloseTx.setOnClickListener(btnCloseTxOnClickListener);
         svDetail = (SearchView)findViewById(R.id.svDetail);
@@ -120,7 +121,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         Integer total = 0;
 
         for (int i = 0; i < list.size(); i++){
-            if (list.get(i).getSaldo().isNaN()){
+            if (!list.get(i).getSaldo().isNaN()){
                 if (list.get(i).getSaldo() > 0.0){
                     total++;
                 }
@@ -150,8 +151,8 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
                 alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        //presenter.getCerrarRecepcion(strR_TxId,(int_SaldoCierre > 0 ? 6 : 5), "ADMIN");
-                        presenter.getCerrarRecepcion("123456789987",99, "ADMIN");
+                        presenter.getCerrarRecepcion(strR_TxId,(int_SaldoCierre > 0 ? 6 : 5), "ADMIN");
+                        //presenter.getCerrarRecepcion("123456789987",99, "ADMIN");
                     }
                 });
 
@@ -197,6 +198,8 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
                 //presenter.goBackToMenu();
                 presenter.navigateToReciboTab01();
                 return true;
+            case R.id.itemSelectImpr:
+                presenter.showDialogImpresora();
             case R.id.itemRefresh:
                 presenter.getDataDetailTx(strR_TxId);
                 return true;
@@ -261,7 +264,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
 
     @Override
-    public void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa) {
+    public void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa, String strCuenta, Integer intId_Cliente) {
         Intent intent = new Intent(this, Recibo_Tab_03Activity.class);
         intent.putExtra("Id_Tx", ent.getId_Tx());
         intent.putExtra("NumOrden", strNumOrden);
@@ -282,6 +285,8 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
         intent.putExtra("Id_TipoMovimiento", intIdTipoMovimiento);
         intent.putExtra("bolAutomatic", bolAutomatic);
         intent.putExtra("FlagPausa", bolFlagPausa);
+        intent.putExtra("Cuenta", strCuenta);
+        intent.putExtra("Id_Cliente", intId_Cliente);
         //startActivity(intent);
         startActivityForResult(intent, CODE_TAB_02);
     }
@@ -328,7 +333,7 @@ public class Recibo_Tab_02Activity extends AppCompatActivity implements ReciboTa
 
     @Override
     public void onClickbtnNext(ListarDetalleTx ent) {
-        presenter.navigateToReciboTab03(ent, strR_NumOrden, intR_IdTipoMovimiento, chkAutomatic.isChecked(), bolR_FlagPausa);
+        presenter.navigateToReciboTab03(ent, strR_NumOrden, intR_IdTipoMovimiento, chkAutomatic.isChecked(), bolR_FlagPausa, strR_Cuenta, intR_Id_Cliente);
     }
 
     @Override

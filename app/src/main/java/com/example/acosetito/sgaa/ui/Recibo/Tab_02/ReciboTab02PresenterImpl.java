@@ -40,8 +40,8 @@ public class ReciboTab02PresenterImpl implements ReciboTab02Presenter, ReciboTab
     }
 
     @Override
-    public void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa) {
-        view.navigateToReciboTab03(ent, strNumOrden, intIdTipoMovimiento, bolAutomatic, bolFlagPausa);
+    public void navigateToReciboTab03(ListarDetalleTx ent, String strNumOrden, Integer intIdTipoMovimiento, Boolean bolAutomatic, Boolean bolFlagPausa, String strCuenta, Integer intId_Cliente) {
+        view.navigateToReciboTab03(ent, strNumOrden, intIdTipoMovimiento, bolAutomatic, bolFlagPausa, strCuenta, intId_Cliente);
     }
 
     @Override
