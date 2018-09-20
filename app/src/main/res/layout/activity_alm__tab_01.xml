@@ -12,9 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <SearchView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -23,8 +20,11 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.RecyclerView
+            android:id="@+id/rclTransito"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 </LinearLayout>
