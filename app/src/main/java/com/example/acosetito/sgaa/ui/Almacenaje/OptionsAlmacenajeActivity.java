@@ -1,19 +1,29 @@
 package com.example.acosetito.sgaa.ui.Almacenaje;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.acosetito.sgaa.R;
+import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
+import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_01.Alm_Tab_01Activity;
 
-public class OptionsAlmacenajeActivity extends AppCompatActivity {
+public class OptionsAlmacenajeActivity extends AppCompatActivity implements OptionsView{
+
+    OptionsPresenter presenter;
+    Button btnAlm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options_almacenaje);
+        initializeControls();
     }
 
     @Override
@@ -21,6 +31,19 @@ public class OptionsAlmacenajeActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_recibo, menu);
         return true;
     }
+
+    void initializeControls(){
+        btnAlm = (Button)findViewById(R.id.btnAlm);
+        btnAlm.setOnClickListener(almOnClickListener);
+        presenter = new OptionsPresenterImpl(this);
+    }
+
+    View.OnClickListener almOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            presenter.navigateToTab01();
+        }
+    };
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -47,5 +70,21 @@ public class OptionsAlmacenajeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void navigateToTab01() {
+        Intent intent = new Intent(OptionsAlmacenajeActivity.this, Alm_Tab_01Activity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void showProgressDialog() {
+        ProgressDialogRequest.show(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        ProgressDialogRequest.dismiss();
     }
 }
