@@ -15,7 +15,7 @@ public class Global {
     public static String strIpImpresora;
 
     public static final String baseUrl = "http://172.16.32.15:8085/SGAA_WCF/";
-    public static final String baseUrlPrint = "http://172.16.32.15/SGAA_WCF_PRINT/";
+    public static final String baseUrlPrint = "http://172.16.32.3/SGAA_WCF_PRINTV2/";//"http://172.16.32.15/SGAA_WCF_PRINT/";
     public static final String usuarioService = "UsuarioService.svc";
     public static final String pickingService = "PickingService.svc";
     public static final String unidadMedidaService = "UnidadMedidaService.svc";
@@ -23,4 +23,5 @@ public class Global {
     public static final String impresoraService = "Impresiones.svc";
     public static final String produccionService = "ProduccionService.svc";
     public static final String tablasEstaticasService = "TablasEstaticasService.svc";
+    public static final String almacenajeService = "AlmacenajeService.svc";
 }
