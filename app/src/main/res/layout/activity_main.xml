@@ -99,217 +99,141 @@
     <LinearLayout
         android:id="@+id/lyLine1Buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnRecibo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_home_variant_enter"
+            android:gravity="bottom|center"
+            android:text="Recibo"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnRecibo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_home_variant_enter"
-                    android:gravity="bottom|center"
-                    android:text="Recibo"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
+        <Button
+            android:id="@+id/btnAlmacenaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_forklift_load"
+            android:gravity="bottom|center"
+            android:text="Almacenaje"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnAlmacenaje"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_forklift_load"
-                    android:gravity="bottom|center"
-                    android:text="Almacenaje"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnPicking"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_deeplink"
-                    android:gravity="bottom|center"
-                    android:text="Picking"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnPicking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_deeplink"
+            android:gravity="bottom|center"
+            android:text="Picking"
+            android:textSize="@dimen/sizeMenuButton" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lyLine2Buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnEmbalaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_social_dropbox"
+            android:gravity="bottom|center"
+            android:text="Embalaje"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnEmbalaje"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_social_dropbox"
-                    android:gravity="bottom|center"
-                    android:text="Embalaje"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
+        <Button
+            android:id="@+id/btnDespacho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_truck"
+            android:gravity="bottom|center"
+            android:text="Despacho"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnDespacho"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_truck"
-                    android:gravity="bottom|center"
-                    android:text="Despacho"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnTransferencia"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_social_aws"
-                    android:gravity="bottom|center"
-                    android:text="Transferencia"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnTransferencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_social_aws"
+            android:gravity="bottom|center"
+            android:text="Transferencia"
+            android:textSize="@dimen/sizeMenuButton" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/lyLine3Buttons"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnEtiquetado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_social_dropbox"
+            android:gravity="bottom|center"
+            android:text="Etiquetado"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/btnEtiquetado"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_social_dropbox"
-                    android:gravity="bottom|center"
-                    android:text="Etiquetado"
-                    android:textSize="@dimen/sizeMenuButton"/>
+        <Button
+            android:id="@+id/btnInventario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_barcode"
+            android:gravity="bottom|center"
+            android:text="Inventario"
+            android:textSize="@dimen/sizeMenuButton" />
 
-            </LinearLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnInventario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_barcode"
-                    android:gravity="bottom|center"
-                    android:text="Inventario"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/btnSalir"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@drawable/appbar_home_variant_leave"
-                    android:gravity="bottom|center"
-                    android:text="Salir"
-                    android:textSize="@dimen/sizeMenuButton"/>
-            </LinearLayout>
-        </LinearLayout>
+        <Button
+            android:id="@+id/btnSalir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/appbar_home_variant_leave"
+            android:gravity="bottom|center"
+            android:text="Salir"
+            android:textSize="@dimen/sizeMenuButton" />
 
     </LinearLayout>
 
