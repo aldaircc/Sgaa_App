@@ -73,6 +73,7 @@ public class Recibo_Tab_01Activity extends AppCompatActivity implements ReciboTa
     public boolean onPrepareOptionsMenu(Menu menu) {
         if(Build.VERSION.SDK_INT > 11) {
             invalidateOptionsMenu();
+            //menu.findItem(R.id.itemSearch).setVisible(true);
             menu.findItem(R.id.itemBack).setVisible(true);
             menu.findItem(R.id.itemRefresh).setVisible(true);
             menu.findItem(R.id.itemPallet).setVisible(false);
