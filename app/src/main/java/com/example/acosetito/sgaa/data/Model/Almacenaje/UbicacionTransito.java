@@ -1,8 +1,10 @@
 package com.example.acosetito.sgaa.data.Model.Almacenaje;
 
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class UbicacionTransito {
+public class UbicacionTransito implements Comparable, Cloneable{
     @SerializedName("almacen")
     public String almacen;
     @SerializedName("sector")
@@ -62,5 +64,27 @@ public class UbicacionTransito {
 
     public void setTotal(Integer total) {
         this.total = total;
+    }
+
+    @Override
+    public int compareTo(@NonNull Object o) {
+        UbicacionTransito compare = (UbicacionTransito) o;
+        if (compare.Id_Ubicacion.equals(this.Id_Ubicacion) && compare.almacen.equals(this.almacen)
+                && compare.sector.equals(this.sector) && compare.pasillo.equals(this.pasillo)
+                && compare.ubicacion.equals(this.ubicacion)){
+            return 0;
+        }
+        return 1;
+    }
+
+    @Override
+    public UbicacionTransito clone(){
+        UbicacionTransito clone;
+        try {
+            clone = (UbicacionTransito)super.clone();
+        }catch (CloneNotSupportedException ex){
+            throw  new RuntimeException(ex);
+        }
+        return clone;
     }
 }
