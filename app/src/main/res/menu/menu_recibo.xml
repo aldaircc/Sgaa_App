@@ -3,34 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.Recibo.Tab_04.Recibo_Tab_04Activity">
+
+    <!--  <item
+            android:id="@+id/itemSearch"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Search"
+            app:actionViewClass="android.support.v7.widget.SearchView"
+            app:showAsAction="always|collapseActionView" /> -->
+
     <item
         android:id="@+id/itemBack"
         android:icon="@drawable/appbar_arrow_left"
         android:title="Regresar"
-        app:showAsAction="always|withText"
-        />
+        app:showAsAction="always|withText" />
     <item
         android:id="@+id/itemRefresh"
+        android:layout_height="wrap_content"
         android:icon="@drawable/appbar_refresh"
         android:title="Refrescar"
-        app:showAsAction="always|withText"/>
+        app:showAsAction="always|withText" />
     <item
         android:id="@+id/itemPallet"
         android:icon="@drawable/appbar_column_two"
         android:title="Pallet"
         app:showAsAction="always|withText" />
-    <item
-        android:id="@+id/itemEtiqImpr"
-        android:icon="@android:drawable/ic_dialog_info"
-        android:title="Etiquetas Impresión"></item>
-    <item
-        android:id="@+id/itemSelectImpr"
-        android:icon="@drawable/appbar_printer_text"
-        app:showAsAction="never" android:title="Seleccionar impresora">
-    </item>
-    <item
-        android:id="@+id/itemRegInci"
-        android:icon="@drawable/appbar_book_open_information"
-        app:showAsAction="never" android:title="Registrar incidencia">
-    </item>
+
+    <group
+        android:id="@+id/grp_SubMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <item
+            android:id="@+id/itemEtiqImpr"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="Etiquetas Impresión"></item>
+
+        <item
+            android:id="@+id/itemSelectImpr"
+            android:icon="@drawable/appbar_printer_text"
+            android:title="Seleccionar impresora"
+            app:showAsAction="never"></item>
+        <item
+            android:id="@+id/itemRegInci"
+            android:icon="@drawable/appbar_book_open_information"
+            android:title="Registrar incidencia"
+            app:showAsAction="never"></item>
+    </group>
 </menu>
