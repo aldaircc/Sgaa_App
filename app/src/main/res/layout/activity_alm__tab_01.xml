@@ -10,8 +10,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="5dp">
 
+        <TextView
+            android:id="@+id/tvAlmacen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Almacen 01"
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
