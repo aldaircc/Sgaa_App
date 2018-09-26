@@ -3,4 +3,14 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="label_header1">Pallets/UA</string>
+    <string name="label_header2">Codigo</string>
+    <string name="label_header3">Producto</string>
+    <string name="label_header4">UM</string>
+    <string name="label_header5">Cantidad</string>
+    <string name="label_header6">LoteLab</string>
+    <string name="label_header7">F.Emisión</string>
+    <string name="label_header8">F.Vencimiento</string>
+    <string name="label_header_Accion">  </string>
 </resources>
