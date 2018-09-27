@@ -1,6 +1,7 @@
 package com.example.acosetito.sgaa.data.WebService;
 
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionTransito;
 
 import java.util.ArrayList;
@@ -19,4 +20,12 @@ public interface AlmacenajeClient {
     Call<ArrayList<UATransito>> validarUATransito(
             @Query("strUA") String strUA,
             @Query("intIdUbicacion") Integer intIdUbicacion);
+
+    @GET("ListarUbicacionLibreXMarcaSugerida")
+    Call<ArrayList<UbicacionLibreXMarca>> listarUbicacionLibreXMarcaSugerida(
+        @Query("intIdMarca") Integer intIdMarca,
+        @Query("intIdAlmacen") Integer intIdAlmacen,
+        @Query("intIdCondicion") Integer intIdCondicion,
+        @Query("CodBarraUA") String strCodBarra
+    );
 }
