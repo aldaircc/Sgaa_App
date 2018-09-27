@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Ubi. origen:"
-            android:textColor="@color/yellowColor" />
+            android:textColor="@color/yellowColor"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvUbiOrigen"
@@ -30,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="xx - yy - zz"
-            android:textColor="@color/whiteColor" />
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Ingrese pallets/UAS"
-            android:textColor="@color/yellowColor" />
+            android:textColor="@color/yellowColor"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
@@ -163,7 +166,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Total:"
-            android:textColor="@color/yellowColor" />
+            android:textColor="@color/yellowColor"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvTotal"
@@ -171,6 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="1"
-            android:textColor="@color/whiteColor" />
+            android:textColor="@color/whiteColor"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
