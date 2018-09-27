@@ -1,10 +1,268 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity">
 
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/textView76"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Producto:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvCodProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1250A365D2"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/tvProducto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="OSEODURAN 500 + D3 GRAN. EFERV. SOB 30 (MG)"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView82"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sector:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvSector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+
+        <TextView
+            android:id="@+id/textView80"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pasillo:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvPasillo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView86"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Fila:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvFila"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+
+        <TextView
+            android:id="@+id/textView84"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Columna:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvColumna"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="4">
+
+        <TextView
+            android:id="@+id/textView90"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Nivel:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvNivel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+
+        <TextView
+            android:id="@+id/textView88"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Posición:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvPosicion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="01"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="10dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView91"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ingrese ubicación:" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/edtUbicacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlueHeader"
+        android:orientation="horizontal"
+        android:padding="3dp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/textView92"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total pallets/UAs:"
+            android:textColor="@color/yellowColor" />
+
+        <TextView
+            android:id="@+id/tvUArestant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="0"
+            android:textColor="@color/whiteColor" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/btnPallets"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:text="+ ubicaciones" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:background="@drawable/appbar_checkmark" />
+    </LinearLayout>
+</LinearLayout>
