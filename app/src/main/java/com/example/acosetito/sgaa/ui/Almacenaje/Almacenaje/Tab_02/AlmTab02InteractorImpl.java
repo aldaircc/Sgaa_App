@@ -1,6 +1,7 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_02;
 
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.WebService.AlmacenajeClient;
 import com.example.acosetito.sgaa.data.WebService.ApiClient;
@@ -32,6 +33,29 @@ public class AlmTab02InteractorImpl implements AlmTab02Interactor{
             @Override
             public void onFailure(Call<ArrayList<UATransito>> call, Throwable t) {
                 listener.OnFailureValidateUATransito(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void listarUbicacionLibrexMarcaSugerida(Integer intId_Marca, Integer intId_Almacen, Integer intId_Condicion, String strCodUA_Pallet, final OnListenerAlmTab02 listener) {
+        AlmacenajeClient almacenajeClient = (ApiClient.getApiClient(Global.baseUrl, Global.almacenajeService).create(AlmacenajeClient.class));
+        Call<ArrayList<UbicacionLibreXMarca>> call = almacenajeClient.listarUbicacionLibreXMarcaSugerida(intId_Marca, intId_Almacen, intId_Condicion, strCodUA_Pallet);
+        call.enqueue(new Callback<ArrayList<UbicacionLibreXMarca>>() {
+            @Override
+            public void onResponse(Call<ArrayList<UbicacionLibreXMarca>> call, Response<ArrayList<UbicacionLibreXMarca>> response) {
+                switch (response.code()){
+                    case 200:
+                        listener.OnSuccessListarUbicacionLibrexMarcaSugerida(response.body());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<UbicacionLibreXMarca>> call, Throwable t) {
+                listener.OnFailureListarUbicacionLibrexMarcaSugerida(t.getMessage());
             }
         });
     }

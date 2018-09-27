@@ -1,10 +1,16 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_02;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -20,7 +26,12 @@ import com.example.acosetito.sgaa.data.Adapter.Almacenaje.LVAlmTab02Adapter;
 import com.example.acosetito.sgaa.data.Adapter.Almacenaje.RVAlmTab02Adapter;
 import com.example.acosetito.sgaa.data.Adapter.Interfaces.IRVAlmTab02Adapter;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionTransito;
+import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
+import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity;
+import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04.Alm_Tab_04Activity;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -34,8 +45,7 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     RecyclerView rclItemPallet;
     TableLayout table;
 
-            //ListView lvItemPallet;
-            DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     RVAlmTab02Adapter adapter;
     ArrayList<UATransito> localList = new ArrayList<>();
     AlmTab02Presenter presenter;
@@ -52,6 +62,60 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
         presenter = new AlmTab02PresenterImpl(this);
     }
 
+    //region Menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu_almacen, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        if (Build.VERSION.SDK_INT > 11){
+            invalidateOptionsMenu();
+            menu.findItem(R.id.itemBack).setVisible(true);
+            menu.findItem(R.id.itemRefresh).setVisible(false);
+            menu.findItem(R.id.itemNext).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    Integer intId_Marca, intId_Condicion;
+    String strUA_CodBarra, strCod_Producto, strProducto, strUAPallet;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.itemBack:
+                return true;
+            case R.id.itemRefresh:
+                return true;
+            case R.id.itemNext:
+
+                if (localList.size() > 0){
+
+                    strCod_Producto = localList.get(0).getCodigoProducto();
+                    strProducto = localList.get(0).getNombreProducto();
+                    strUAPallet = localList.get(0).getUA_CodBarra();
+                    intId_Marca = localList.get(0).getId_Marca();
+                    intId_Condicion = localList.get(0).getId_Condicion();
+                    strUA_CodBarra = localList.get(0).getUA_CodBarra();
+
+                    presenter.listarUbicacionLibrexMarcaSugerida(
+                            intId_Marca,
+                            2, //Global.IdWarehouse,
+                            intId_Condicion,
+                            strUA_CodBarra);
+                }else{
+                    Toast.makeText(this, "Debe de ingresar Pallet/UA", Toast.LENGTH_SHORT).show();
+                }
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //endregion
+
     void initializeControls(){
         table = (TableLayout)findViewById(R.id.tableSample);
         tvUbiOrigen = (TextView)findViewById(R.id.tvUbiOrigen);
@@ -59,9 +123,6 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
         edtCodBarra = (EditText)findViewById(R.id.edtCodBarra);
         btnInsert = (Button)findViewById(R.id.btnInsert);
         btnInsert.setOnClickListener(insertOnClickListener);
-        //lvItemPallet = (ListView)findViewById(R.id.lvItemPal);
-        rclItemPallet = (RecyclerView)findViewById(R.id.rclItemPallet);
-        rclItemPallet.setHasFixedSize(true);
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rclItemPallet.setLayoutManager(llm);
     }
@@ -111,6 +172,7 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
                 Toast.makeText(Alm_Tab_02Activity.this, "Pallet/UA se encuentra en lista", Toast.LENGTH_SHORT).show();
             }else {
                 presenter.validateUATransito(edtCodBarra.getText().toString(), intR_IdUbicacion);
+                edtCodBarra.setText("");
             }
         }
     };
@@ -119,25 +181,63 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     public void resultValidateUA(ArrayList<UATransito> list) {
         if (list.size() > 0){
             localList = list;
-            //adapter = new RVAlmTab02Adapter(this, list);
-            //rclItemPallet.setAdapter(adapter);
-            //LVAlmTab02Adapter adapter = new LVAlmTab02Adapter(this, list);
-            //lvItemPallet.setAdapter(adapter);
             dataBindTable(list);
         }else{
             Toast.makeText(this, "Pallet/UA no registrada", Toast.LENGTH_SHORT).show();
         }
     }
 
+    @Override
+    public void resultListarUbicacionLibrexMarcaSugerida(ArrayList<UbicacionLibreXMarca> list) {
+
+        if (list.size() > 0){
+            UbicacionLibreXMarca ent = list.get(0);
+            presenter.navigateToTab03(
+                    ent.getId_Marca(),
+                    intId_Condicion,
+                    strCod_Producto,
+                    strProducto,
+                    ent.getCodigoBarra(),
+                    strUAPallet,
+                    ent.getSector(),
+                    ent.getPasillo(),
+                    ent.getFila(),
+                    ent.getId_Ubicacion(),
+                    ent.getColumna(),
+                    ent.getNivel(),
+                    String.valueOf(ent.getPosicion()),
+                    list.size(),
+                    localList.size()
+            );
+
+        }else{
+
+            final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("No existe ubicación sugerida,¿Desea seleccionar una ubicación?");
+            alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    presenter.navigateToTab04();
+                }
+            });
+
+            alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
+    }
+
     View.OnClickListener RemoveItemOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            // row is your row, the parent of the clicked button
             View row = (View) v.getParent();
-            // container contains all the rows, you could keep a variable somewhere else to the container which you can refer to here
             ViewGroup container = ((ViewGroup)row.getParent());
-            // delete the row and invalidate your view so it gets redrawn
-
             UATransito objEnt = new UATransito();
             for (UATransito ent: localList){
                 if (ent.getUA_CodBarra().equals(v.getTag())){
@@ -159,6 +259,36 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     @Override
     public void navigateToTab01() {
 
+    }
+
+    @Override
+    public void navigateToTab03(Integer intId_Marca, Integer intId_Condicion, String strCod_Prod, String strProducto,
+                                String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo,
+                                String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel,
+                                String strPosicion, Integer intCountPallets, Integer total) {
+        Intent intent = new Intent(Alm_Tab_02Activity.this, Alm_Tab_03Activity.class);
+        intent.putExtra("Id_Marca", intId_Marca);
+        intent.putExtra("Id_Condicion", intId_Condicion);
+        intent.putExtra("Cod_Prod", strCod_Prod);
+        intent.putExtra("Producto", strProducto);
+        intent.putExtra("Cod_Barra", strCod_Barra);
+        intent.putExtra("Cod_UAPallet", strCod_UAPallet);
+        intent.putExtra("Sector", strSector);
+        intent.putExtra("Pasillo", strPasillo);
+        intent.putExtra("Fila", strFila);
+        intent.putExtra("Ubicacion", intId_Ubicacion);
+        intent.putExtra("Columna", intColumna);
+        intent.putExtra("Nivel", intNivel);
+        intent.putExtra("Posicion", strPosicion);
+        intent.putExtra("CountPallet", intCountPallets);
+        intent.putExtra("Total", total);
+        startActivityForResult(intent, 3);
+    }
+
+    @Override
+    public void navigateToTab04() {
+        Intent intent = new Intent(Alm_Tab_02Activity.this, Alm_Tab_04Activity.class);
+        startActivityForResult(intent, 4);
     }
 
     @Override
