@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public interface AlmTab01View {
     void sourceDataUbicacionTransito(ArrayList<UbicacionTransito> list);
     void showFailureRequest(String result);
-    void navigateToTab02();
+    void navigateToTab02(String strUbicacion, Integer intIdUbicacion);
     void showProgressDialog();
     void hideProgressDialog();
 }
