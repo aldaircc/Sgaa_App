@@ -1,5 +1,6 @@
 package com.example.acosetito.sgaa.data.WebService;
 
+import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionTransito;
@@ -27,5 +28,10 @@ public interface AlmacenajeClient {
         @Query("intIdAlmacen") Integer intIdAlmacen,
         @Query("intIdCondicion") Integer intIdCondicion,
         @Query("CodBarraUA") String strCodBarra
+    );
+
+    @GET("ListarSectoresXAlmacen")
+    Call<ArrayList<SectorXAlmacen>> listarSectoresXAlmacen(
+        @Query("intIdAlmacen") Integer intIdAlmacen
     );
 }
