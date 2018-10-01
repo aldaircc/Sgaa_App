@@ -4,6 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Text Header: Tab 02 Almacenaje -->
     <string name="label_header1">Pallets/UA</string>
     <string name="label_header2">Codigo</string>
     <string name="label_header3">Producto</string>
@@ -13,4 +14,13 @@
     <string name="label_header7">F.Emisión</string>
     <string name="label_header8">F.Vencimiento</string>
     <string name="label_header_Accion">  </string>
+
+    <!-- Text Header: Tab 04 Almacenaje -->
+    <string name="alm_tab04_header_01">Sector</string>
+    <string name="alm_tab04_header_02">Pasillo</string>
+    <string name="alm_tab04_header_03">Fila</string>
+    <string name="alm_tab04_header_04">Columna</string>
+    <string name="alm_tab04_header_05">Nivel</string>
+    <string name="alm_tab04_header_06">Posicion</string>
+
 </resources>
