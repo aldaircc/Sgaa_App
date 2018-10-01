@@ -5,11 +5,184 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="7"
     tools:context=".ui.Almacenaje.Almacenaje.Tab_04.Alm_Tab_04Activity">
 
-    <TextView
-        android:id="@+id/textView75"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tab 04" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView78"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Filtrar ubicaciones disponibles" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/textView79"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Sector:" />
+
+        <Spinner
+            android:id="@+id/spnSector"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:spinnerMode="dialog" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <RadioGroup
+            android:id="@+id/rgpOptions"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <RadioButton
+                android:id="@+id/rdbCMarca"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="C/Marca" />
+
+            <RadioButton
+                android:id="@+id/rdbSMarca"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="S/Marca" />
+
+            <RadioButton
+                android:id="@+id/rdbDirig"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dirigido" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/textView81"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Ubicación:" />
+
+        <EditText
+            android:id="@+id/edtUbicacion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="textPersonName" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TableLayout
+                    android:id="@+id/tblUbicaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="0">
+
+                    <TableRow
+                        android:id="@+id/tblRowHeader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/labelHeader1"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_01" />
+
+                        <TextView
+                            android:id="@+id/labelHeader2"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_02" />
+
+                        <TextView
+                            android:id="@+id/labelHeader3"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_03" />
+
+                        <TextView
+                            android:id="@+id/labelHeader4"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_04" />
+
+                        <TextView
+                            android:id="@+id/labelHeader5"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_05" />
+
+                        <TextView
+                            android:id="@+id/labelHeader6"
+                            style="@style/TableHeader"
+                            android:text="@string/alm_tab04_header_06" />
+                    </TableRow>
+                </TableLayout>
+            </HorizontalScrollView>
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/textView75"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total:" />
+
+        <TextView
+            android:id="@+id/tvRows"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"></LinearLayout>
+
 </LinearLayout>
