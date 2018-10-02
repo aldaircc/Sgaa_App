@@ -2,6 +2,7 @@ package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
 
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
 
 import java.util.ArrayList;
 
@@ -12,8 +13,11 @@ public interface AlmTab04Interactor {
         void OnFailureListarSectoresXAlmacen(String result);
         void OnSuccessListarMasUbicacionesDisponibles(ArrayList<UbicacionDisponible> list);
         void OnFailureListarMasUbicacionesDisponibles(String result);
+        void OnSuccessListarUbicacionXCodigoBarra(ArrayList<UbicacionXCodigoBarra> list);
+        void OnFailureListarUbicacionXCodigoBarra(String result);
     }
 
     void listarSectoresXAlmacen(Integer intIdAlmacen, OnListenerAlmTab04 listener);
     void listarMasUbicacionesDisponibles(Integer intIdAlmacen, Integer intIdMarca, Integer intIdCondicion, Integer intIdSector, OnListenerAlmTab04 listener);
+    void listarUbicacionXCodigoBarra(String strUbi, Integer intIdAlmacen, OnListenerAlmTab04 listener);
 }

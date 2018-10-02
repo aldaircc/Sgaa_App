@@ -2,6 +2,7 @@ package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
 
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.WebService.AlmacenajeClient;
 import com.example.acosetito.sgaa.data.WebService.ApiClient;
@@ -55,6 +56,29 @@ public class AlmTab04InteractorImpl implements AlmTab04Interactor{
             @Override
             public void onFailure(Call<ArrayList<UbicacionDisponible>> call, Throwable t) {
                 listener.OnFailureListarMasUbicacionesDisponibles(t.getMessage());
+            }
+        });
+    }
+
+    @Override
+    public void listarUbicacionXCodigoBarra(String strUbi, Integer intIdAlmacen, final OnListenerAlmTab04 listener) {
+        AlmacenajeClient almClient = (ApiClient.getApiClient(Global.baseUrl, Global.almacenajeService).create(AlmacenajeClient.class));
+        Call<ArrayList<UbicacionXCodigoBarra>> call = almClient.listarUbicacionXCodigoBarra(strUbi, intIdAlmacen);
+        call.enqueue(new Callback<ArrayList<UbicacionXCodigoBarra>>() {
+            @Override
+            public void onResponse(Call<ArrayList<UbicacionXCodigoBarra>> call, Response<ArrayList<UbicacionXCodigoBarra>> response) {
+                switch (response.code()){
+                    case 200:
+                        listener.OnSuccessListarUbicacionXCodigoBarra(response.body());
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<UbicacionXCodigoBarra>> call, Throwable t) {
+                listener.OnFailureListarUbicacionXCodigoBarra(t.getMessage());
             }
         });
     }

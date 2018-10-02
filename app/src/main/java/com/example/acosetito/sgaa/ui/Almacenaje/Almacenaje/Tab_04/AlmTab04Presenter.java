@@ -4,4 +4,6 @@ public interface AlmTab04Presenter {
 
     void listarSectoresXAlmacen(Integer intIdAlmacen);
     void listarMasUbicacionDisponibles(Integer intIdAlmacen, Integer intIdMarca, Integer intIdCondicion, Integer intIdSector);
+    void listarUbicacionXCodigoBarra(String strUbi, Integer intIdAlmacen);
+    void navigateToTab03();
 }

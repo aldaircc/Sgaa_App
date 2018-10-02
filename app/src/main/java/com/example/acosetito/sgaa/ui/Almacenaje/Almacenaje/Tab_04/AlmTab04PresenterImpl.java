@@ -1,6 +1,8 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
+
 import java.util.ArrayList;
 
 public class AlmTab04PresenterImpl implements AlmTab04Presenter, AlmTab04Interactor.OnListenerAlmTab04{
@@ -38,6 +40,18 @@ public class AlmTab04PresenterImpl implements AlmTab04Presenter, AlmTab04Interac
     }
 
     @Override
+    public void OnSuccessListarUbicacionXCodigoBarra(ArrayList<UbicacionXCodigoBarra> list) {
+        view.resultListarUbicacionXCodigoBarra(list);
+        view.hideProgressDialog();
+    }
+
+    @Override
+    public void OnFailureListarUbicacionXCodigoBarra(String result) {
+        view.showFailureRequest(result);
+        view.hideProgressDialog();
+    }
+
+    @Override
     public void listarSectoresXAlmacen(Integer intIdAlmacen) {
         view.showProgressDialog();
         interactor.listarSectoresXAlmacen(intIdAlmacen, this);
@@ -47,5 +61,16 @@ public class AlmTab04PresenterImpl implements AlmTab04Presenter, AlmTab04Interac
     public void listarMasUbicacionDisponibles(Integer intIdAlmacen, Integer intIdMarca, Integer intIdCondicion, Integer intIdSector) {
         view.showProgressDialog();
         interactor.listarMasUbicacionesDisponibles(intIdAlmacen, intIdMarca, intIdCondicion, intIdSector, this);
+    }
+
+    @Override
+    public void listarUbicacionXCodigoBarra(String strUbi, Integer intIdAlmacen) {
+        view.showProgressDialog();
+        interactor.listarUbicacionXCodigoBarra(strUbi, intIdAlmacen, this);
+    }
+
+    @Override
+    public void navigateToTab03() {
+        view.navigateToTab03();
     }
 }
