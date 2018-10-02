@@ -28,4 +28,10 @@
         android:id="@+id/textPosicion"
         style="@style/TableItem"
         android:text="" />
+
+    <Button
+        android:id="@+id/btnSelectUbi"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/appbar_deeplink" />
 </TableRow>
