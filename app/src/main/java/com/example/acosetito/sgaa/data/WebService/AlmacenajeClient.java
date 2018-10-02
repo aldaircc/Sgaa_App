@@ -5,6 +5,7 @@ import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionTransito;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
 
 import java.util.ArrayList;
 
@@ -42,5 +43,11 @@ public interface AlmacenajeClient {
             @Query("intIdMarca") Integer intIdMarca,
             @Query("intIdCondicion") Integer intIdCondicion,
             @Query("intIdSector") Integer intIdSector
+    );
+
+    @GET("ListarUbicacionXCodigoBarra")
+    Call<ArrayList<UbicacionXCodigoBarra>> listarUbicacionXCodigoBarra(
+            @Query("strUbi") String strUbi,
+            @Query("intIdAlmacen") Integer intIdAlmacen
     );
 }
