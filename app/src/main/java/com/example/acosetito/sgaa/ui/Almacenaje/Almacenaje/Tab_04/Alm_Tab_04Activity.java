@@ -1,5 +1,4 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
-
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,13 +16,11 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Almacenaje.SPSector;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
-import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity;
 
@@ -43,12 +40,15 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     private ArrayList<UbicacionXCodigoBarra> listDirigido;
 
     private boolean existeUbi = false;
+    private String strR_Producto, strR_CodProducto;
+    Integer intR_IdCondicion, intR_Id_Marca, intR_TotalRowsUbi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alm__tab_04);
         initializeControls();
+        getValueExtras();
         presenter = new AlmTab04PresenterImpl(this);
         presenter.listarSectoresXAlmacen(2);//Global.IdWarehouse);
     }
@@ -65,6 +65,18 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
         rdbCMarca = (RadioButton)findViewById(R.id.rdbCMarca);
         rdbSMarca = (RadioButton)findViewById(R.id.rdbSMarca);
         rdbDirig = (RadioButton)findViewById(R.id.rdbDirig);
+    }
+
+    void getValueExtras(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            intR_Id_Marca = extras.getInt("Id_Marca");
+            intR_TotalRowsUbi = extras.getInt("Total_RowsUbi");
+            intR_IdCondicion = extras.getInt("Id_Condicion");
+            strR_CodProducto = extras.getString("Cod_Producto");
+            strR_Producto = extras.getString("Producto");
+            intR_TotalRowsUbi = extras.getInt("Total_RowsUbi");
+        }
     }
 
     AdapterView.OnItemSelectedListener spnSectorOnItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -122,7 +134,9 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
             if (rdbCMarca.isChecked() && !ent.getMarca().equals("Sin Marca")){
                 ((TextView)row.findViewById(R.id.textSector)).setText(ent.getSector());
                 ((TextView)row.findViewById(R.id.textPasillo)).setText(ent.getPasillo());
+                ((TextView)row.findViewById(R.id.textPasillo)).setTag(ent.getCodigoBarra());
                 ((TextView)row.findViewById(R.id.textFila)).setText(ent.getFila());
+                ((TextView) row.findViewById(R.id.textFila)).setTag(ent.getId_Ubicacion());
                 ((TextView)row.findViewById(R.id.textColumna)).setText(String.valueOf(ent.getColumna()));
                 ((TextView)row.findViewById(R.id.textNivel)).setText(String.valueOf(ent.getNivel()));
                 ((TextView)row.findViewById(R.id.textPosicion)).setText(String.valueOf(ent.getPosicion()));
@@ -130,7 +144,9 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
             }else if (rdbSMarca.isChecked() && ent.getMarca().equals("Sin Marca")){
                 ((TextView)row.findViewById(R.id.textSector)).setText(ent.getSector());
                 ((TextView)row.findViewById(R.id.textPasillo)).setText(ent.getPasillo());
+                ((TextView)row.findViewById(R.id.textPasillo)).setTag(ent.getCodigoBarra());
                 ((TextView)row.findViewById(R.id.textFila)).setText(ent.getFila());
+                ((TextView)row.findViewById(R.id.textFila)).setTag(ent.getId_Ubicacion());
                 ((TextView)row.findViewById(R.id.textColumna)).setText(String.valueOf(ent.getColumna()));
                 ((TextView)row.findViewById(R.id.textNivel)).setText(String.valueOf(ent.getNivel()));
                 ((TextView)row.findViewById(R.id.textPosicion)).setText(String.valueOf(ent.getPosicion()));
@@ -175,7 +191,9 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
                         TableRow row = (TableRow) LayoutInflater.from(Alm_Tab_04Activity.this).inflate(R.layout.table_row_alm_tab04, null);
                         ((TextView) row.findViewById(R.id.textSector)).setText(ent.getSector());
                         ((TextView) row.findViewById(R.id.textPasillo)).setText(ent.getPasillo());
+                        ((TextView) row.findViewById(R.id.textPasillo)).setTag(ent.getCodigoBarra());
                         ((TextView) row.findViewById(R.id.textFila)).setText(ent.getFila());
+                        ((TextView) row.findViewById(R.id.textFila)).setTag(ent.getId_Ubicacion());
                         ((TextView) row.findViewById(R.id.textColumna)).setText(String.valueOf(ent.getColumna()));
                         ((TextView) row.findViewById(R.id.textNivel)).setText(String.valueOf(ent.getNivel()));
                         ((TextView) row.findViewById(R.id.textPosicion)).setText(String.valueOf(ent.getPosicion()));
@@ -202,80 +220,6 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
                     presenter.listarUbicacionXCodigoBarra(codeUbicacion, 2);//Global.IdWarehouse);
                 }
             }
-
-            /**
-             if (string.IsNullOrEmpty(txtCodBarraUbicacion.Text.Trim()))
-             {
-             return;
-             }
-
-             bool existe = false;
-
-             if (e.KeyChar == 13)
-             {
-             ListaUbicaciones.Items.Clear();
-             listaDirigida = new List<ProxySGAAMovil.SOAPAlmacenaje.SGAA_SP_S_ListarUbicacionXCodigoBarra_Result>();
-             foreach (var item in masUbi)
-             {
-
-             if (item.CodigoBarra  == txtCodBarraUbicacion.Text) //by jmc 12.02.2018
-             {
-             existe = true;
-             ListViewItem nvo_lst = new ListViewItem(item.Sector);
-             nvo_lst.SubItems.Add(item.Pasillo);
-             nvo_lst.SubItems.Add(item.Pasillo.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(item.Fila.ToString());
-             nvo_lst.SubItems.Add(item.Columna.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(item.Nivel.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(item.Posicion.ToString().Trim().PadLeft(3, '0'));
-             nvo_lst.SubItems.Add(item.Id_Ubicacion.ToString()); ///add by JMC 12.02.2018
-             ListaUbicaciones.Items.Add(nvo_lst);
-
-             listaDirigida.Add(
-             new ProxySGAAMovil.SOAPAlmacenaje.SGAA_SP_S_ListarUbicacionXCodigoBarra_Result()
-             {
-             Sector = item.Sector,
-             Pasillo = item.Pasillo,
-             Id_Ubicacion = item.Id_Ubicacion,
-             Fila=item.Fila,
-             Columna=item.Columna,
-             Nivel=item.Nivel,
-             Posicion=item.Posicion,
-             CodigoBarra= item.CodigoBarra
-             });
-             break;
-             }
-             }
-             if (!existe)
-             {
-             masUbi.Clear();
-
-             GestionAlmacenajeMobile ga = new GestionAlmacenajeMobile();
-             //var list = ga.ListarUbicacionXCodigoBarra(txtCodBarraUbicacion.Text, control.Global.IdAlmacen);
-             listaDirigida = ga.ListarUbicacionXCodigoBarra(txtCodBarraUbicacion.Text, control.Global.IdAlmacen);
-             if (listaDirigida.Count() > 0)
-             {
-             existe = true;
-             ListViewItem nvo_lst = new ListViewItem(listaDirigida[0].Sector);
-             nvo_lst.SubItems.Add(listaDirigida[0].Pasillo);
-             nvo_lst.SubItems.Add(listaDirigida[0].Pasillo.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(listaDirigida[0].Fila.ToString());
-             nvo_lst.SubItems.Add(listaDirigida[0].Columna.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(listaDirigida[0].Nivel.ToString().Trim().PadLeft(2, '0'));
-             nvo_lst.SubItems.Add(listaDirigida[0].Posicion.ToString().Trim().PadLeft(3, '0'));
-             nvo_lst.SubItems.Add(listaDirigida[0].Id_Ubicacion.ToString()); ///add by JMC 12.02.2018
-             ListaUbicaciones.Items.Add(nvo_lst);
-             }
-             lbltotmasubi.Text = ListaUbicaciones.Items.Count.ToString();
-             }
-             if (!existe)
-             {
-
-             MessageBox.Show("No se econtro la ubicación", "Aviso",
-             MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-             }
-             }
-             **/
         }
 
         @Override
@@ -287,8 +231,44 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     View.OnClickListener selectUbiOnClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            View row = (View)v.getParent();
-            presenter.navigateToTab03();
+            TableRow row = (TableRow)v.getParent();
+
+            String strSector, strPasillo, strFila, strCodigoBarra;
+            Integer intIdUbicacion, intColumna, intNivel, intPosicion;
+
+            if (rdbDirig.isChecked()){
+                strSector = listDirigido.get(0).getSector();
+                strPasillo = listDirigido.get(0).getPasillo();
+                strCodigoBarra = listDirigido.get(0).getCodigoBarra();
+                strFila = listDirigido.get(0).getFila();
+                intIdUbicacion = listDirigido.get(0).getId_Ubicacion();
+                intColumna = listDirigido.get(0).getColumna();
+                intNivel = listDirigido.get(0).getNivel();
+                intPosicion = listDirigido.get(0).getPosicion();
+            }else{
+
+                if (baseListUbi.size() > 0){
+                    strSector = ((TextView) row.getChildAt(0)).getText().toString();
+                    strPasillo = ((TextView) row.getChildAt(1)).getText().toString();
+                    strCodigoBarra = ((TextView) row.getChildAt(1)).getTag().toString();
+                    strFila = ((TextView) row.getChildAt(2)).getText().toString();
+                    intIdUbicacion = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(2)).getTag()));
+                    intColumna = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(3)).getText()));
+                    intNivel = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(4)).getText()));
+                    intPosicion = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(5)).getText()));
+                }else{
+                    strSector = ((TextView) row.getChildAt(0)).getText().toString();
+                    strPasillo = ((TextView) row.getChildAt(1)).getText().toString();
+                    strCodigoBarra = ((TextView) row.getChildAt(1)).getTag().toString();
+                    strFila = ((TextView) row.getChildAt(2)).getText().toString();
+                    intIdUbicacion = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(2)).getTag()));
+                    intColumna = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(3)).getText()));
+                    intNivel = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(4)).getText()));
+                    intPosicion = Integer.parseInt(String.valueOf(((TextView) row.getChildAt(5)).getText()));
+                }
+            }
+
+            presenter.navigateToTab03(intR_IdCondicion, strR_CodProducto, strR_Producto, strCodigoBarra, strCodigoBarra, strSector, strPasillo, strFila, intIdUbicacion, intColumna, intNivel, intPosicion,1,intR_TotalRowsUbi);
         }
     };
 
@@ -315,7 +295,9 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
             TableRow row = (TableRow) LayoutInflater.from(Alm_Tab_04Activity.this).inflate(R.layout.table_row_alm_tab04, null);
             ((TextView) row.findViewById(R.id.textSector)).setText(listDirigido.get(0).getSector());
             ((TextView) row.findViewById(R.id.textPasillo)).setText(listDirigido.get(0).getPasillo());
+            ((TextView) row.findViewById(R.id.textPasillo)).setTag(listDirigido.get(0).getCodigoBarra());
             ((TextView) row.findViewById(R.id.textFila)).setText(listDirigido.get(0).getFila());
+            ((TextView) row.findViewById(R.id.textFila)).setTag(listDirigido.get(0).getId_Ubicacion());
             ((TextView) row.findViewById(R.id.textColumna)).setText(String.valueOf(listDirigido.get(0).getColumna()));
             ((TextView) row.findViewById(R.id.textNivel)).setText(String.valueOf(listDirigido.get(0).getNivel()));
             ((TextView) row.findViewById(R.id.textPosicion)).setText(String.valueOf(listDirigido.get(0).getPosicion()));
@@ -332,8 +314,25 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     }
 
     @Override
-    public void navigateToTab03() {
+    public void navigateToTab03(Integer intId_Condicion, String strCod_Prod, String strProducto,
+                                String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo,
+                                String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel,
+                                Integer intPosicion, Integer intCountPallets, Integer total) {
         Intent intent = new Intent(Alm_Tab_04Activity.this, Alm_Tab_03Activity.class);
+        intent.putExtra("Id_Condicion",intId_Condicion);
+        intent.putExtra("Cod_Producto", strCod_Prod);
+        intent.putExtra("Producto", strProducto);
+        intent.putExtra("Cod_Barra",strCod_Barra);
+        intent.putExtra("Cod_UAPallet",strCod_UAPallet);
+        intent.putExtra("Sector",strSector);
+        intent.putExtra("Pasillo",strPasillo);
+        intent.putExtra("Fila",strFila);
+        intent.putExtra("Id_Ubicacion",intId_Ubicacion);
+        intent.putExtra("Columna",intColumna);
+        intent.putExtra("Nivel",intNivel);
+        intent.putExtra("Posicion",intPosicion);
+        intent.putExtra("CountPallets", intCountPallets);
+        intent.putExtra("Total_RowsUbi", total);
         startActivity(intent);
     }
 
