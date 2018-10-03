@@ -42,16 +42,16 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     TextView tvUbiOrigen, tvTotal;
     EditText edtCodBarra;
     Button btnInsert;
-    RecyclerView rclItemPallet;
+    //RecyclerView rclItemPallet;
     TableLayout table;
 
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    RVAlmTab02Adapter adapter;
+    //RVAlmTab02Adapter adapter;
     ArrayList<UATransito> localList = new ArrayList<>();
     AlmTab02Presenter presenter;
 
     String strR_Ubicacion;
-    Integer intR_IdUbicacion;
+    Integer intR_IdUbicacion, intTotalRows;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,8 +123,8 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
         edtCodBarra = (EditText)findViewById(R.id.edtCodBarra);
         btnInsert = (Button)findViewById(R.id.btnInsert);
         btnInsert.setOnClickListener(insertOnClickListener);
-        LinearLayoutManager llm = new LinearLayoutManager(this);
-        rclItemPallet.setLayoutManager(llm);
+        //LinearLayoutManager llm = new LinearLayoutManager(this);
+        //rclItemPallet.setLayoutManager(llm);
     }
 
     void getValueExtras(){
@@ -151,8 +151,10 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
             ((Button)row.findViewById(R.id.btnRemove)).setTag(ent.getUA_CodBarra());
             ((Button)row.findViewById(R.id.btnRemove)).setOnClickListener(RemoveItemOnClick);
             table.addView(row);
+            localList.add(ent);
         }
         table.requestLayout();
+
     }
 
     Boolean existInList(String strCodBar){
@@ -180,8 +182,10 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     @Override
     public void resultValidateUA(ArrayList<UATransito> list) {
         if (list.size() > 0){
-            localList = list;
+            //localList = list;
             dataBindTable(list);
+            intTotalRows = localList.size();
+            tvTotal.setText(String.valueOf(intTotalRows));
         }else{
             Toast.makeText(this, "Pallet/UA no registrada", Toast.LENGTH_SHORT).show();
         }
@@ -217,7 +221,11 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
             alertDialogBuilder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    presenter.navigateToTab04();
+                    presenter.navigateToTab04(intId_Marca, intTotalRows, intId_Condicion, strCod_Producto, strProducto);
+                    //strCod_Barra =  -> ListViewItem nvo_lstua = new ListViewItem((item.Serie == null) ? item.UA_CodBarra : item.Serie);//0
+                    //strCodUA_Pallet = UA_CodBarra; //15
+                    //total = > total de filas de la grilla
+
                 }
             });
 
@@ -245,9 +253,10 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
                 }
             }
             localList.remove(objEnt);
-
             container.removeView(row);
             container.invalidate();
+            intTotalRows = localList.size();
+            tvTotal.setText(String.valueOf(intTotalRows));
         }
     };
 
@@ -286,8 +295,13 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     }
 
     @Override
-    public void navigateToTab04() {
+    public void navigateToTab04(Integer intId_Marca, Integer intTotal_RowsUbi, Integer intId_Condicion, String strCod_Producto, String strProducto){
         Intent intent = new Intent(Alm_Tab_02Activity.this, Alm_Tab_04Activity.class);
+        intent.putExtra("Id_Marca", intId_Marca);
+        intent.putExtra("Total_RowsUbi", intTotal_RowsUbi);
+        intent.putExtra("Id_Condicion",intId_Condicion);
+        intent.putExtra("Cod_Producto",strCod_Producto);
+        intent.putExtra("Producto",strProducto);
         startActivityForResult(intent, 4);
     }
 

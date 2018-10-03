@@ -8,5 +8,5 @@ public interface AlmTab02Presenter {
                          String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo,
                          String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel,
                          String strPosicion, Integer intCountPallets, Integer total);
-    void navigateToTab04();
+    void navigateToTab04(Integer intId_Marca, Integer intTotal_RowsUbi, Integer intId_Condicion, String strCod_Producto, String strProducto);
 }

@@ -64,8 +64,7 @@ public class AlmTab02PresenterImpl implements AlmTab02Presenter, AlmTab02Interac
     }
 
     @Override
-    public void navigateToTab04() {
-        view.navigateToTab04();
+    public void navigateToTab04(Integer intId_Marca, Integer intTotal_RowsUbi, Integer intId_Condicion, String strCod_Producto, String strProducto){
+        view.navigateToTab04(intId_Marca, intTotal_RowsUbi, intId_Condicion, strCod_Producto, strProducto);
     }
-
 }
