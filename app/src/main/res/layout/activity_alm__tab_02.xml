@@ -102,45 +102,55 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <TableLayout
                     android:id="@+id/tableSample"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:stretchColumns="0" >
-                    <TableRow
-                        android:id="@+id/tableHeader" >
+                    android:stretchColumns="0">
+
+                    <TableRow android:id="@+id/tableHeader">
+
                         <TextView
                             android:id="@+id/labelHeader1"
                             style="@style/TableHeader"
                             android:text="@string/label_header1" />
+
                         <TextView
                             android:id="@+id/labelHeader2"
                             style="@style/TableHeader"
                             android:text="@string/label_header2" />
+
                         <TextView
                             android:id="@+id/labelHeader3"
                             style="@style/TableHeader"
                             android:text="@string/label_header3" />
+
                         <TextView
                             android:id="@+id/labelHeader4"
                             style="@style/TableHeader"
                             android:text="@string/label_header4" />
+
                         <TextView
                             android:id="@+id/labelHeader5"
                             style="@style/TableHeader"
                             android:text="@string/label_header5" />
+
                         <TextView
                             android:id="@+id/labelHeader6"
                             style="@style/TableHeader"
                             android:text="@string/label_header6" />
+
                         <TextView
                             android:id="@+id/labelHeader7"
                             style="@style/TableHeader"
                             android:text="@string/label_header7" />
+
                         <TextView
                             android:id="@+id/labelHeader8"
                             style="@style/TableHeader"
                             android:text="@string/label_header8" />
+
                         <TextView
                             android:id="@+id/labelHeader9"
                             style="@style/TableHeader"
