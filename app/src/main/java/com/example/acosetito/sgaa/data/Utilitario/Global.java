@@ -1,5 +1,9 @@
 package com.example.acosetito.sgaa.data.Utilitario;
 
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
+
+import java.util.ArrayList;
+
 public class Global {
     public static String userName;
     public static String ApeNom;
@@ -13,6 +17,7 @@ public class Global {
     public static Integer intId_Impresora;
     public static Integer intPuertoImpresora;
     public static String strIpImpresora;
+    public static ArrayList<UATransito> gListItemsPallet = new ArrayList<>(); //It only used for updating Item Pallet's status
 
     public static final String baseUrl = "http://172.16.32.15:8085/SGAA_WCF/";
     public static final String baseUrlPrint = "http://172.16.32.3/SGAA_WCF_PRINTV2/";//"http://172.16.32.15/SGAA_WCF_PRINT/";
