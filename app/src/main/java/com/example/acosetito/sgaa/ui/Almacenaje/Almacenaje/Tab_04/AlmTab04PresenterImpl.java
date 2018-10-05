@@ -1,5 +1,6 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
 
@@ -70,8 +71,13 @@ public class AlmTab04PresenterImpl implements AlmTab04Presenter, AlmTab04Interac
     }
 
     @Override
-    public void navigateToTab03(Integer intId_Condicion, String strCod_Prod, String strProducto, String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo, String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel, Integer intPosicion, Integer intCountPallets, Integer total) {
-        view.navigateToTab03(intId_Condicion,strCod_Prod, strProducto, strCod_Barra, strCod_UAPallet, strSector, strPasillo, strFila, intId_Ubicacion, intColumna, intNivel, intPosicion, intCountPallets, total);
+    public void navigateToTab02() {
+        view.navigateToTab02();
+    }
+
+    @Override
+    public void navigateToTab03(Integer intId_Condicion, String strCod_Prod, String strProducto, String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo, String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel, Integer intPosicion, Integer intCountPallets, Integer total, ArrayList<UATransito> lstItemPallets) {
+        view.navigateToTab03(intId_Condicion,strCod_Prod, strProducto, strCod_Barra, strCod_UAPallet, strSector, strPasillo, strFila, intId_Ubicacion, intColumna, intNivel, intPosicion, intCountPallets, total, lstItemPallets);
     }
 
 }

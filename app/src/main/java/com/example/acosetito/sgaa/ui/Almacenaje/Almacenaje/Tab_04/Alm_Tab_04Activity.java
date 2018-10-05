@@ -1,4 +1,5 @@
 package com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 import com.example.acosetito.sgaa.R;
 import com.example.acosetito.sgaa.data.Adapter.Almacenaje.SPSector;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.SectorXAlmacen;
+import com.example.acosetito.sgaa.data.Model.Almacenaje.UATransito;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionDisponible;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionXCodigoBarra;
+import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
 import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity;
 
@@ -38,10 +41,12 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     private SPSector adapterSpn;
     private ArrayList<UbicacionDisponible> baseListUbi, baseListUbiAux;
     private ArrayList<UbicacionXCodigoBarra> listDirigido;
+    private ArrayList<UATransito> lstR_ItemPallets = new ArrayList<>();
 
     private boolean existeUbi = false;
     private String strR_Producto, strR_CodProducto;
-    Integer intR_IdCondicion, intR_Id_Marca, intR_TotalRowsUbi;
+    private Integer intR_IdCondicion, intR_Id_Marca, intR_TotalRowsUbi, intOrigen;
+    private int ALM_TAB_04 = 04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +81,10 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
             strR_CodProducto = extras.getString("Cod_Producto");
             strR_Producto = extras.getString("Producto");
             intR_TotalRowsUbi = extras.getInt("Total_RowsUbi");
+
+            //Evaluar origen
+            intOrigen = extras.getInt("Origen");
+            lstR_ItemPallets =  extras.getParcelableArrayList("lstItemsPallet");
         }
     }
 
@@ -86,7 +95,6 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
             if (adapterSpn.getItems().size() > 0){
                 SectorXAlmacen ent = adapterSpn.getItems().get(i);
                 presenter.listarMasUbicacionDisponibles(2/** Global.IdWarehouse **/, 0, 1, ent.getId_Sector());
-                //CargarListaUbicaciones(idAlmacen, 0, 1, idSector);
             }
         }
 
@@ -101,7 +109,6 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
         public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
 
             switch (checkedId){
-
                 case R.id.rdbCMarca:
                     showUbicaciones();
                     break;
@@ -109,9 +116,6 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
                     edtUbicacion.setText("");
                     edtUbicacion.setEnabled(false);
                     showUbicaciones();
-                    /**txtCodBarraUbicacion.Text = "";
-                    txtCodBarraUbicacion.Enabled = false;
-                    MostrarListaUbicaciones();**/
                     break;
                 case R.id.rdbDirig:
                     edtUbicacion.setEnabled(true);
@@ -268,7 +272,7 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
                 }
             }
 
-            presenter.navigateToTab03(intR_IdCondicion, strR_CodProducto, strR_Producto, strCodigoBarra, strCodigoBarra, strSector, strPasillo, strFila, intIdUbicacion, intColumna, intNivel, intPosicion,1,intR_TotalRowsUbi);
+            presenter.navigateToTab03(intR_IdCondicion, strR_CodProducto, strR_Producto, strCodigoBarra, strCodigoBarra, strSector, strPasillo, strFila, intIdUbicacion, intColumna, intNivel, intPosicion,1,intR_TotalRowsUbi, lstR_ItemPallets);
         }
     };
 
@@ -314,10 +318,20 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     }
 
     @Override
+    public void navigateToTab02() {
+        Global.gListItemsPallet.clear();
+        Global.gListItemsPallet = lstR_ItemPallets;
+        Intent intent = new Intent();
+        intent.putParcelableArrayListExtra("listItemPallets", lstR_ItemPallets);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
+    @Override
     public void navigateToTab03(Integer intId_Condicion, String strCod_Prod, String strProducto,
                                 String strCod_Barra, String strCod_UAPallet, String strSector, String strPasillo,
                                 String strFila, Integer intId_Ubicacion, Integer intColumna, Integer intNivel,
-                                Integer intPosicion, Integer intCountPallets, Integer total) {
+                                Integer intPosicion, Integer intCountPallets, Integer total, ArrayList<UATransito> lstItemPallets) {
         Intent intent = new Intent(Alm_Tab_04Activity.this, Alm_Tab_03Activity.class);
         intent.putExtra("Id_Condicion",intId_Condicion);
         intent.putExtra("Cod_Producto", strCod_Prod);
@@ -333,7 +347,10 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
         intent.putExtra("Posicion",intPosicion);
         intent.putExtra("CountPallets", intCountPallets);
         intent.putExtra("Total_RowsUbi", total);
+        intent.putExtra("Origen", ALM_TAB_04);
+        intent.putParcelableArrayListExtra("lstItemPallets", lstItemPallets);
         startActivity(intent);
+        finish();
     }
 
     @Override
@@ -349,5 +366,14 @@ public class Alm_Tab_04Activity extends AppCompatActivity implements AlmTab04Vie
     @Override
     public void hideProgressDialog() {
         ProgressDialogRequest.dismiss();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (intOrigen.equals(2)){
+            presenter.navigateToTab02();
+        }else{
+            //presenter.navigateToTab03();
+        }
     }
 }
