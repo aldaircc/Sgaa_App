@@ -30,28 +30,29 @@ import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionLibreXMarca;
 import com.example.acosetito.sgaa.data.Model.Almacenaje.UbicacionTransito;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.Utilitario.ProgressDialogRequest;
+import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_01.Alm_Tab_01Activity;
 import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity;
 import com.example.acosetito.sgaa.ui.Almacenaje.Almacenaje.Tab_04.Alm_Tab_04Activity;
+import com.example.acosetito.sgaa.ui.Fragments.Impresora.ImpresoraFragment;
 
+import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02View, IRVAlmTab02Adapter{
 
-    TextView tvUbiOrigen, tvTotal;
-    EditText edtCodBarra;
-    Button btnInsert;
-    //RecyclerView rclItemPallet;
-    TableLayout table;
+    private TextView tvUbiOrigen, tvTotal;
+    private EditText edtCodBarra;
+    private Button btnInsert;
+    private TableLayout table;
+    private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private ArrayList<UATransito> localList = new ArrayList<>();
+    private AlmTab02Presenter presenter;
 
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    //RVAlmTab02Adapter adapter;
-    ArrayList<UATransito> localList = new ArrayList<>();
-    AlmTab02Presenter presenter;
-
-    String strR_Ubicacion;
-    Integer intR_IdUbicacion, intTotalRows;
+    private String strR_Ubicacion;
+    private Integer intR_IdUbicacion, intTotalRows;
+    private int ALM_TAB_02 = 02;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +152,7 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
             ((Button)row.findViewById(R.id.btnRemove)).setTag(ent.getUA_CodBarra());
             ((Button)row.findViewById(R.id.btnRemove)).setOnClickListener(RemoveItemOnClick);
             table.addView(row);
+            ent.isComplete = false;
             localList.add(ent);
         }
         table.requestLayout();
@@ -267,7 +269,9 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
 
     @Override
     public void navigateToTab01() {
-
+        //Intent intent = new Intent();
+        //startActivity(intent);
+        finish();
     }
 
     @Override
@@ -291,7 +295,8 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
         intent.putExtra("Posicion", strPosicion);
         intent.putExtra("CountPallet", intCountPallets);
         intent.putExtra("Total", total);
-        startActivityForResult(intent, 3);
+        intent.putExtra("Origen", ALM_TAB_02);
+        startActivityForResult(intent, ALM_TAB_02);
     }
 
     @Override
@@ -302,7 +307,9 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
         intent.putExtra("Id_Condicion",intId_Condicion);
         intent.putExtra("Cod_Producto",strCod_Producto);
         intent.putExtra("Producto",strProducto);
-        startActivityForResult(intent, 4);
+        intent.putExtra("Origen", ALM_TAB_02);
+        intent.putParcelableArrayListExtra("lstItemsPallet", localList);
+        startActivityForResult(intent, ALM_TAB_02);
     }
 
     @Override
@@ -323,5 +330,59 @@ public class Alm_Tab_02Activity extends AppCompatActivity implements AlmTab02Vie
     @Override
     public void OnAddItem(UATransito ent, Integer position) {
         //adapter.removeItem();
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.navigateToTab01();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        for (UATransito ent : Global.gListItemsPallet){
+            updateStatusItemPallet(ent);
+        }
+
+        /**if (resultCode == RESULT_OK && requestCode == ALM_TAB_02){
+            ArrayList<UATransito> list = data.getParcelableArrayListExtra("listItemPallets");
+
+            for (UATransito ent : list){
+                updateStatusItemPallet(ent);
+            }
+        }**/
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    void updateStatusItemPallet(UATransito obj){
+        for (UATransito ent: localList){
+            if (ent.getUA_CodBarra().equals(obj.getUA_CodBarra())
+                    && !ent.isComplete.equals(obj.isComplete)){
+                ent.isComplete = obj.isComplete;
+                changeBackGoundColorItemPallet(obj.UA_CodBarra);
+            }
+        }
+    }
+
+    void changeBackGoundColorItemPallet(String strUA_CodBarra){
+
+        for (int i = 1, j = table.getChildCount(); i < j; i++){
+
+            TableRow row = (TableRow) table.getChildAt(i);
+            String cod_Barra = ((TextView)row.findViewById(R.id.textItem1)).getText().toString();
+
+            if (cod_Barra.equals(strUA_CodBarra)){
+                ((TextView)row.findViewById(R.id.textItem1)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textItem2)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textItem3)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textItem4)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textCantidad)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textLoteLab)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textFEmision)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((TextView)row.findViewById(R.id.textFVencimiento)).setBackgroundColor(getResources().getColor(R.color.light_green));
+                ((Button)row.findViewById(R.id.btnRemove)).setVisibility(View.INVISIBLE);
+            }
+        }
+
     }
 }
