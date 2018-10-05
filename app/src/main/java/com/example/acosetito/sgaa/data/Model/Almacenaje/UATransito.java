@@ -1,10 +1,11 @@
 package com.example.acosetito.sgaa.data.Model.Almacenaje;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Date;
 
-public class UATransito {
+public class UATransito implements Parcelable{
     @SerializedName("UA_CodBarra")
     public String UA_CodBarra;
     @SerializedName("Id_Producto")
@@ -39,6 +40,12 @@ public class UATransito {
     public Date FechaVencimiento;
     @SerializedName("Serie")
     public String Serie;
+    @SerializedName("IsComplete")
+    public Boolean isComplete;
+
+    public UATransito() {
+
+    }
 
     public String getUA_CodBarra() {
         return UA_CodBarra;
@@ -175,4 +182,75 @@ public class UATransito {
     public void setSerie(String serie) {
         Serie = serie;
     }
+
+    public Boolean getComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(Boolean complete) {
+        isComplete = complete;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public UATransito(Parcel parcel){
+        UA_CodBarra = parcel.readString();
+        Id_Producto = parcel.readInt();
+        CodigoProducto = parcel.readString();
+        NombreProducto = parcel.readString();
+        Id_UM = parcel.readInt();
+        UM = parcel.readString();
+        Cantidad = parcel.readDouble();
+        LoteLab = parcel.readString();
+        LotePT = parcel.readString();
+        FlagDisponible = (Boolean)parcel.readValue(null);
+        FlagAveriado = (Boolean)parcel.readValue(null);
+        Id_Marca = parcel.readInt();
+        FlagCuarentena = (Boolean)parcel.readValue(null);
+        Id_Condicion = parcel.readInt();
+        FechaEmision = (Date)parcel.readValue(null);
+        FechaVencimiento = (Date)parcel.readValue(null);
+        Serie = parcel.readString();
+        isComplete = (Boolean)parcel.readValue(null);
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(UA_CodBarra);
+        dest.writeInt(Id_Producto);
+        dest.writeString(CodigoProducto);
+        dest.writeString(NombreProducto);
+        dest.writeInt(Id_UM);
+        dest.writeString(UM);
+        dest.writeDouble(Cantidad);
+        dest.writeString(LoteLab);
+        dest.writeString(LotePT);
+        dest.writeValue(FlagDisponible);
+        dest.writeValue(FlagAveriado);
+        dest.writeInt(Id_Marca);
+        dest.writeValue(FlagCuarentena);
+        dest.writeInt(Id_Condicion);
+        dest.writeValue(FechaEmision);
+        dest.writeValue(FechaVencimiento);
+        dest.writeString(Serie);
+        dest.writeValue(isComplete);
+    }
+
+    //used when un-parceling our parcel (creating the object)
+    public static final Parcelable.Creator<UATransito> CREATOR = new Parcelable.Creator<UATransito>(){
+
+        @Override
+        public UATransito createFromParcel(Parcel parcel) {
+            return new UATransito(parcel);
+        }
+
+        @Override
+        public UATransito[] newArray(int size) {
+            return new UATransito[0];
+        }
+    };
+
 }
