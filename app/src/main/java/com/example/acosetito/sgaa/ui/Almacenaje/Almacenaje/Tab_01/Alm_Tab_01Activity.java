@@ -18,11 +18,12 @@ import java.util.ArrayList;
 
 public class Alm_Tab_01Activity extends AppCompatActivity implements AlmTab01View, IRVAlmTab01Adapter{
 
-    RecyclerView rclTransito;
-    TextView tvAlmacen;
-    AlmTab01Presenter presenter;
-    RVAlmTab01Adapter adapter;
-    ArrayList<UbicacionTransito> listItems = new ArrayList<>();
+    private RecyclerView rclTransito;
+    private TextView tvAlmacen;
+    private AlmTab01Presenter presenter;
+    private RVAlmTab01Adapter adapter;
+    private ArrayList<UbicacionTransito> listItems = new ArrayList<>();
+    private int ALM_TAB_01 = 01;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class Alm_Tab_01Activity extends AppCompatActivity implements AlmTab01Vie
         Intent intent = new Intent(Alm_Tab_01Activity.this, Alm_Tab_02Activity.class);
         intent.putExtra("Ubicacion", strUbicacion);
         intent.putExtra("IdUbicacion", intIdUbicacion);
-        startActivity(intent);
+        startActivityForResult(intent, ALM_TAB_01);
     }
 
     @Override
@@ -74,5 +75,14 @@ public class Alm_Tab_01Activity extends AppCompatActivity implements AlmTab01Vie
     @Override
     public void onUbicarItem(UbicacionTransito ent) {
         presenter.navigateToTab02(ent.getUbicacion(), ent.getId_Ubicacion());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK && requestCode == ALM_TAB_01){
+            Integer x = data.getExtras().getInt("key");
+            //Do something
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
