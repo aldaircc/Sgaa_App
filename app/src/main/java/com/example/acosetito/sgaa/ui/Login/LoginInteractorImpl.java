@@ -3,6 +3,8 @@ import com.example.acosetito.sgaa.data.Model.Usuario;
 import com.example.acosetito.sgaa.data.Utilitario.Global;
 import com.example.acosetito.sgaa.data.WebService.ApiClient;
 import com.example.acosetito.sgaa.data.WebService.UserClient;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -11,7 +13,8 @@ import retrofit2.Response;
 public class LoginInteractorImpl implements LoginInteractor {
     @Override
     public void validateUser(String user, String password, Integer idTerminal, final OnValidateUserListener listener) {
-        UserClient userClient = (ApiClient.getApiClient(Global.baseUrl, Global.usuarioService)).create(UserClient.class);
+
+        /**UserClient userClient = (ApiClient.getApiClient(Global.baseUrl, Global.usuarioService)).create(UserClient.class);
         Call<ArrayList<Usuario>> call = userClient.validarUsuario(user, password);
 
         call.enqueue(new Callback<ArrayList<Usuario>>() {
@@ -35,7 +38,7 @@ public class LoginInteractorImpl implements LoginInteractor {
             public void onFailure(Call<ArrayList<Usuario>> call, Throwable t) {
                 listener.OnFailureValidateUser(t.getMessage());
             }
-        });
+        });**/
     }
 
     @Override
