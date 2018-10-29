@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Recibo.Tab_01.Recibo_Tab_01Activity">
+        <activity android:name=".ui.Login.LoginActivity">
 
             <!-- android:theme="@style/AppTheme.NoActionBar"> -->
             <intent-filter>
@@ -24,14 +24,23 @@
         <activity
             android:name=".ui.Main.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.Login.LoginActivity"></activity>
         <activity android:name=".ui.Etiqueta.EtqCajaLpnActivity" />
+        <activity android:name=".ui.Recibo.Tab_01.Recibo_Tab_01Activity" />
         <activity android:name=".ui.Recibo.Tab_02.Recibo_Tab_02Activity" />
         <activity android:name=".ui.Recibo.Tab_03.Recibo_Tab_03Activity" />
         <activity android:name=".ui.Recibo.Tab_04.Recibo_Tab_04Activity" /> <!-- android:theme="@style/AppTheme.NoActionBar"/> -->
         <activity android:name=".ui.Inventario.Tab_01.Inventario_Tab_01Activity" />
         <activity android:name=".ui.Inventario.Tab_02.Inventario_Tab_02Activity" />
         <activity android:name=".ui.Recibo.Tab_05.Recibo_Tab_05Activity" />
+        <activity android:name=".ui.Almacenaje.OptionsAlmacenajeActivity" />
+        <activity android:name=".ui.Almacenaje.Almacenaje.Tab_01.Alm_Tab_01Activity" />
+        <activity android:name=".ui.Almacenaje.Almacenaje.Tab_02.Alm_Tab_02Activity" />
+        <activity android:name=".ui.Almacenaje.Almacenaje.Tab_03.Alm_Tab_03Activity" />
+        <activity android:name=".ui.Almacenaje.Almacenaje.Tab_04.Alm_Tab_04Activity" />
+
+        <service
+            android:name=".ui.Login.BackgroundService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

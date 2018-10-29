@@ -19,6 +19,8 @@ import retrofit2.Response;
 
 public class BackgroundService extends IntentService {
 
+    public static final String NOTIFICATION = "com.example.acosetito.sgaa";
+
     public BackgroundService() {
         super("BackgroundService");
     }
@@ -32,8 +34,24 @@ public class BackgroundService extends IntentService {
         try {
             Response<ArrayList<Usuario>> result = call.execute();
             Log.d("Return login", result.body().get(0).getApeNom() + " - " + result.body().get(0).getCorreo());
+            publishResult(result.body());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
+
+    private void publishResult(ArrayList<Usuario> result){
+        Intent intent = new Intent(NOTIFICATION);
+        intent.putExtra("USER", result.get(0).getApeNom());
+        sendBroadcast(intent);
+    }
+    /**
+     private void publishResults(String outputPath, int result) {
+     Intent intent = new Intent(NOTIFICATION);
+     intent.putExtra(FILEPATH, outputPath);
+     intent.putExtra(RESULT, result);
+     sendBroadcast(intent);
+     }
+     **/
 }

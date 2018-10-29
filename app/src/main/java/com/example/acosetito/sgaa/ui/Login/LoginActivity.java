@@ -1,6 +1,9 @@
 package com.example.acosetito.sgaa.ui.Login;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,19 @@ public class LoginActivity extends AppCompatActivity implements LoginView, CDist
     private EditText edtUser, edtPassword;
     private LoginPresenter presenter;
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null){
+                String string = bundle.getString("USER");
+                //int resultCode = bundle.getInt()
+                //Do something ...
+
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
@@ -40,6 +56,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView, CDist
         }catch (Exception e){
             Log.e("ERROR - LOGIN", e.getMessage());
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(receiver, new IntentFilter(BackgroundService.NOTIFICATION));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
     }
 
     View.OnClickListener  btnEnterOnClickListener = new View.OnClickListener() {
